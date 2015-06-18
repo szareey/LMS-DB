@@ -28,8 +28,11 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
+    bcrypt (3.1.10)
     bond (0.5.1)
     builder (3.2.2)
+    byebug (5.0.0)
+      columnize (= 0.9.0)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.7)
@@ -41,6 +44,7 @@ GEM
       coffee-script-source
       execjs
     coffee-script-source (1.9.1.1)
+    columnize (0.9.0)
     erubis (2.7.0)
     execjs (2.5.2)
     hike (1.2.3)
@@ -142,6 +146,8 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  bcrypt (~> 3.1.7)
+  byebug
   coffee-rails (~> 4.0.0)
   jbuilder (~> 2.0)
   jquery-rails

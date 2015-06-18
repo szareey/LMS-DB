@@ -1,15 +1,26 @@
-Teacher.create(
+teacher = Teacher.create(
     first_name: 'Sana',
     last_name: 'Zareey',
-    email: 'szareey@nancycampbell.ca'
+    email: 'szareey@nancycampbell.ca',
+    password: 'test123'
   )
 
-Student.create(
+q1 = Question.create(
+  question: 'http://img.sparknotes.com/content/testprep/bookimgs/sat2/math2c/0056/tan(theta)=sin(theta).gif',
+  user_id: teacher.id  
+)
+
+student = Student.create(
     first_name: 'Logan',
     last_name: 'Benadryl',
-    email: 'logan@benadryl.ca'
+    email: 'logan@gmail.com',
+    password: 'test123'
   )
 
-Question.create(
-  question: 'http://img.sparknotes.com/content/testprep/bookimgs/sat2/math2c/0056/tan(theta)=sin(theta).gif'
+Answer.create(
+  question_id: q1.id,
+  user_id: student.id,
+  answer: "this is the answer"
   )
+
+  

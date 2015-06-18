@@ -14,12 +14,15 @@
 ActiveRecord::Schema.define(version: 20150617193136) do
 
   create_table "answers", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "question_id"
     t.string   "answer"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "questions", force: true do |t|
+    t.integer  "user_id"
     t.string   "question_file_name"
     t.string   "question_content_type"
     t.integer  "question_file_size"
@@ -28,18 +31,12 @@ ActiveRecord::Schema.define(version: 20150617193136) do
     t.datetime "updated_at"
   end
 
-  create_table "students", force: true do |t|
+  create_table "users", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "teachers", force: true do |t|
-    t.string   "first_name"
-    t.string   "last_name"
-    t.string   "email"
+    t.string   "password_digest"
+    t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

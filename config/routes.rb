@@ -1,15 +1,21 @@
 Rails.application.routes.draw do
   
-  resources :teachers do
-    resources :questions do
-      resources :answers
-    end
-  end
+  # resources :questions, only: [:index, :show]
 
-  resources :students do
+  resources :sessions, only: [:new, :create, :destroy]
+
+  # resources :teachers do 
+  #   resources :questions, :answers
+  # end
+
+  # resources :students do
+  #   resources :questions, :answers
+  # end
+
+  resources :questions do
     resources :answers
   end
 
-  root 'question#show'
+  root 'sessions#new'
 
 end

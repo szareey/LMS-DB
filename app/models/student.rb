@@ -1,5 +1,5 @@
-class Student < ActiveRecord::Base
+class Student < User
 
-  has_many :answers, through: :questions
+  has_many :answers
 
 end

@@ -1,0 +1,6 @@
+<h1> Questions </h1>
+<h2> Logged in as <%=@current_user.type%>: <%=@current_user.first_name%> </h2>
+<%if @current_user.type == 'Teacher'%>
+  <%= link_to "Add a new question", new_question_path %>
+<% end %>
+<%= render partial: "/shared/question", collection: @questions, locals: {current_user_type: @current_user.type}%>
