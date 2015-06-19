@@ -2,17 +2,23 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-#corkboard{
-  position: relative;
+#corkboard {
 }
 
-#question{
-  position: fixed;
+#question {
   border: 1px solid #ccc;
+  position: absolute;
 }
 
 #whiteboard {
   border: 8px solid #ccc;
-  position: fixed;
 }
 
+.saveMessage {
+  transition: all 1s;
+}
+
+.saveMessage.show {
+  transition: all 1s;
+  display: block;
+}

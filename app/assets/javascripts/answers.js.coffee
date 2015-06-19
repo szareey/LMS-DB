@@ -10,15 +10,15 @@ $(document).ready ->
     x: []
     y: []
   
-  solution = []
-
   $whiteboard = $('#whiteboard')
+  # console.log $whiteboard.data("points")
+  solution = $whiteboard.data("points") || "[]"
   context = $whiteboard[0].getContext("2d")
 
   initialize_stroke = ->
-    context.strokeStyle = "#df4b26";
-    context.lineJoin = "round";
-    context.lineWidth = 1;
+    context.strokeStyle = "#df4b26"
+    context.lineJoin = "round"
+    context.lineWidth = 1
     context.beginPath()
     return
 
@@ -68,8 +68,35 @@ $(document).ready ->
     console.log(solution)
     return
 
-  $('#finish').on 'click' ->
-    
-    return
+  saveSuccess = (message) ->
+    $('.saveMessage').text('Saved!')
+    setTimeout ( ->
+      $('.saveMessage').html('&nbsp;')
+    ), 1000
 
-  return
+  $('#finish').on 'click', ->
+    $.ajax
+      type: 'POST'
+      url: '/questions/' + $whiteboard.attr("data-id") + '/answers'
+      data: {solution: JSON.stringify(solution), user_id: $('#user_id').val()}
+      success: saveSuccess
+
+  $('#showAnswer').on 'click', ->
+    for stroke in solution
+      for x, i in stroke.x
+        context.moveTo(stroke.x[i], stroke.y[i])
+        context.lineTo(stroke.x[i+1], stroke.y[i+1])
+        context.closePath()
+        context.stroke()
+ 
+    # i = 0
+    # while i < solution.length
+    #   i++
+    #   z = 1  
+    #   while z < stroke.x.length
+    #     initialize_stroke()
+    #     context.moveTo(stroke.x[z - 1], stroke.y[z - 1])
+    #     context.lineTo(stroke.x[z], stroke.y[z])
+    #     context.closePath()
+    #     context.stroke()
+    #     z++

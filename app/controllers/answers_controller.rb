@@ -9,9 +9,19 @@ def show
 end
 
 def new
-  @answer = Answer.new
   @question = Question.find(params[:question_id])
   # For main canvas for creating a new answer
+end
+
+def create
+
+  Answer.create(
+    user_id: params[:user_id],
+    question_id: params[:question_id],
+    answer: params[:solution]
+    )
+
+  redirect_to :back
 end
 
 end

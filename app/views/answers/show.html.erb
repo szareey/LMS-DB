@@ -1,0 +1,10 @@
+<h1> Answers/Show </h1>
+<div>
+<p> Student: <%= @answer.student.first_name %> </p>
+<p> Question Creator: <%= @answer.question.teacher.first_name %>
+</div>
+<div id='corkboard'>
+  <img id='question' src='<%= @answer.question.question %>'>
+  <canvas id='whiteboard' height="500px" width="1000" data-points="<%= @answer.answer %>"></canvas>
+</div>
+<button id='showAnswer'>Show</button>

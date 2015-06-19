@@ -5,8 +5,13 @@ teacher = Teacher.create(
     password: 'test123'
   )
 
-q1 = Question.create(
+Question.create(
   question: 'http://img.sparknotes.com/content/testprep/bookimgs/sat2/math2c/0056/tan(theta)=sin(theta).gif',
+  user_id: teacher.id  
+)
+
+Question.create(
+  question: 'http://localhost:3000/system/questions/questions/000/000/011/original/Screen_Shot_2015-06-18_at_5.05.08_PM.png?1434661621',
   user_id: teacher.id  
 )
 
@@ -15,12 +20,6 @@ student = Student.create(
     last_name: 'Benadryl',
     email: 'logan@gmail.com',
     password: 'test123'
-  )
-
-Answer.create(
-  question_id: q1.id,
-  user_id: student.id,
-  answer: "this is the answer"
   )
 
   

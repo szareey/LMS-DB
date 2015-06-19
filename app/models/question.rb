@@ -4,7 +4,7 @@ class Question < ActiveRecord::Base
   do_not_validate_attachment_file_type :question
 
   has_many :answers
-  belongs_to :teacher
+  belongs_to :teacher, class_name: 'Teacher', foreign_key: 'user_id'
 
 end
 
