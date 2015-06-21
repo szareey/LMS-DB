@@ -11,8 +11,7 @@ $(document).ready ->
     y: []
   
   $whiteboard = $('#whiteboard')
-  # console.log $whiteboard.data("points")
-  solution = $whiteboard.data("points") || "[]"
+  solution = $whiteboard.data("points") || []
   context = $whiteboard[0].getContext("2d")
 
   initialize_stroke = ->
@@ -57,8 +56,6 @@ $(document).ready ->
   $whiteboard.mouseup ->
     mousePress = false
     solution.push stroke
-    # point = new ImageData(Uint8ClampedArray.from([stroke.x, stroke.y]), 5, 5)
-    # context.putImageData(point, stroke.x, stroke.y)
     stroke =
       x: []
       y: []
@@ -88,15 +85,3 @@ $(document).ready ->
         context.lineTo(stroke.x[i+1], stroke.y[i+1])
         context.closePath()
         context.stroke()
- 
-    # i = 0
-    # while i < solution.length
-    #   i++
-    #   z = 1  
-    #   while z < stroke.x.length
-    #     initialize_stroke()
-    #     context.moveTo(stroke.x[z - 1], stroke.y[z - 1])
-    #     context.lineTo(stroke.x[z], stroke.y[z])
-    #     context.closePath()
-    #     context.stroke()
-    #     z++

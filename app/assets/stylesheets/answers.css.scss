@@ -22,3 +22,26 @@
   transition: all 1s;
   display: block;
 }
+
+#blue_pen{
+  background: blue;
+}
+
+#grey_pen{
+  background: grey;
+}
+
+#yellow_pen{
+  background: yellow;
+}
+
+.pens {
+  height: 25px;
+  width: 25px;
+  border: 1px solid #ccc;
+  transition: all .1s;
+}
+
+.pens.selected {
+  margin-left: 10px
+}
