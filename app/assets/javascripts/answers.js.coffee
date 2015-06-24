@@ -8,18 +8,60 @@ $(document).ready ->
 
     mousePress = false
 
+    colors = {
+      eraser: "#FFFFFF",
+      pencil: "#C0C0C0"
+      blue: "#0000FF"
+      green: "#008000"
+      orange: "#FFA500"
+    }
+
     stroke = 
       x: []
       y: []
+      color: colors.pencil
+      width: 1
     
+
     $whiteboard = $('#whiteboard')
     solution = $whiteboard.data("points") || []
     context = $whiteboard[0].getContext("2d")
 
+    $('#eraser').on 'click', ->
+      stroke.color = colors.eraser
+      stroke.width = 20
+
+    $('#pencil').on 'click', ->
+      stroke.color = colors.pencil
+
+    $('#blue-pencil').on 'click', ->
+      stroke.color = colors.blue
+
+    $('#green-pencil').on 'click', ->
+      stroke.color = colors.green
+
+    $('#orange-pencil').on 'click', ->
+      stroke.color = colors.orange
+
+    $('#thin').on 'click', ->
+      stroke.width = 1
+
+    $('#thick').on 'click', ->
+      stroke.width = 10
+
+    $('#zoomIn').on 'click', ->
+      context.scale(2,2)
+      # context.setTransform(1,0,0,1,0,0)
+      
+    $('#zoomOut').on 'click', ->
+      context.save()
+      context.scale(1,1)
+      context.restore()
+
     initialize_stroke = ->  
       context.strokeStyle = stroke.color
       context.lineJoin = "round"
-      context.lineWidth = 1
+      context.lineWidth = stroke.width
       context.beginPath()
       return
 
@@ -61,7 +103,6 @@ $(document).ready ->
       stroke =
         x: []
         y: []
-        color: "#df4b26"
       return
 
     $('#testStroke').on 'click', ->
@@ -89,7 +130,7 @@ $(document).ready ->
       # Only draw strokes while i < the # of strokes in the solution 
       if i < solution.length
         stroke = solution[i]
-
+        initialize_stroke()
         # Draw the points in the stroke
         drawPoints(stroke, ->
 

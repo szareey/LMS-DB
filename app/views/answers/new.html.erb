@@ -1,9 +1,22 @@
 <h1 id='testStroke'> Answer the question </h1>
 <div class='divider'> </div>
 <div class='saveMessage'> &nbsp; </div>
-<div id='corkboard'>
-  <img id='question' src='<%= @question.question %>'>
-  <canvas id='whiteboard' height="500px" width="1000" data-id="<%= @question.id %>"></canvas>
+<div id='corkboard' class='row'>
+  <div class="col s9">
+    <img id='question' src='<%= @question.question %>'>
+    <canvas id='whiteboard' height="500px" width="1000" data-id="<%= @question.id %>"></canvas>
+  </div>
+  <div class="col s1">
+    <div class="palette" id="eraser">eraser</div>
+    <div class="palette" id="pencil">pencil</div>
+    <div class="palette" id="blue-pencil">blue</div>
+    <div class="palette" id="green-pencil">green</div>
+    <div class="palette" id="orange-pencil">orange</div>
+    <div class="pencil-weight" id="thin"></div>
+    <div class="pencil-weight" id="thick"></div>
+    <div class="zoom" id="zoomIn">Zoom In</div>
+    <div class="zoom" id="zoomOut">Zoom Out</div>
+  </div>
 </div>
 <button id='finish'class="btn waves-effect waves-light btn-large btn-fullwidth" type="submit">Submit
 </button>
