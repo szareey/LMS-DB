@@ -1,6 +1,11 @@
 <h1> Questions </h1>
 <h2> Logged in as <%=@current_user.type%>: <%=@current_user.first_name%> </h2>
+ <div class="divider"></div>
+  <%= render partial: "/shared/question", collection: @questions, locals: {current_user_type: @current_user.type}%>
 <%if @current_user.type == 'Teacher'%>
-  <%= link_to "Add a new question", new_question_path %>
+  <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red" href="<%= new_question_path %>">
+    <i class="large material-icons">add</i>
+    </a>
+  </div>
 <% end %>
-<%= render partial: "/shared/question", collection: @questions, locals: {current_user_type: @current_user.type}%>

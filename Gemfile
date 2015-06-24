@@ -3,12 +3,17 @@ source 'https://rubygems.org'
 gem "paperclip", "~> 4.2"
 gem 'tux'
 gem 'byebug'
+gem 'railties'
+gem 'bootstrap-sass', '~> 3.3.5'
+gem 'sprockets-rails', :require => 'sprockets/railtie'
+gem 'materialize-sass'
+gem 'sass'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
-gem 'sass-rails', '~> 4.0.3'
+gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views

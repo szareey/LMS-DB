@@ -1,15 +1,29 @@
-<h1>Login to your Account</h1>
+<div class="col-sm-offset-2 col-sm-4" id="welcomeMessage">
+  <h1> Welcome to Awesomeness</h1>
+  <button class='btn btn-success' id="showLogin">Start!</button>
+</div>
 
-<h1>Log In</h1>
-
-<%= form_tag sessions_path do %>
-  <div class="form-group">
-    <%= label_tag "email" %><br/>
-    <%= text_field_tag "email" %>
-  </div>
-  <div>
-    <%= label_tag :password %><br/>
-    <%= password_field_tag :password %>
-  </div>
-  <div><%= submit_tag "Log In" %></div>
-<% end %>
+<div id="loginContainer">
+  <div class="row">
+    <h1 class="col-sm-offset-2 col-sm-4">Log In</h1>
+    </div>
+  <%= form_tag sessions_path, class: "form-horizontal" do %>
+    <div class="form-group">
+      <%= label_tag :email, nil, class: "col-sm-2 control-label" %>
+      <div class="col-sm-4">
+        <%= text_field_tag :email, nil, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <%= label_tag :password, nil, class: "col-sm-2 control-label" %>
+      <div class="col-sm-4">
+        <%= password_field_tag :password, nil, class: "form-control" %>
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+        <%= submit_tag 'Login', class: 'btn btn-success' %>
+      </div>
+    </div>
+  <% end %>
+</div>
