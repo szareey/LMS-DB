@@ -5,6 +5,7 @@
       <div class="card-content">
         <p>Question created by Mr. <%=question.teacher.last_name %></p>
         <p> This is question tests your problem solving skills </p>
+        <p class="question-marks"> This question is worth <%=question.marks%> marks </p>
       </div>
       <div class="card-action">
         <%=link_to "Answer question", new_question_answer_path(question) %>

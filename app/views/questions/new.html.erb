@@ -1,4 +1,5 @@
 <%= form_for @question, url: questions_path, :html => { :multipart => true } do |f| %>
   <%= f.file_field :question %>
+  <%= f.text_field :marks %>
   <%= f.submit "Save" %> 
 <% end %>

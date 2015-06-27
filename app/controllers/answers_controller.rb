@@ -13,6 +13,14 @@ def new
   # For main canvas for creating a new answer
 end
 
+def update
+  Answer.find(params[:id]).update(
+    grade: params[:grade],
+    teacher_comment: params[:teacher_comment]
+    )
+  redirect_to :back
+end
+
 def create
 
   Answer.create(
