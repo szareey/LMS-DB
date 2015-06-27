@@ -22,6 +22,7 @@ $(document).ready ->
       color: colors.pencil
       width: 1
     
+    zoom = 1
 
     $whiteboard = $('#whiteboard')
     solution = $whiteboard.data("points") || []
@@ -50,20 +51,24 @@ $(document).ready ->
       stroke.width = 10
 
     $('#zoomIn').on 'click', ->
-      context.scale(2,2)
-      # context.setTransform(1,0,0,1,0,0)
+      zoom = 2
+      $whiteboard.attr("height", "500px")
+      $whiteboard.attr("width", "1000px")
+      context.scale(zoom, zoom)
+      fastRedraw()
       
     $('#zoomOut').on 'click', ->
-      context.save()
-      context.scale(1,1)
-      context.restore()
+      zoom = 1
+      $whiteboard.attr("height", "500px")
+      $whiteboard.attr("width", "1000px")
+      context.scale(zoom, zoom)
+      fastRedraw()
 
     initialize_stroke = ->  
       context.strokeStyle = stroke.color
       context.lineJoin = "round"
       context.lineWidth = stroke.width
       context.beginPath()
-      return
 
     record_stroke = (e) ->
       # Get canvas coordinates of mouse event. 
@@ -126,25 +131,37 @@ $(document).ready ->
       # Draw the first stroke in the solution
       drawStroke(0)
 
-    drawStroke = (i) ->
+    fastRedraw = ->
+     for s in solution
+      stroke = s
+      initialize_stroke()
+      for p, i in stroke.x
+        context.moveTo(p, stroke.y[i])
+        context.lineTo(stroke.x[i + 1], stroke.y[i + 1])
+      context.closePath()
+      context.stroke()
+
+    drawStroke = (i, timer = 18) ->
+
+
       # Only draw strokes while i < the # of strokes in the solution 
       if i < solution.length
         stroke = solution[i]
         initialize_stroke()
         # Draw the points in the stroke
-        drawPoints(stroke, ->
+        drawPoints(stroke, timer, ->
 
           # When the points are drawn, draw the next stroke
-          drawStroke(i + 1)
+          drawStroke(i + 1, timer)
         )
     
-    drawPoints = (stroke, callback) ->
+    drawPoints = (stroke, timer, callback) ->
       context.moveTo(stroke.x[0], stroke.y[0])
 
       # Draw the first point in stroke
-      drawPoint(stroke, callback, 1)
+      drawPoint(stroke, timer, callback, 1)
 
-    drawPoint = (stroke, callback, i) ->
+    drawPoint = (stroke, timer, callback, i) ->
       if i < stroke.x.length
         # Delay each point by X miliseconds
         setTimeout ->
@@ -153,8 +170,8 @@ $(document).ready ->
           context.stroke()  
 
           # Draw the next point in the stroke
-          drawPoint(stroke, callback, i + 1)
-        , 18
+          drawPoint(stroke, timer, callback, i + 1)
+        , 
       else
         # If all points are done, call the callback
         # which draws the next stroke
