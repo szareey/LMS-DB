@@ -28,6 +28,13 @@ $(document).ready ->
     solution = $whiteboard.data("points") || []
     context = $whiteboard[0].getContext("2d")
 
+    $('#slider').noUiSlider
+      start: [0, 10]
+      connect: true
+      range:
+        'min': 0
+        'max': 100
+
     $('#eraser').on 'click', ->
       stroke.color = colors.eraser
       stroke.width = 20
