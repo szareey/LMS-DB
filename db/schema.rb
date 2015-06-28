@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 20150627024108) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "teacher_comment"
-    t.integer  "grade"
+    t.integer  "score"
     t.boolean  "request_meeting", default: false
   end
 

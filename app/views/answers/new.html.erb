@@ -3,8 +3,8 @@
 <div class='saveMessage'> &nbsp; </div>
 <div id='corkboard' class='row'>
   <div class="col s9">
-    <img id='question' src='<%= @question.question %>'>
-    <canvas id='whiteboard' height="500px" width="1000px" data-id="<%= @question.id %>"></canvas>
+    <img id='question' src='<%= @answer.question.question %>'>
+    <canvas id='whiteboard' height="500px" width="1000px" data-id="<%= @answer.question.id %>" data-points="<%= @answer.answer %>"></canvas>
   </div>
   <div class="col s1">
     <div class="palette" id="eraser">eraser</div>
@@ -18,9 +18,21 @@
     <div class="zoom" id="zoomOut">Zoom Out</div>
   </div>
   <div class="col s2">
-  <p class='question-marks'> This question is worth <%=@question.marks%> marks </p>
+  <p class='question-marks'> This question is worth <%=@answer.question.marks%> marks </p>
+  <% if @answer.score %>
+    <p> This question has been marked </p>
+    <p> You got <%= @answer.score %> out of <%= @answer.question.marks %> </p>
+    <p> Mr. <%=@answer.question.teacher.last_name%>'s Comment: <%= @answer.teacher_comment %> </p>
+  <% else %>
+    <p> You have not yet answered this question </p>
+  <% end %>
   </div>
 </div>
-<button id='finish'class="btn waves-effect waves-light btn-large btn-fullwidth" type="submit">Submit
-</button>
+
+<% if @answer.created_at %>
+  <button id='showAnswer'>Show My Answer</button>
+<% else %>
+  <button id='finish'class="btn waves-effect waves-light btn-large btn-fullwidth" type="submit">Submit</button>
+<%end%>
+
 <input id='user_id'type='hidden' name='user_id' value='<%=@current_user.id %>'>

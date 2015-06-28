@@ -11,12 +11,12 @@
         <%=link_to "Answer question", new_question_answer_path(question) %>
       </div>
         <% if current_user_type == 'Teacher' %>
-        <div class="card-action">
-          <%= render partial: "/shared/answers_index", collection: question.answers %>
           <div class="card-action">
-          <%= link_to 'Delete', {action: :destroy, id: question.id}, method: :delete, data: {confirm: 'Are you sure?'} %>
+          <%= render partial: "/shared/answers_index", collection: question.answers %>
+            <div class="card-action">
+            <%= link_to 'Delete', {action: :destroy, id: question.id}, method: :delete, data: {confirm: 'Are you sure?'} %>
+            </div>
           </div>
-        </div>
         <% end %>
       </div>
     </div>

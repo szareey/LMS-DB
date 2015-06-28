@@ -9,14 +9,17 @@ def show
 end
 
 def new
-  @question = Question.find(params[:question_id])
+  unless @answer = Answer.find_by(question_id: params[:question_id], user_id: @current_user.id)
+    @answer = Answer.new
+    @answer.question = Question.find(params[:question_id])
+  end
   # For main canvas for creating a new answer
 end
 
 def update
   Answer.find(params[:id]).update(
-    grade: params[:grade],
-    teacher_comment: params[:teacher_comment]
+    score: params[:answer][:score],
+    teacher_comment: params[:answer][:teacher_comment]
     )
   redirect_to :back
 end

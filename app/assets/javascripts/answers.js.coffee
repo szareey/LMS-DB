@@ -130,6 +130,7 @@ $(document).ready ->
     $('#showAnswer').on 'click', ->
       # Draw the first stroke in the solution
       drawStroke(0)
+      debugger
 
     fastRedraw = ->
      for s in solution
