@@ -28,12 +28,19 @@ $(document).ready ->
     solution = $whiteboard.data("points") || []
     context = $whiteboard[0].getContext("2d")
 
-    $('#slider').noUiSlider
-      start: [0, 10]
-      connect: true
+    $slider = $('#slider')
+
+    # initialize the playback slider to have max range equal to the number of strokes
+    $slider.noUiSlider
+      start: [ 0 ]
+      step: 1
       range:
         'min': 0
-        'max': 100
+        'max': solution.length
+
+    $slider.on 'slide', ->
+      $whiteboard.attr("height", "500px")
+      fastRedraw($slider.val())
 
     $('#eraser').on 'click', ->
       stroke.color = colors.eraser
@@ -137,21 +144,22 @@ $(document).ready ->
     $('#showAnswer').on 'click', ->
       # Draw the first stroke in the solution
       drawStroke(0)
-      debugger
 
-    fastRedraw = ->
-     for s in solution
-      stroke = s
-      initialize_stroke()
-      for p, i in stroke.x
-        context.moveTo(p, stroke.y[i])
-        context.lineTo(stroke.x[i + 1], stroke.y[i + 1])
-      context.closePath()
-      context.stroke()
+    # TODO: Make more efficient. Currently still going though all s in solution values.
+    fastRedraw = (sliderValue = -1) ->
+     if sliderValue == -1
+        sliderValue = solution.length
+     for s, ind  in solution
+      if ind < sliderValue
+        stroke = s
+        initialize_stroke()
+        for p, i in stroke.x
+          context.moveTo(p, stroke.y[i])
+          context.lineTo(stroke.x[i + 1], stroke.y[i + 1])
+        context.closePath()
+        context.stroke()
 
     drawStroke = (i, timer = 18) ->
-
-
       # Only draw strokes while i < the # of strokes in the solution 
       if i < solution.length
         stroke = solution[i]

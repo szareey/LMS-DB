@@ -7,6 +7,7 @@
   <div class="col s9">
     <img id='question' src='<%= @answer.question.question %>'>
     <canvas id='whiteboard' height="500px" width="1000" data-points="<%= @answer.answer %>"></canvas>  
+    <div id="slider"></div>
   </div>
   <div class="col s3">
       <p class='question-marks'> This question is worth <%=@answer.question.marks%> marks </p>
@@ -19,4 +20,3 @@
   </div>
 </div>
 <button id='showAnswer' class="btn waves-effect waves-light btn-large btn-fullwidth">Show</button>
-<div id="slider"></div>
