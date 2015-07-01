@@ -6,6 +6,7 @@ end
 
 def show
   @answer = Answer.find(params[:id])
+  # @ansImg = Answer.find(8).final_answer_img
 end
 
 def new
@@ -25,11 +26,19 @@ def update
 end
 
 def create
+  # byebug
+  # img = params[:final_answer_img]
+  # decoded_data = Base64.decode64(img)
+  # data = StringIO.new(decoded_data)
+  # # img.original_filename = "final_answer.png"
+  # # my_img = Thing.create!(final_answer_img: image)
 
+  byebug
   Answer.create(
     user_id: params[:user_id],
     question_id: params[:question_id],
-    answer: params[:solution]
+    answer: params[:solution],
+    final_answer_img: params[:final_answer_img]
     )
 
   redirect_to :back

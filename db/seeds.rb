@@ -11,11 +11,11 @@ Question.create(
   marks: 10
 )
 
-Question.create(
-  question: 'http://localhost:3000/system/questions/questions/000/000/011/original/Screen_Shot_2015-06-18_at_5.05.08_PM.png?1434661621',
-  user_id: teacher.id,  
-  marks: 15
-)
+# Question.create(
+#   question: 'http://localhost:3000/system/questions/questions/000/000/011/original/Screen_Shot_2015-06-18_at_5.05.08_PM.png?1434661621',
+#   user_id: teacher.id,  
+#   marks: 15
+# )
 
 student = Student.create(
     first_name: 'Logan',

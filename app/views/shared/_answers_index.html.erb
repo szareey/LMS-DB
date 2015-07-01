@@ -1,3 +1,11 @@
 <% if answers_index.student != nil %>
-<div><%=link_to "#{answers_index.student.first_name}'s answer", question_answer_path(answers_index.question, answers_index) %></div>
+    <div class="col s3">
+    <div> <%=link_to "#{answers_index.student.first_name}'s answer", question_answer_path(answers_index.question, answers_index) %> </div>
+    <div class="teacher_marked_checkbox">
+    <% if answers_index.score %>
+      <p class="teacher_mark"> <%=answers_index.score%> </p>
+    <% end %>
+    </div>
+    <img class="col s5" src="<%= answers_index.final_answer_img(:medium)%>">
+  </div>
 <%end%>

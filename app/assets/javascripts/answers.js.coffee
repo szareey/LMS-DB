@@ -137,8 +137,11 @@ $(document).ready ->
       return
 
     $('#testStroke').on 'click', ->
-      $whiteboard.toDataURL("image/png")
-      return
+      dataURL = $whiteboard[0].toDataURL("image/png")
+      file = dataURLtoBlob(dataURL)
+      fd = new FormData()
+      fd.append("image", file)
+      console.log(fd)
 
     saveSuccess = (message) ->
       $('.saveMessage').text('Saved!')
@@ -146,11 +149,30 @@ $(document).ready ->
         $('.saveMessage').html('&nbsp;')
       ), 1000
 
+    # Convert dataURL to Blob object
+
+    dataURLtoBlob = (dataURL) ->
+      # Decode the dataURL    
+      binary = atob(dataURL.split(',')[1])
+      # Create 8-bit unsigned array
+      array = []
+      i = 0
+      while i < binary.length
+        array.push binary.charCodeAt(i)
+        i++
+      # Return our Blob object
+      return new Blob([ new Uint8Array(array) ], type: 'image/png')
+
     $('#finish').on 'click', ->
+      dataURL = $whiteboard[0].toDataURL("image/png")
+      # .replace(/^data:image\/png;base64,/, '')
+      # file = dataURLtoBlob(dataURL)
+      # fd = new FormData()
+      # fd.append("image", file)
       $.ajax
         type: 'POST'
         url: '/questions/' + $whiteboard.attr("data-id") + '/answers'
-        data: {solution: JSON.stringify(solution), user_id: $('#user_id').val()}
+        data: {solution: JSON.stringify(solution), user_id: $('#user_id').val(), final_answer_img: dataURL}
         success: saveSuccess
 
     $('#showAnswer').on 'click', ->
