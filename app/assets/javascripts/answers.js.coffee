@@ -24,9 +24,17 @@ $(document).ready ->
     
     zoom = 1
 
+    # method to draw question on canvas. Get's value from data-question in html view
+    draw_question = ->
+      question = new Image 
+      question.onload = ->
+        context.drawImage(question,0,0)
+      question.src = $whiteboard.data("question")
+
     $whiteboard = $('#whiteboard')
     solution = $whiteboard.data("points") || []
     context = $whiteboard[0].getContext("2d")
+    draw_question()
 
     $slider = $('#slider')
 
@@ -70,6 +78,7 @@ $(document).ready ->
       $whiteboard.attr("width", "1000px")
       context.scale(zoom, zoom)
       fastRedraw()
+      draw_question()
       
     $('#zoomOut').on 'click', ->
       zoom = 1
@@ -77,6 +86,7 @@ $(document).ready ->
       $whiteboard.attr("width", "1000px")
       context.scale(zoom, zoom)
       fastRedraw()
+      draw_question()
 
     initialize_stroke = ->  
       context.strokeStyle = stroke.color
@@ -119,13 +129,15 @@ $(document).ready ->
     $whiteboard.mouseup ->
       mousePress = false
       solution.push stroke
+      # redraw question to ensure it stays on top
+      draw_question()
       stroke =
         x: []
         y: []
       return
 
     $('#testStroke').on 'click', ->
-      console.log(solution)
+      $whiteboard.toDataURL("image/png")
       return
 
     saveSuccess = (message) ->
@@ -158,8 +170,11 @@ $(document).ready ->
           context.lineTo(stroke.x[i + 1], stroke.y[i + 1])
         context.closePath()
         context.stroke()
+      draw_question()
 
+    # Animated drawing of student's answer
     drawStroke = (i, timer = 18) ->
+      draw_question()
       # Only draw strokes while i < the # of strokes in the solution 
       if i < solution.length
         stroke = solution[i]

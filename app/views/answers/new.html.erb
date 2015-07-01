@@ -3,8 +3,8 @@
 <div class='saveMessage'> &nbsp; </div>
 <div id='corkboard' class='row'>
   <div class="col s9">
-    <img id='question' src='<%= @answer.question.question %>'>
-    <canvas id='whiteboard' height="500px" width="1000px" data-id="<%= @answer.question.id %>" data-points="<%= @answer.answer %>"></canvas>
+    <!-- <img id='question' src='<%= @answer.question.question %>'> -->
+    <canvas id='whiteboard' height="500px" width="1000px" data-id="<%= @answer.question.id %>" data-points="<%= @answer.answer %>" data-question="<%=@answer.question.question%>"></canvas>
   </div>
   <div class="col s1">
     <div class="palette" id="eraser">eraser</div>
