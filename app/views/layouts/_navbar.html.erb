@@ -1,0 +1,14 @@
+<nav class="purple lighten-1" role="navigation">
+  <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Nancy Campbell</a>
+    <ul class="right">
+      <% if @current_user %>
+        Signed in as <%= @current_user.type %> :  <%= @current_user.first_name %>
+      <% end %>
+    </ul>
+
+    <ul id="nav-mobile" class="side-nav" style="left: -250px;">
+      <li><a href="#">NCA</a></li>
+    </ul>
+    <a href="/" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">Logout</i></a>
+  </div>
+</nav>
