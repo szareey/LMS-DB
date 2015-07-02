@@ -20,7 +20,16 @@
       </div>
     <% end %>
     <div class="card-action">
-      <%= link_to "Answer", new_question_answer_path(question) %>
+      <% ans = Answer.find_by(question_id: question.id, user_id: @current_user.id) %>
+      <% if ans && ans.score%>
+        <%= link_to "My answer", new_question_answer_path(question) %>
+        You got <%= ans.score %>/<%=question.marks%>
+      <% elsif ans%>
+        <%= link_to "My answer", new_question_answer_path(question) %>
+        Not yet marked
+      <% else %>
+        <%= link_to "Click to answer question", new_question_answer_path(question) %>
+      <% end %>
       <% if current_user_type == 'Teacher' %>
         <%= link_to 'Delete', {action: :destroy, id: question.id}, method: :delete, data: {confirm: 'Are you sure?'} %>
       <% end %>

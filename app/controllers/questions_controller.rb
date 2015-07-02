@@ -4,6 +4,7 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = Question.all
+    @user_answers = Answer.find_by(user_id: @current_user.id)
   end
 
   def show
