@@ -5,10 +5,10 @@
   <div class='saveMessage'> &nbsp; </div>
 </div>
 <div id='corkboard' class='row' class='container'>
-  <div class="col s9">
+  <div class="col s12 m12 l9">
     <canvas id='whiteboard' height="500px" width="1000px" data-id="<%= @answer.question.id %>" data-points="<%= @answer.answer %>" data-question="<%=@answer.question.question%>"></canvas>
   </div>
-  <div class="col s1">
+  <div class="col s3 m3 l1">
     <div class="palette tools" id="eraser"></div>
     <div class="palette tools clicked" id="pencil"></div>
     <div class="palette tools" id="blue-pencil"></div>
@@ -19,7 +19,7 @@
     <div class="zoom tools" id="zoomIn"><i class="medium material-icons">zoom_in</i></div>
     <div class="zoom tools clicked" id="zoomOut"><i class="medium material-icons">zoom_out</i></div>
   </div>
-  <div class="col s2">
+  <div class="col s6 m6 l2">
     <p class='question-marks'> This question is worth <%=@answer.question.marks%> marks </p>
     <% if @answer.score %>
       <p> This question has been marked </p>
@@ -31,7 +31,7 @@
       <p> You have not yet answered this question </p>
     <% end %>
     <% if @answer.created_at %>
-      <button id='showAnswer'>Show My Answer</button>
+      <button id='showAnswer' class='btn'>My Answer</button>
     <%end%>
   </div>
 </div> 

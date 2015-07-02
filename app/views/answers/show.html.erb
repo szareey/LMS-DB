@@ -1,23 +1,27 @@
-<h1> Answers/Show </h1>
-<div>
-<p> Student: <%= @answer.student.first_name %> </p>
-<p> Question Creator: <%= @answer.question.teacher.first_name %>
+</div>
+<div class="container">
+  <h1> <%=@answer.student.first_name%>'s answers</h1>
+  
 </div>
 <div id='corkboard' class='row'>
-  <div class="col s9">
-    <img id='question' src='<%= @answer.question.question %>'>
-    <canvas id='whiteboard' height="500px" width="1000" data-points="<%= @answer.answer %>"></canvas>  
-    <div id="slider"></div>
+  <div class="col s12 l9">
+    <canvas id='whiteboard' height="500px" width="1000" data-points="<%= @answer.answer %>" data-question="<%=@answer.question.question%>"></canvas>  
   </div>
-  <div class="col s3">
+  <div class="col s12 l3">
       <p class='question-marks'> This question is worth <%=@answer.question.marks%> marks </p>
       <p id="teach-comments">Student Score / Teacher Comments:</p>
       <%= form_for @answer, method: :patch, url:question_answer_path do |f|%>
         <%= f.text_field :score %>
         <%= f.text_field :teacher_comment %>
-        <%= f.submit "Grade student's work" %> 
+        <%= f.submit "Mark it!", class: 'btn'
+        %> 
       <% end %>
   </div>
 </div>
-<button id='showAnswer' class="btn waves-effect waves-light btn-large btn-fullwidth">Show</button>
+<div class="row">
+  <div class="col s12 l7 offset-l1">
+    <div id="slider"></div>
+  </div>
+</div>
+<button id='showAnswer' class="btn waves-effect waves-light btn-large btn-fullwidth">Play <%=@answer.student.first_name%>'s answers</button>
 <img id="" src='<%= @ansImg %>'/>
