@@ -9,15 +9,15 @@
     <canvas id='whiteboard' height="500px" width="1000px" data-id="<%= @answer.question.id %>" data-points="<%= @answer.answer %>" data-question="<%=@answer.question.question%>"></canvas>
   </div>
   <div class="col s1">
-    <div class="palette" id="eraser">eraser</div>
-    <div class="palette" id="pencil">pencil</div>
-    <div class="palette" id="blue-pencil">blue</div>
-    <div class="palette" id="green-pencil">green</div>
-    <div class="palette" id="orange-pencil">orange</div>
-    <div class="pencil-weight" id="thin"></div>
+    <div class="palette" id="eraser"></div>
+    <div class="palette clicked" id="pencil"></div>
+    <div class="palette" id="blue-pencil"></div>
+    <div class="palette" id="green-pencil"></div>
+    <div class="palette" id="orange-pencil"></div>
+    <div class="pencil-weight clicked" id="thin"></div>
     <div class="pencil-weight" id="thick"></div>
     <div class="zoom" id="zoomIn">Zoom In</div>
-    <div class="zoom" id="zoomOut">Zoom Out</div>
+    <div class="zoom clicked" id="zoomOut">Zoom Out</div>
   </div>
   <div class="col s2">
     <p class='question-marks'> This question is worth <%=@answer.question.marks%> marks </p>

@@ -31,6 +31,20 @@ $(document).ready ->
         context.drawImage(question,0,0)
       question.src = $whiteboard.data("question")
 
+    $palette = $('.palette')
+    $weight = $('.pencil-weight')
+    $zoom = $('.zoom')
+
+    highlightPalette = (element, type = 'palette') ->
+      if type == 'palette'
+        $palette.removeClass('clicked')
+      else if type == 'weight'
+        $weight.removeClass('clicked')
+      else if type == 'zoom'
+        $zoom.removeClass('clicked')
+      element.addClass('clicked')
+      
+
     $whiteboard = $('#whiteboard')
     solution = $whiteboard.data("points") || []
     context = $whiteboard[0].getContext("2d")
@@ -53,24 +67,31 @@ $(document).ready ->
     $('#eraser').on 'click', ->
       stroke.color = colors.eraser
       stroke.width = 20
+      highlightPalette($(this))
 
     $('#pencil').on 'click', ->
       stroke.color = colors.pencil
+      highlightPalette($(this))
 
     $('#blue-pencil').on 'click', ->
       stroke.color = colors.blue
+      highlightPalette($(this))
 
     $('#green-pencil').on 'click', ->
       stroke.color = colors.green
+      highlightPalette($(this))
 
     $('#orange-pencil').on 'click', ->
       stroke.color = colors.orange
+      highlightPalette($(this))
 
     $('#thin').on 'click', ->
       stroke.width = 1
+      highlightPalette($(this), 'weight')
 
     $('#thick').on 'click', ->
       stroke.width = 10
+      highlightPalette($(this), 'weight')
 
     $('#zoomIn').on 'click', ->
       zoom = 2
@@ -79,6 +100,7 @@ $(document).ready ->
       context.scale(zoom, zoom)
       fastRedraw()
       draw_question()
+      highlightPalette($(this), 'zoom')
       
     $('#zoomOut').on 'click', ->
       zoom = 1
@@ -87,6 +109,7 @@ $(document).ready ->
       context.scale(zoom, zoom)
       fastRedraw()
       draw_question()
+      highlightPalette($(this), 'zoom')
 
     initialize_stroke = ->  
       context.strokeStyle = stroke.color

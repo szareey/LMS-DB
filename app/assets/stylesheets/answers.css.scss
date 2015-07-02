@@ -31,10 +31,44 @@ button#finish{
 }
 
 div.palette{
-  border: 1px solid;
   border-radius: 50%;
   width: 50px;
   height: 50px;
+  margin-top: 5px;
+  box-shadow: 0px 0px 14px -7px #802380
+}
+
+div.palette.clicked{
+ box-shadow: 0px 0px 2px 2px #802380 
+}
+
+div.pencil-weight.clicked{
+ box-shadow: 0px 0px 2px 2px #802380 
+}
+
+div.zoom.clicked{
+ box-shadow: 0px 0px 2px 2px #802380 
+}
+
+div#eraser.palette{
+  background-color: white;
+  border: 1px solid;
+}
+
+div#pencil.palette{
+  background-color: gray;
+}
+
+div#blue-pencil.palette{
+  background-color: blue;
+}
+
+div#green-pencil.palette{
+  background-color: green;
+}
+
+div#orange-pencil.palette{
+  background-color: orange;
 }
 
 div.pencil-weight{
@@ -45,15 +79,21 @@ div.pencil-weight{
 div#thin{
   width: 15px;
   height: 15px;
+  margin-left: 14px;
+  margin-top: 5px;
 }
 
 div#thick {
   width: 30px;
   height: 30px; 
+  margin-left: 7px;
+  margin-top: 5px;
 }
 
 div.zoom{
+  margin-top: 5px;
   border: 1px solid;
+  border-radius: 5px;
   width: 50px;
   height: 50px;
 }
