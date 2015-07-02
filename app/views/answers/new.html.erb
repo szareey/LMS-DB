@@ -1,7 +1,10 @@
-<h1 id='testStroke'> Answer the question </h1>
-<div class='divider'> </div>
-<div class='saveMessage'> &nbsp; </div>
-<div id='corkboard' class='row'>
+</div>
+<div class="container">
+  <h1 id='testStroke'> Answer the question </h1>
+  <div class='divider'> </div>
+  <div class='saveMessage'> &nbsp; </div>
+</div>
+<div id='corkboard' class='row' class='container'>
   <div class="col s9">
     <canvas id='whiteboard' height="500px" width="1000px" data-id="<%= @answer.question.id %>" data-points="<%= @answer.answer %>" data-question="<%=@answer.question.question%>"></canvas>
   </div>
@@ -17,23 +20,22 @@
     <div class="zoom" id="zoomOut">Zoom Out</div>
   </div>
   <div class="col s2">
-  <p class='question-marks'> This question is worth <%=@answer.question.marks%> marks </p>
-  <% if @answer.score %>
-    <p> This question has been marked </p>
-    <p> You got <%= @answer.score %> out of <%= @answer.question.marks %> </p>
-    <p> Mr. <%=@answer.question.teacher.last_name%>'s Comment: <%= @answer.teacher_comment %> </p>
-  <% elsif @answer.answer %>
-    <p> You have submitted an answer, but it hasn't been marked yet! </p>
-  <% else %>
-    <p> You have not yet answered this question </p>
-  <% end %>
+    <p class='question-marks'> This question is worth <%=@answer.question.marks%> marks </p>
+    <% if @answer.score %>
+      <p> This question has been marked </p>
+      <p> You got <%= @answer.score %> out of <%= @answer.question.marks %> </p>
+      <p> Mr. <%=@answer.question.teacher.last_name%>'s Comment: <%= @answer.teacher_comment %> </p>
+    <% elsif @answer.answer %>
+      <p> You have submitted an answer, but it hasn't been marked yet! </p>
+    <% else %>
+      <p> You have not yet answered this question </p>
+    <% end %>
+    <% if @answer.created_at %>
+      <button id='showAnswer'>Show My Answer</button>
+    <%end%>
   </div>
-</div>
-
-<% if @answer.created_at %>
-  <button id='showAnswer'>Show My Answer</button>
-<%end%>
+</div> 
+<div id='submit-button' class="row s1">
   <button id='finish'class="btn waves-effect waves-light btn-large btn-fullwidth" type="submit">Submit</button>
-
-
-<input id='user_id'type='hidden' name='user_id' value='<%=@current_user.id %>'>
+  <input id='user_id'type='hidden' name='user_id' value='<%=@current_user.id %>'>
+</div>
