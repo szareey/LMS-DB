@@ -6,16 +6,40 @@ teacher = Teacher.create(
   )
 
 Question.create(
-  question: 'http://img.sparknotes.com/content/testprep/bookimgs/sat2/math2c/0056/tan(theta)=sin(theta).gif',
+  question: File.open("#{Rails.root}/public/questions/q1.png"),
   user_id: teacher.id,  
   marks: 10
 )
 
-# Question.create(
-#   question: 'http://localhost:3000/system/questions/questions/000/000/011/original/Screen_Shot_2015-06-18_at_5.05.08_PM.png?1434661621',
-#   user_id: teacher.id,  
-#   marks: 15
-# )
+Question.create(
+  question: File.open("#{Rails.root}/public/questions/q2.png"),
+  user_id: teacher.id,  
+  marks: 15
+)
+
+Question.create(
+  question: File.open("#{Rails.root}/public/questions/q3.png"),
+  user_id: teacher.id,  
+  marks: 10
+)
+
+Question.create(
+  question: File.open("#{Rails.root}/public/questions/q4.png"),
+  user_id: teacher.id,  
+  marks: 15
+)
+
+Question.create(
+  question: File.open("#{Rails.root}/public/questions/q5.png"),
+  user_id: teacher.id,  
+  marks: 15
+)
+
+Question.create(
+  question: File.open("#{Rails.root}/public/questions/q6.png"),
+  user_id: teacher.id,  
+  marks: 10
+)
 
 student = Student.create(
     first_name: 'Logan',
@@ -24,4 +48,23 @@ student = Student.create(
     password: 'test123'
   )
 
+student = Student.create(
+    first_name: 'Jacob',
+    last_name: 'Benadryl',
+    email: 'jacob@gmail.com',
+    password: 'test123'
+  )
   
+student = Student.create(
+    first_name: 'Susan',
+    last_name: 'Benadryl',
+    email: 'susan@gmail.com',
+    password: 'test123'
+  )
+
+student = Student.create(
+    first_name: 'Gabriel',
+    last_name: 'Benadryl',
+    email: 'gabe@gmail.com',
+    password: 'test123'
+  )

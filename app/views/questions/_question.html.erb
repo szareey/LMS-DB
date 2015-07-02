@@ -1,0 +1,29 @@
+<div class="col s12 m6 l6">
+  <div class="card">
+    <div class="card-image">
+      <img class="question_img" src='<%= question.question %>'>
+    </div> 
+    <div class="card-content">
+      <p>Question created by Mr. <%=question.teacher.last_name %></p>
+      <p> This is question tests your problem solving skills </p>
+      <p class="question-marks"> This question is worth <%=question.marks%> marks </p>
+    </div>
+    <% if current_user_type == 'Teacher' %>
+      <div class="card-action">
+        <%= link_to '', class: 'view-answers' do %>
+          <i class="material-icons">play_for_work</i> 
+          Submissions
+        <% end %>
+        <div class="answers" style="display:none">
+          <%= render partial: "/answers/answer", collection: question.answers %>
+        </div>
+      </div>
+    <% end %>
+    <div class="card-action">
+      <%= link_to "Answer", new_question_answer_path(question) %>
+      <% if current_user_type == 'Teacher' %>
+        <%= link_to 'Delete', {action: :destroy, id: question.id}, method: :delete, data: {confirm: 'Are you sure?'} %>
+      <% end %>
+    </div>
+  </div>
+</div>

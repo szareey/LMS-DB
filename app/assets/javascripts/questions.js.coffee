@@ -4,3 +4,6 @@
 
 
 $ ->
+  $('.view-answers').on 'click', (e) ->
+    e.preventDefault()
+    $(this).closest('.card-action').find('.answers').slideToggle(300)

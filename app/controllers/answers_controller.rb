@@ -32,8 +32,6 @@ def create
   # data = StringIO.new(decoded_data)
   # # img.original_filename = "final_answer.png"
   # # my_img = Thing.create!(final_answer_img: image)
-
-  byebug
   Answer.create(
     user_id: params[:user_id],
     question_id: params[:question_id],

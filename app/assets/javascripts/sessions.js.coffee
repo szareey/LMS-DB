@@ -10,9 +10,7 @@
 $(document).ready ->
   $login = $('#loginContainer')
 
-  $login.hide()
-
   $('#showLogin').on 'click', ->
-    $('#welcomeMessage').hide()
-    $login.slideToggle(320)
+    $('#welcomeMessage').addClass('hide')
+    $login.removeClass('hide')
       

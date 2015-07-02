@@ -4,7 +4,7 @@ gem "paperclip", "~> 4.2"
 gem 'tux'
 gem 'byebug'
 gem 'railties'
-gem 'bootstrap-sass', '~> 3.3.5'
+#gem 'bootstrap-sass', '~> 3.3.5'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'materialize-sass'
 gem 'sass'

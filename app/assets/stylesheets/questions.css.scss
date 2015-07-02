@@ -2,14 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-h1 {
+/*h1 {
   font: 4em "stationery", roboto;
 }
 
 h2 {
   font: 2em "stationery", roboto;
 }
-
+*/
 p.question-marks {
   font-weight: bold;
   color: red;
@@ -25,4 +25,9 @@ p.teacher_mark {
   font-size: 15px;
   margin-top: 0px;
   margin-left: 3px;
+}
+
+.card .card-image img.question_img {
+  width: initial;
+  max-width: 100%;
 }

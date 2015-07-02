@@ -13,9 +13,9 @@
       <p class='question-marks'> This question is worth <%=@answer.question.marks%> marks </p>
       <p id="teach-comments">Student Score / Teacher Comments:</p>
       <%= form_for @answer, method: :patch, url:question_answer_path do |f|%>
-      <%= f.text_field :score %>
-      <%= f.text_field :teacher_comment %>
-      <%= f.submit "Grade student's work" %> 
+        <%= f.text_field :score %>
+        <%= f.text_field :teacher_comment %>
+        <%= f.submit "Grade student's work" %> 
       <% end %>
   </div>
 </div>

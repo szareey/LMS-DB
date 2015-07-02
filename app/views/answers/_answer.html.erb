@@ -1,0 +1,15 @@
+<% if answer.student != nil %>
+  <div class="row">
+    <div class="col s3">
+    <%= link_to answer.student.first_name, question_answer_path(answer.question, answer) %> 
+    </div>
+    <div class="teacher_marked_checkbox col s2">
+      <% if answer.score %>
+        <p class="teacher_mark"> <%= answer.score %> </p>
+      <% end %>
+    </div>
+    <div class="col s7">
+      <img src="<%= answer.final_answer_img(:medium)%>" style="width:100%">
+    </div>
+  </div>
+<% end %>
