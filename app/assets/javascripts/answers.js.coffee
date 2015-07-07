@@ -19,6 +19,7 @@ $(document).ready ->
     stroke = 
       x: []
       y: []
+      strokeDelay: 0
       color: colors.pencil
       width: 1
     
@@ -140,6 +141,10 @@ $(document).ready ->
     # Draw event
     $whiteboard.mousedown (e) ->    
       mousePress = true 
+      # record the delay in time between the previous stroke and the current stroke, except for the first stroke
+      if solution.length >= 1
+        stroke.strokeDelay = Date.now() - stroke.strokeDelay
+
       # record_stroke draws a line between most recent point and previous point, so the initial click will register two points so that a line can be drawn
       record_stroke(e)
       return
@@ -157,14 +162,12 @@ $(document).ready ->
       stroke =
         x: []
         y: []
+        # temporarily save the time when the stroke finished to find the delay when the next stroke begins
+        strokeDelay: Date.now() 
       return
 
     $('#testStroke').on 'click', ->
-      dataURL = $whiteboard[0].toDataURL("image/png")
-      file = dataURLtoBlob(dataURL)
-      fd = new FormData()
-      fd.append("image", file)
-      console.log(fd)
+      console.log(solution)
 
     saveSuccess = (message) ->
       $('.saveMessage').text('Saved!')
