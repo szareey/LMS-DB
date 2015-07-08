@@ -19,6 +19,7 @@ $(document).ready ->
     stroke = 
       x: []
       y: []
+      pointDelay: [Date.now()]
       strokeDelay: 0
       color: colors.pencil
       width: 1
@@ -124,6 +125,9 @@ $(document).ready ->
       mouseX = e.offsetX - 8
       mouseY = e.offsetY - 8
 
+      # save the time delay between each point
+      stroke.pointDelay.push (stroke.pointDelay[(stroke.pointDelay.length-1)]-Date.now())
+
       # record points that make up the stroke
       stroke.x.push mouseX
       stroke.y.push mouseY
@@ -137,6 +141,7 @@ $(document).ready ->
       context.lineTo(stroke.x[newPointIndex], stroke.y[newPointIndex])
       context.closePath()
       context.stroke()
+      console.log(stroke)
 
     # Draw event
     $whiteboard.mousedown (e) ->    
@@ -177,7 +182,6 @@ $(document).ready ->
       ), 1000
 
     # Convert dataURL to Blob object
-
     dataURLtoBlob = (dataURL) ->
       # Decode the dataURL    
       binary = atob(dataURL.split(',')[1])
