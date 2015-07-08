@@ -167,7 +167,8 @@ $(document).ready ->
       return
 
     $('#testStroke').on 'click', ->
-      console.log(solution)
+      drawDelayStroke(0)
+      console.log('hi')
 
     saveSuccess = (message) ->
       $('.saveMessage').text('Saved!')
@@ -203,7 +204,8 @@ $(document).ready ->
 
     $('#showAnswer').on 'click', ->
       # Draw the first stroke in the solution
-      drawStroke(0)
+      # drawStroke(0)
+      drawDelayStroke(0)
 
     # TODO: Make more efficient. Currently still going though all s in solution values.
     fastRedraw = (sliderValue = -1) ->
@@ -229,7 +231,6 @@ $(document).ready ->
         initialize_stroke()
         # Draw the points in the stroke
         drawPoints(stroke, timer, ->
-
           # When the points are drawn, draw the next stroke
           drawStroke(i + 1, timer)
         )
@@ -256,3 +257,22 @@ $(document).ready ->
         # which draws the next stroke
         callback()
 
+    # draws the strokes with a time delay reflecting the student's pauses between strokes
+    drawDelayStroke = (i)  -> 
+      if i < solution.length
+        stroke = solution[i]
+        initialize_stroke()
+        drawDelayPoints(stroke, 0)
+
+    drawDelayPoints = (stroke, i) ->
+      if i < stroke.x.length
+        console.log(stroke)
+        context.moveTo(stroke.x[i], stroke.y[i])
+        context.lineTo(stroke.x[i + 1], stroke.y[i + 1])
+        context.closePath()
+        context.stroke()
+        drawDelayPoints(stroke,i + 1)
+      else
+        setTimeout ->
+          drawDelayStroke(solution.indexOf(stroke) + 1)
+        , stroke.strokeDelay
