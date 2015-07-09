@@ -114,10 +114,10 @@ $(document).ready ->
       draw_question()
       highlightPalette($(this), 'zoom')
 
-    initialize_stroke = ->  
-      context.strokeStyle = stroke.color
+    initialize_stroke = (s)->  
+      context.strokeStyle = s.color
       context.lineJoin = "round"
-      context.lineWidth = stroke.width
+      context.lineWidth = s.width
       context.beginPath()
 
     record_stroke = (e) ->
@@ -147,7 +147,7 @@ $(document).ready ->
       # move the to the previously recorded point
       newPointIndex = stroke.x.length - 1
       prevPointIndex = stroke.x.length - 2
-      initialize_stroke()
+      initialize_stroke(stroke)
       context.moveTo(stroke.x[prevPointIndex], stroke.y[prevPointIndex])
       context.lineTo(stroke.x[newPointIndex], stroke.y[newPointIndex])
       context.closePath()
@@ -230,7 +230,7 @@ $(document).ready ->
      for s, ind  in solution
       if ind < sliderValue
         stroke = s
-        initialize_stroke()
+        initialize_stroke(stroke)
         for p, i in stroke.x
           context.moveTo(p, stroke.y[i])
           context.lineTo(stroke.x[i + 1], stroke.y[i + 1])
@@ -244,7 +244,7 @@ $(document).ready ->
       # Only draw strokes while i < the # of strokes in the solution 
       if i < solution.length
         stroke = solution[i]
-        initialize_stroke()
+        initialize_stroke(stroke)
         # Draw the points in the stroke
         drawPoints(stroke, timer, ->
           # When the points are drawn, draw the next stroke
@@ -277,17 +277,18 @@ $(document).ready ->
     drawDelayStroke = (i)  -> 
       if i < solution.length
         stroke = solution[i]
-        initialize_stroke()
+        initialize_stroke(stroke)
         # wait the recorded amount of time before between the strokes before drawing the first line
         # TODO: could change strokeDelay to be the first element in pointDelay.
         setTimeout ->
           drawDelayPoints(stroke, 0)
         , stroke.strokeDelay
 
-    # TODO: refactor to have only one setTimeout method
+    # TODO: refactor to have only one setTimeout
     drawDelayPoints = (stroke, i) ->
       if i < stroke.x.length
         # draw the first line
+        initialize_stroke(stroke)
         context.moveTo(stroke.x[i], stroke.y[i])
         context.lineTo(stroke.x[i + 1], stroke.y[i + 1])
         context.closePath()
