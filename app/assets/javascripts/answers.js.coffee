@@ -20,7 +20,7 @@ $(document).ready ->
     stroke = 
       x: []
       y: []
-      pointDelay: [0]
+      pointDelay: []
       strokeDelay: 0
       color: colors.pencil
       width: 1
@@ -137,7 +137,7 @@ $(document).ready ->
       if stroke.x.length > 1
         pointTime = Date.now() - prevPointTime
         stroke.pointDelay.push pointTime
-
+        console.log('time between points: ', pointTime)
       # save the time that the point was recorded 
       prevPointTime = Date.now()
 
@@ -178,7 +178,7 @@ $(document).ready ->
       stroke =
         x: []
         y: []
-        pointDelay: [0]
+        pointDelay: []
         # temporarily save the time when the stroke finished to find the delay when the next stroke begins
         strokeDelay: Date.now() 
       return
@@ -267,7 +267,7 @@ $(document).ready ->
 
           # Draw the next point in the stroke
           drawPoint(stroke, timer, callback, i + 1)
-        , 
+        , timer
       else
         # If all points are done, call the callback
         # which draws the next stroke
@@ -278,17 +278,29 @@ $(document).ready ->
       if i < solution.length
         stroke = solution[i]
         initialize_stroke()
-        drawDelayPoints(stroke, 0)
+        # wait the recorded amount of time before between the strokes before drawing the first line
+        # TODO: could change strokeDelay to be the first element in pointDelay.
+        setTimeout ->
+          drawDelayPoints(stroke, 0)
+        , stroke.strokeDelay
 
+    # TODO: refactor to have only one setTimeout method
     drawDelayPoints = (stroke, i) ->
       if i < stroke.x.length
-        console.log(stroke)
+        # draw the first line
         context.moveTo(stroke.x[i], stroke.y[i])
         context.lineTo(stroke.x[i + 1], stroke.y[i + 1])
         context.closePath()
         context.stroke()
-        drawDelayPoints(stroke,i + 1)
-      else
+        # wait the recorded time before drawing the next line
         setTimeout ->
-          drawDelayStroke(solution.indexOf(stroke) + 1)
-        , stroke.strokeDelay
+          drawDelayPoints(stroke, i + 1)
+        , stroke.pointDelay[i + 1]
+      else
+        # if we reach the end of the stroke, load up the next stroke in solution
+        nextStrokeIndex = solution.indexOf(stroke) + 1
+        if nextStrokeIndex < solution.length
+          setTimeout ->   
+              drawDelayPoints(solution[nextStrokeIndex], 0)
+          , solution[nextStrokeIndex].strokeDelay
+
