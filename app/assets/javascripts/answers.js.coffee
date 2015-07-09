@@ -7,6 +7,7 @@ $(document).ready ->
   if $("body.answers").length > 0
 
     mousePress = false
+    prevPointTime = 0
 
     colors = {
       eraser: "#FFFFFF",
@@ -19,7 +20,7 @@ $(document).ready ->
     stroke = 
       x: []
       y: []
-      pointDelay: [Date.now()]
+      pointDelay: [0]
       strokeDelay: 0
       color: colors.pencil
       width: 1
@@ -125,12 +126,22 @@ $(document).ready ->
       mouseX = e.offsetX - 8
       mouseY = e.offsetY - 8
 
-      # save the time delay between each point
-      stroke.pointDelay.push (stroke.pointDelay[(stroke.pointDelay.length-1)]-Date.now())
-
       # record points that make up the stroke
       stroke.x.push mouseX
       stroke.y.push mouseY
+
+
+      # save the time delay between each point
+      # If it's the first point save a delay of zero and temporarily save the time. Else, save the time between each point
+      # temporaraily save the time of the first point
+      if stroke.x.length > 1
+        pointTime = Date.now() - prevPointTime
+        stroke.pointDelay.push pointTime
+
+      # save the time that the point was recorded 
+      prevPointTime = Date.now()
+
+      console.log("delay between points", stroke.pointDelay[stroke.pointDelay.length - 1])
 
       # draw the points on the canvas
       # move the to the previously recorded point
@@ -167,6 +178,7 @@ $(document).ready ->
       stroke =
         x: []
         y: []
+        pointDelay: [0]
         # temporarily save the time when the stroke finished to find the delay when the next stroke begins
         strokeDelay: Date.now() 
       return
