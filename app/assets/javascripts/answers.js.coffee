@@ -152,7 +152,6 @@ $(document).ready ->
       context.lineTo(stroke.x[newPointIndex], stroke.y[newPointIndex])
       context.closePath()
       context.stroke()
-      console.log(stroke)
 
     # Draw event
     $whiteboard.mousedown (e) ->    
@@ -277,7 +276,6 @@ $(document).ready ->
     drawDelayStroke = (i)  -> 
       if i < solution.length
         stroke = solution[i]
-        initialize_stroke(stroke)
         # wait the recorded amount of time before between the strokes before drawing the first line
         # TODO: could change strokeDelay to be the first element in pointDelay.
         setTimeout ->
@@ -286,9 +284,9 @@ $(document).ready ->
 
     # TODO: refactor to have only one setTimeout
     drawDelayPoints = (stroke, i) ->
+      initialize_stroke(stroke)
       if i < stroke.x.length
         # draw the first line
-        initialize_stroke(stroke)
         context.moveTo(stroke.x[i], stroke.y[i])
         context.lineTo(stroke.x[i + 1], stroke.y[i + 1])
         context.closePath()
