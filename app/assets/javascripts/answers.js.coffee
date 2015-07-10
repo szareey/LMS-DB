@@ -40,6 +40,7 @@ $(document).ready ->
     $palette = $('.palette')
     $weight = $('.pencil-weight')
     $zoom = $('.zoom')
+    $recorder = $('#recorder')
 
     highlightPalette = (element, type = 'palette') ->
       if type == 'palette'
@@ -56,6 +57,25 @@ $(document).ready ->
     context = $whiteboard[0].getContext("2d")
     draw_question()
 
+
+    $recorder.on 'click', ->
+      if navigator.webkitGetUserMedia
+        navigator.webkitGetUserMedia {
+          audio: true
+          video: true
+        }, ((stream) ->
+          # as a parameter object LocalMediaStream is passed to function
+          console.log 'Stream:', stream
+          return
+        ), (error) ->
+          # error object is passing to the function as a parameter
+          console.log 'Error:', error
+          return
+      else
+        console.log 'navigator.webkitGetUserMedia not supported. Are you using latest Chrome/Chromium?'
+
+
+    # noUiSlider version 8 has no jquery dependency
     slider = document.getElementById('slider')
 
     # initialize the playback slider to have max range equal to the number of strokes
@@ -293,6 +313,7 @@ $(document).ready ->
     # TODO: refactor to have only one setTimeout
     drawDelayPoints = (stroke, i) ->
       initialize_stroke(stroke)
+      # drawing will stop if slider is moved by setting continuePlayback to false
       if i < stroke.x.length && continuePlayback == true
         # draw the first line
         context.moveTo(stroke.x[i], stroke.y[i])

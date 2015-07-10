@@ -68,3 +68,10 @@ student = Student.create(
     email: 'gabe@gmail.com',
     password: 'test123'
   )
+
+student = Student.create(
+    first_name: 'Bean',
+    last_name: 'Benadryl',
+    email: 'bean@gmail.com',
+    password: 'test123'
+  )
