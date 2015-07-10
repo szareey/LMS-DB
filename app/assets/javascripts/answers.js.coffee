@@ -53,19 +53,20 @@ $(document).ready ->
     context = $whiteboard[0].getContext("2d")
     draw_question()
 
-    $slider = $('#slider')
+    slider = document.getElementById('slider')
 
     # initialize the playback slider to have max range equal to the number of strokes
-    $slider.noUiSlider
+    noUiSlider.create(slider,
       start: [ 0 ]
       step: 1
       range:
         'min': 0
         'max': solution.length
+      )
 
-    $slider.on 'slide', ->
+    slider.noUiSlider.on 'slide', ->
       $whiteboard.attr("height", "500px")
-      fastRedraw($slider.val())
+      fastRedraw(slider.noUiSlider.get())
 
     $('#eraser').on 'click', ->
       stroke.color = colors.eraser
@@ -220,7 +221,7 @@ $(document).ready ->
     $('#showAnswer').on 'click', ->
       # Draw the first stroke in the solution
       # drawStroke(0)
-      drawDelayStroke(0)
+      drawDelayStroke(parseInt(slider.noUiSlider.get()))
 
     # TODO: Make more efficient. Currently still going though all s in solution values.
     fastRedraw = (sliderValue = -1) ->
@@ -276,6 +277,7 @@ $(document).ready ->
     drawDelayStroke = (i)  -> 
       if i < solution.length
         stroke = solution[i]
+        slider.noUiSlider.set(parseInt(slider.noUiSlider.get()) + 1)
         # wait the recorded amount of time before between the strokes before drawing the first line
         # TODO: could change strokeDelay to be the first element in pointDelay.
         setTimeout ->
@@ -301,5 +303,6 @@ $(document).ready ->
         if nextStrokeIndex < solution.length
           setTimeout ->   
               drawDelayPoints(solution[nextStrokeIndex], 0)
+              slider.noUiSlider.set(parseInt(slider.noUiSlider.get()) + 1)
           , solution[nextStrokeIndex].strokeDelay
 
