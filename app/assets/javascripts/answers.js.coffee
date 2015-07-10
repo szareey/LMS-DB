@@ -9,6 +9,9 @@ $(document).ready ->
     mousePress = false
     prevPointTime = 0
 
+    # flag used to terminate playback if slider is moved.
+    continuePlayback = false
+
     colors = {
       eraser: "#FFFFFF",
       pencil: "#C0C0C0"
@@ -65,6 +68,8 @@ $(document).ready ->
       )
 
     slider.noUiSlider.on 'slide', ->
+      # flag is set to false, DrawDelayPoints will check for this flag to be true.
+      continuePlayback = false
       $whiteboard.attr("height", "500px")
       fastRedraw(slider.noUiSlider.get())
 
@@ -219,8 +224,9 @@ $(document).ready ->
         success: saveSuccess
 
     $('#showAnswer').on 'click', ->
-      # Draw the first stroke in the solution
-      # drawStroke(0)
+      # flag will be set to false if the slider is clicked
+      continuePlayback = true
+      # Start drawing the stroke starting from the slider's current position
       drawDelayStroke(parseInt(slider.noUiSlider.get()))
 
     # TODO: Make more efficient. Currently still going though all s in solution values.
@@ -287,7 +293,7 @@ $(document).ready ->
     # TODO: refactor to have only one setTimeout
     drawDelayPoints = (stroke, i) ->
       initialize_stroke(stroke)
-      if i < stroke.x.length
+      if i < stroke.x.length && continuePlayback == true
         # draw the first line
         context.moveTo(stroke.x[i], stroke.y[i])
         context.lineTo(stroke.x[i + 1], stroke.y[i + 1])
@@ -297,7 +303,7 @@ $(document).ready ->
         setTimeout ->
           drawDelayPoints(stroke, i + 1)
         , stroke.pointDelay[i + 1]
-      else
+      else if continuePlayback == true
         # if we reach the end of the stroke, load up the next stroke in solution
         nextStrokeIndex = solution.indexOf(stroke) + 1
         if nextStrokeIndex < solution.length
