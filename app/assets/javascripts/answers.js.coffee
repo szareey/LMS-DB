@@ -62,9 +62,13 @@ $(document).ready ->
       if navigator.webkitGetUserMedia
         navigator.webkitGetUserMedia {
           audio: true
-          video: true
         }, ((stream) ->
           # as a parameter object LocalMediaStream is passed to function
+          audio_context = new AudioContext
+          input = audio_context.createMediaStreamSource(stream)
+          rec = new Recorder(input, {"workerPath": "http://localhost:3000/assets/recorderWorker.js"} )
+          rec.record()
+          console.log 'rec', rec
           console.log 'Stream:', stream
           return
         ), (error) ->
