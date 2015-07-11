@@ -66,10 +66,14 @@ $(document).ready ->
           # as a parameter object LocalMediaStream is passed to function
           audio_context = new AudioContext
           input = audio_context.createMediaStreamSource(stream)
+          # TODO: Need to reference the path of recorderWorker.js properly. I assume this is a bad way of doing it
           rec = new Recorder(input, {"workerPath": "http://localhost:3000/assets/recorderWorker.js"} )
           rec.record()
-          console.log 'rec', rec
-          console.log 'Stream:', stream
+          setTimeout ->
+            rec.stop()
+            rec.getBuffer(getBufferCallback)
+          , 2000
+
           return
         ), (error) ->
           # error object is passing to the function as a parameter
@@ -79,6 +83,9 @@ $(document).ready ->
         console.log 'navigator.webkitGetUserMedia not supported. Are you using latest Chrome/Chromium?'
 
 
+    getBufferCallback = (buffers) ->
+      console.log('buffer 1: ', buffers[0])
+              
     # noUiSlider version 8 has no jquery dependency
     slider = document.getElementById('slider')
 
