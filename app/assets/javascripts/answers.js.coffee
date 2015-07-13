@@ -71,6 +71,7 @@ $(document).ready ->
           rec.record()
           setTimeout ->
             rec.stop()
+            console.log('stopped')
             rec.getBuffer(getBufferCallback)
           , 2000
 
@@ -80,12 +81,19 @@ $(document).ready ->
           console.log 'Error:', error
           return
       else
-        console.log 'navigator.webkitGetUserMedia not supported. Are you using latest Chrome/Chromium?'
+        console.log 'navigator.webkitGetUserMedia not supported.'
 
 
     getBufferCallback = (buffers) ->
-      console.log('buffer 1: ', buffers[0])
-              
+      newAudioContext = new AudioContext
+      newSource = newAudioContext.createBufferSource()
+      newBuffer = newAudioContext.createBuffer(1, buffers[0].length, 44100)
+      newBuffer.getChannelData(0).set(buffers[0]);
+      newSource.buffer = newBuffer
+      newSource.connect(newAudioContext.destination) 
+      newSource.start(0)
+
+
     # noUiSlider version 8 has no jquery dependency
     slider = document.getElementById('slider')
 
@@ -197,6 +205,7 @@ $(document).ready ->
       if solution.length >= 1
         stroke.strokeDelay = Date.now() - stroke.strokeDelay
 
+      # TODO: change below to draw a single pixel at the point clicked either with context.fillRect() or with Canvas image data.
       # record_stroke draws a line between most recent point and previous point, so the initial click will register two points so that a line can be drawn
       record_stroke(e)
       return
@@ -209,7 +218,7 @@ $(document).ready ->
     $whiteboard.mouseup ->
       mousePress = false
       solution.push stroke
-      # redraw question to ensure it stays on top
+      # redraw question to ensure it stays on top of the canvas
       draw_question()
       stroke =
         x: []
