@@ -285,7 +285,6 @@ $(document).ready ->
       newAudioContext = new AudioContext
       answerBuffer = new Float32Array(262143)
       answerBuffer[i] = $whiteboard.data("audio")[i] for i in [0..262143]
-      debugger
       newSource = newAudioContext.createBufferSource()
       newBuffer = newAudioContext.createBuffer(1, 262143, 44100)
       newBuffer.getChannelData(0).set(answerBuffer);
