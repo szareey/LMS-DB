@@ -41,6 +41,7 @@ $(document).ready ->
     $weight = $('.pencil-weight')
     $zoom = $('.zoom')
     $recorder = $('#recorder')
+    $stopRecorder = $('#stop-recorder')
 
     highlightPalette = (element, type = 'palette') ->
       if type == 'palette'
@@ -64,18 +65,7 @@ $(document).ready ->
           audio: true
         }, ((stream) ->
           # as a parameter object LocalMediaStream is passed to function
-          audio_context = new AudioContext
-          input = audio_context.createMediaStreamSource(stream)
-          # TODO: Need to reference the path of recorderWorker.js properly. I assume this is a bad way of doing it
-          rec = new Recorder(input, {"workerPath": "http://localhost:3000/assets/recorderWorker.js"} )
-          rec.record()
-          setTimeout ->
-            rec.stop()
-            console.log('stopped')
-            rec.getBuffer(getBufferCallback)
-          , 2000
-
-          return
+          recordLessonAudio(stream)
         ), (error) ->
           # error object is passing to the function as a parameter
           console.log 'Error:', error
@@ -83,81 +73,102 @@ $(document).ready ->
       else
         console.log 'navigator.webkitGetUserMedia not supported.'
 
-
+    recordLessonAudio = (stream) ->
+      audio_context = new AudioContext  
+      input = audio_context.createMediaStreamSource(stream)
+      # TODO: Need to reference the path of recorderWorker.js properly. I assume this is a bad way of doing it
+      rec = new Recorder(input, {"workerPath": "http://localhost:3000/assets/recorderWorker.js"} )
+      rec.record()
+      # TODO: Is this a terrible way of looking for the stop event? Should I have an event function nested in my audio?
+      # $stopRecorder.on 'click', ->
+      $('#finish').on 'click', ->
+        rec.stop()
+        console.log('stopped')
+        rec.getBuffer(getBufferCallback)
+        
+    # Uncomment below to play back audio. Currently modified to save array to database.
     getBufferCallback = (buffers) ->
-      newAudioContext = new AudioContext
-      newSource = newAudioContext.createBufferSource()
-      newBuffer = newAudioContext.createBuffer(1, buffers[0].length, 44100)
-      newBuffer.getChannelData(0).set(buffers[0]);
-      newSource.buffer = newBuffer
-      newSource.connect(newAudioContext.destination) 
-      newSource.start(0)
-
-
+      # newAudioContext = new AudioContext
+      # # newSource = newAudioContext.createBufferSource()
+      # newBuffer = newAudioContext.createBuffer(1, buffers[0].length, 44100)
+      # newBuffer.getChannelData(0).set(buffers[0]);
+      # newSource.buffer = newBuffer
+      # saveSolution is passed the buffer to save it to the DB, other parameters are global so they can be easily accessed.
+      saveSolution(buffers[0])
+      # console.log(newBuffer.size())
+      # newSource.connect(newAudioContext.destination) 
+      # newSource.start(0)
+      
     # noUiSlider version 8 has no jquery dependency
     slider = document.getElementById('slider')
 
-    # initialize the playback slider to have max range equal to the number of strokes
-    noUiSlider.create(slider,
-      start: [ 0 ]
-      step: 1
-      range:
-        'min': 0
-        'max': solution.length
-      )
+    # For Answers new, there is no slider.
+    # TODO: Make a slider for Answers new for students to go backwards and undo. Maybe...
+    if slider != null
+      # initialize the playback slider to have max range equal to the number of strokes
+      noUiSlider.create(slider,
+        start: [ 0 ]
+        step: 1
+        range:
+          'min': 0
+          'max': solution.length
+        )
 
-    slider.noUiSlider.on 'slide', ->
-      # flag is set to false, DrawDelayPoints will check for this flag to be true.
-      continuePlayback = false
-      $whiteboard.attr("height", "500px")
-      fastRedraw(slider.noUiSlider.get())
+      slider.noUiSlider.on 'slide', ->
+        # flag is set to false, DrawDelayPoints will check for this flag to be true.
+        continuePlayback = false
+        $whiteboard.attr("height", "500px")
+        fastRedraw(slider.noUiSlider.get())
 
-    $('#eraser').on 'click', ->
-      stroke.color = colors.eraser
-      stroke.width = 20
-      highlightPalette($(this))
+    # Quick and dirty way to avoid having these listeners active when on Answers show. May need to change
+    # once teacher can add edits.
+    if slider == null
+      $('#eraser').on 'click', ->
+        stroke.color = colors.eraser
+        stroke.width = 20
+        highlightPalette($(this))
 
-    $('#pencil').on 'click', ->
-      stroke.color = colors.pencil
-      highlightPalette($(this))
+      $('#pencil').on 'click', ->
+        stroke.color = colors.pencil
+        highlightPalette($(this))
 
-    $('#blue-pencil').on 'click', ->
-      stroke.color = colors.blue
-      highlightPalette($(this))
+      $('#blue-pencil').on 'click', ->
+        stroke.color = colors.blue
+        highlightPalette($(this))
 
-    $('#green-pencil').on 'click', ->
-      stroke.color = colors.green
-      highlightPalette($(this))
+      $('#green-pencil').on 'click', ->
+        stroke.color = colors.green
+        highlightPalette($(this))
 
-    $('#orange-pencil').on 'click', ->
-      stroke.color = colors.orange
-      highlightPalette($(this))
+      $('#orange-pencil').on 'click', ->
+        stroke.color = colors.orange
+        highlightPalette($(this))
 
-    $('#thin').on 'click', ->
-      stroke.width = 1
-      highlightPalette($(this), 'weight')
+      $('#thin').on 'click', ->
+        stroke.width = 1
+        highlightPalette($(this), 'weight')
 
-    $('#thick').on 'click', ->
-      stroke.width = 10
-      highlightPalette($(this), 'weight')
+      $('#thick').on 'click', ->
+        stroke.width = 10
+        highlightPalette($(this), 'weight')
 
-    $('#zoomIn').on 'click', ->
-      zoom = 2
-      $whiteboard.attr("height", "500px")
-      $whiteboard.attr("width", "1000px")
-      context.scale(zoom, zoom)
-      fastRedraw()
-      draw_question()
-      highlightPalette($(this), 'zoom')
-      
-    $('#zoomOut').on 'click', ->
-      zoom = 1
-      $whiteboard.attr("height", "500px")
-      $whiteboard.attr("width", "1000px")
-      context.scale(zoom, zoom)
-      fastRedraw()
-      draw_question()
-      highlightPalette($(this), 'zoom')
+      $('#zoomIn').on 'click', ->
+        zoom = 2
+        $whiteboard.attr("height", "500px")
+        $whiteboard.attr("width", "1000px")
+        context.scale(zoom, zoom)
+        fastRedraw()
+        draw_question()
+        highlightPalette($(this), 'zoom')
+        
+      $('#zoomOut').on 'click', ->
+        zoom = 1
+        $whiteboard.attr("height", "500px")
+        $whiteboard.attr("width", "1000px")
+        context.scale(zoom, zoom)
+        fastRedraw()
+        draw_question()
+        highlightPalette($(this), 'zoom')
 
     initialize_stroke = (s)->  
       context.strokeStyle = s.color
@@ -251,21 +262,37 @@ $(document).ready ->
       # Return our Blob object
       return new Blob([ new Uint8Array(array) ], type: 'image/png')
 
-    $('#finish').on 'click', ->
-      dataURL = $whiteboard[0].toDataURL("image/png")
+    # $('#finish').on 'click', ->
+    #   saveSolution()
       # .replace(/^data:image\/png;base64,/, '')
       # file = dataURLtoBlob(dataURL)
       # fd = new FormData()
       # fd.append("image", file)
+      
+
+    saveSolution = (audioBuffer) ->
+      dataURL = $whiteboard[0].toDataURL("image/png")
       $.ajax
         type: 'POST'
         url: '/questions/' + $whiteboard.attr("data-id") + '/answers'
-        data: {solution: JSON.stringify(solution), user_id: $('#user_id').val(), final_answer_img: dataURL}
+        data: {solution: JSON.stringify(solution), user_id: $('#user_id').val(), final_answer_img: dataURL, audio: JSON.stringify(audioBuffer)}
         success: saveSuccess
 
     $('#showAnswer').on 'click', ->
       # flag will be set to false if the slider is clicked
       continuePlayback = true
+      # start the audio playback
+      newAudioContext = new AudioContext
+      answerBuffer = new Float32Array(262143)
+      answerBuffer[i] = $whiteboard.data("audio")[i] for i in [0..262143]
+      debugger
+      newSource = newAudioContext.createBufferSource()
+      newBuffer = newAudioContext.createBuffer(1, 262143, 44100)
+      newBuffer.getChannelData(0).set(answerBuffer);
+      newSource.buffer = newBuffer
+      newSource.connect(newAudioContext.destination) 
+      newSource.start(0)
+
       # Start drawing the stroke starting from the slider's current position
       drawDelayStroke(parseInt(slider.noUiSlider.get()))
 

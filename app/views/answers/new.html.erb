@@ -41,8 +41,11 @@
     <button id='finish'class="btn waves-effect waves-light btn-large btn-fullwidth" type="submit">Submit</button>
     <input id='user_id'type='hidden' name='user_id' value='<%=@current_user.id %>'>
   </div>
-  <div id='record-audio' class="col s12 m6 l2">
+  <div class="col s12 m6 l2">
     <button id='recorder'class="btn waves-effect waves-light btn-large btn-fullwidth">Record audio</button>
+  </div>
+  <div class="col s12 m6 l2">
+    <button id='stop-recorder'class="btn waves-effect waves-light btn-large btn-fullwidth">Stop record audio</button>
   </div>
 </div>
 <% end %>
