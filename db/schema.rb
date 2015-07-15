@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150708230642) do
+ActiveRecord::Schema.define(version: 20150715020754) do
 
   create_table "answers", force: true do |t|
     t.integer  "user_id"
@@ -26,7 +26,10 @@ ActiveRecord::Schema.define(version: 20150708230642) do
     t.string   "final_answer_img_content_type"
     t.integer  "final_answer_img_file_size"
     t.datetime "final_answer_img_updated_at"
-    t.string   "audio"
+    t.string   "audio_file_name"
+    t.string   "audio_content_type"
+    t.integer  "audio_file_size"
+    t.datetime "audio_updated_at"
   end
 
   create_table "questions", force: true do |t|

@@ -84,17 +84,17 @@ $(document).ready ->
       $('#finish').on 'click', ->
         rec.stop()
         console.log('stopped')
-        rec.getBuffer(getBufferCallback)
+        rec.exportWAV(wavCallback)
         
     # Uncomment below to play back audio. Currently modified to save array to database.
-    getBufferCallback = (buffers) ->
+    wavCallback = (blob) ->
       # newAudioContext = new AudioContext
       # # newSource = newAudioContext.createBufferSource()
       # newBuffer = newAudioContext.createBuffer(1, buffers[0].length, 44100)
       # newBuffer.getChannelData(0).set(buffers[0]);
       # newSource.buffer = newBuffer
       # saveSolution is passed the buffer to save it to the DB, other parameters are global so they can be easily accessed.
-      saveSolution(buffers[0])
+      saveSolution(blob)
       # console.log(newBuffer.size())
       # newSource.connect(newAudioContext.destination) 
       # newSource.start(0)
@@ -270,13 +270,20 @@ $(document).ready ->
       # fd.append("image", file)
       
 
-    saveSolution = (audioBuffer) ->
+    saveSolution = (audioBlobWav) ->
       dataURL = $whiteboard[0].toDataURL("image/png")
-      $.ajax
-        type: 'POST'
-        url: '/questions/' + $whiteboard.attr("data-id") + '/answers'
-        data: {solution: JSON.stringify(solution), user_id: $('#user_id').val(), final_answer_img: dataURL, audio: JSON.stringify(audioBuffer)}
-        success: saveSuccess
+      # audioURL = URL.createObjectURL(audioBlob)
+      # audioWav = audioBlobWav.slice()
+      # turn blob to dataURL
+      reader = new FileReader()
+      # reader.onload = ->
+      reader.readAsDataURL(audioBlobWav)
+      reader.onloadend = ->
+        $.ajax
+          type: 'POST'
+          url: '/questions/' + $whiteboard.attr("data-id") + '/answers'
+          data: {solution: JSON.stringify(solution), user_id: $('#user_id').val(), final_answer_img: dataURL, audio: reader.result}
+          success: saveSuccess
 
     $('#showAnswer').on 'click', ->
       # flag will be set to false if the slider is clicked
