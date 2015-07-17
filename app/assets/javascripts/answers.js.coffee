@@ -270,20 +270,27 @@ $(document).ready ->
       # fd.append("image", file)
       
 
-    saveSolution = (audioBlobWav) ->
+    saveSolution = (audioBlob) ->
+      waitForAudio = new $.Deferred
+      waitForPicture = new $.Deferred
       dataURL = $whiteboard[0].toDataURL("image/png")
-      # audioURL = URL.createObjectURL(audioBlob)
-      # audioWav = audioBlobWav.slice()
-      # turn blob to dataURL
-      reader = new FileReader()
-      # reader.onload = ->
-      reader.readAsDataURL(audioBlobWav)
-      reader.onloadend = ->
+      # convert audioBlob to DataURL for ajax call
+      audioBlobReader = new FileReader()
+      audioBlobReader.readAsDataURL(audioBlobWav)
+      # run the ajax call after the reader has had a chance to load
+      audioBlobReader.onloadend = ->
+        waitForAudio.done()
+      
+      pictureBlobReader.onloadend = ->
+        waitForPicture.done()
+
+      $.when(waitForAudio, waitForPicture).then(() ->
         $.ajax
           type: 'POST'
           url: '/questions/' + $whiteboard.attr("data-id") + '/answers'
-          data: {solution: JSON.stringify(solution), user_id: $('#user_id').val(), final_answer_img: dataURL, audio: reader.result}
+          data: {solution: JSON.stringify(solution), user_id: $('#user_id').val(), final_answer_img: dataURL, audio: audioBlobReader.result}
           success: saveSuccess
+      )
 
     $('#showAnswer').on 'click', ->
       # flag will be set to false if the slider is clicked
