@@ -295,16 +295,16 @@ $(document).ready ->
     $('#showAnswer').on 'click', ->
       # flag will be set to false if the slider is clicked
       continuePlayback = true
-      # start the audio playback
-      newAudioContext = new AudioContext
-      answerBuffer = new Float32Array(262143)
-      answerBuffer[i] = $whiteboard.data("audio")[i] for i in [0..262143]
-      newSource = newAudioContext.createBufferSource()
-      newBuffer = newAudioContext.createBuffer(1, 262143, 44100)
-      newBuffer.getChannelData(0).set(answerBuffer);
-      newSource.buffer = newBuffer
-      newSource.connect(newAudioContext.destination) 
-      newSource.start(0)
+      # # start the audio playback
+      # newAudioContext = new AudioContext
+      # answerBuffer = new Float32Array(262143)
+      # answerBuffer[i] = $whiteboard.data("audio")[i] for i in [0..262143]
+      # newSource = newAudioContext.createBufferSource()
+      # newBuffer = newAudioContext.createBuffer(1, 262143, 44100)
+      # newBuffer.getChannelData(0).set(answerBuffer);
+      # newSource.buffer = newBuffer
+      # newSource.connect(newAudioContext.destination) 
+      # newSource.start(0)
 
       # Start drawing the stroke starting from the slider's current position
       drawDelayStroke(parseInt(slider.noUiSlider.get()))
