@@ -1,8 +1,8 @@
 (function(window){
 
   // TODO: fix path to both below
-  var WORKER_PATH = 'http://localhost:3000/assets/recorderWorker.js';
-  var encoderWorker = new Worker('http://localhost:3000/assets/mp3Worker.js');
+  var WORKER_PATH = "<%= javascript_path "recorderWorker.js"%>";
+  var encoderWorker = new Worker("<%= javascript_path "mp3Worker.js"%>");
 
   var Recorder = function(source, cfg){
     var config = cfg || {};
