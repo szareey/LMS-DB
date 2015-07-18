@@ -26,7 +26,7 @@ def update
 end
 
 def create
-  byebug
+  #byebug
   # img = params[:final_answer_img]
   # decoded_data = Base64.decode64(img)
   # data = StringIO.new(decoded_data)

@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20150715020754) do
     t.string   "final_answer_img_content_type"
     t.integer  "final_answer_img_file_size"
     t.datetime "final_answer_img_updated_at"
+    t.string   "audio"
     t.string   "audio_file_name"
     t.string   "audio_content_type"
     t.integer  "audio_file_size"
