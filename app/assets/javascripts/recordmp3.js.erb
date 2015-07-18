@@ -1,6 +1,6 @@
 (function(window){
 
-  // TODO: fix path to both below
+  
   var WORKER_PATH = "<%= javascript_path "recorderWorker.js"%>";
   var encoderWorker = new Worker("<%= javascript_path "mp3Worker.js"%>");
 
@@ -55,6 +55,7 @@
       worker.postMessage({ command: 'getBuffer' })
     }
 
+    // This method now returns an mp3blob through worker.onmessage
     this.exportWAV = function(cb, type){
       currCallback = cb || config.callback;
       type = type || config.type || 'audio/wav';
@@ -67,11 +68,12 @@
 
   	//Mp3 conversion
     worker.onmessage = function(e){
-      var blob = e.data;
+      var mp3Blob = e.data;
   	  //console.log("the blob " +  blob + " " + blob.size + " " + blob.type);
   	  
   	  var arrayBuffer;
   	  var fileReader = new FileReader();
+      fileReader.readAsArrayBuffer(mp3Blob);
   	  
   	  fileReader.onload = function(){
         arrayBuffer = this.result;
@@ -104,31 +106,33 @@
     				//console.log ("The Mp3 data " + e.data.buf);
     				
     				var mp3Blob = new Blob([new Uint8Array(e.data.buf)], {type: 'audio/mp3'});
-    				uploadAudio(mp3Blob);
+    				
+            // Once converted to MP3, then call the callback
+            currCallback(mp3Blob);
+            
 
-            var recordingslist = $('#recordings_list')[0];
 
-            var url = 'data:audio/mp3;base64,'+encode64(e.data.buf);
-            var li = document.createElement('li');
-            var au = document.createElement('audio');
-            var hf = document.createElement('a');
+            // uploadAudio(mp3Blob);
 
-            au.controls = true;
-            au.src = url;
-            hf.href = url;
-            hf.download = 'audio_recording_' + new Date().getTime() + '.mp3';
-            hf.innerHTML = hf.download;
-            li.appendChild(au);
-            li.appendChild(hf);
-            recordingslist.appendChild(li);
+            // var recordingslist = $('#recordings_list')[0];
+
+            // var url = 'data:audio/mp3;base64,'+encode64(e.data.buf);
+            // var li = document.createElement('li');
+            // var au = document.createElement('audio');
+            // var hf = document.createElement('a');
+
+            // au.controls = true;
+            // au.src = url;
+            // hf.href = url;
+            // hf.download = 'audio_recording_' + new Date().getTime() + '.mp3';
+            // hf.innerHTML = hf.download;
+            // li.appendChild(au);
+            // li.appendChild(hf);
+            // recordingslist.appendChild(li);
 
           }
         };
       };
-
-      fileReader.readAsArrayBuffer(blob);
-
-      currCallback(blob);
     }
 
 

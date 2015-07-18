@@ -57,47 +57,6 @@ $(document).ready ->
     solution = $whiteboard.data("points") || []
     context = $whiteboard[0].getContext("2d")
     draw_question()
-
-
-    $recorder.on 'click', ->
-      if navigator.webkitGetUserMedia
-        navigator.webkitGetUserMedia {
-          audio: true
-        }, ((stream) ->
-          # as a parameter object LocalMediaStream is passed to function
-          recordLessonAudio(stream)
-        ), (error) ->
-          # error object is passing to the function as a parameter
-          console.log 'Error:', error
-          return
-      else
-        console.log 'navigator.webkitGetUserMedia not supported.'
-
-    recordLessonAudio = (stream) ->
-      audio_context = new AudioContext  
-      input = audio_context.createMediaStreamSource(stream)
-      # TODO: Need to reference the path of recorderWorker.js properly. I assume this is a bad way of doing it
-      rec = new Recorder(input, {"workerPath": "<%=javascript_path "recorderWorker.js"%>"} )
-      rec.record()
-      # TODO: Is this a terrible way of looking for the stop event? Should I have an event function nested in my audio?
-      # $stopRecorder.on 'click', ->
-      $('#finish').on 'click', ->
-        rec.stop()
-        console.log('stopped')
-        rec.exportWAV(wavCallback)
-        
-    # Uncomment below to play back audio. Currently modified to save array to database.
-    wavCallback = (blob) ->
-      # newAudioContext = new AudioContext
-      # # newSource = newAudioContext.createBufferSource()
-      # newBuffer = newAudioContext.createBuffer(1, buffers[0].length, 44100)
-      # newBuffer.getChannelData(0).set(buffers[0]);
-      # newSource.buffer = newBuffer
-      # saveSolution is passed the buffer to save it to the DB, other parameters are global so they can be easily accessed.
-      saveSolution(blob)
-      # console.log(newBuffer.size())
-      # newSource.connect(newAudioContext.destination) 
-      # newSource.start(0)
       
     # noUiSlider version 8 has no jquery dependency
     slider = document.getElementById('slider')
@@ -269,10 +228,50 @@ $(document).ready ->
       # fd = new FormData()
       # fd.append("image", file)
       
+    $recorder.on 'click', ->
+      if navigator.webkitGetUserMedia
+        navigator.webkitGetUserMedia {
+          audio: true
+        }, ((stream) ->
+          # as a parameter object LocalMediaStream is passed to function
+          recordLessonAudio(stream)
+        ), (error) ->
+          # error object is passing to the function as a parameter
+          console.log 'Error:', error
+          return
+      else
+        console.log 'navigator.webkitGetUserMedia not supported.'
+
+    recordLessonAudio = (stream) ->
+      audio_context = new AudioContext  
+      input = audio_context.createMediaStreamSource(stream)
+      # TODO: Need to reference the path of recorderWorker.js properly. I assume this is a bad way of doing it
+      rec = new Recorder(input)
+      rec.record()
+      # TODO: Is this a terrible way of looking for the stop event? Should I have an event function nested in my audio?
+      # $stopRecorder.on 'click', ->
+      $('#finish').on 'click', ->
+        rec.stop()
+        console.log('stopped')
+        rec.exportWAV(saveSolution) 
+
+    # Uncomment below to play back audio. Currently modified to save array to database.
+    wavCallback = (blob) ->
+      # newAudioContext = new AudioContext
+      # # newSource = newAudioContext.createBufferSource()
+      # newBuffer = newAudioContext.createBuffer(1, buffers[0].length, 44100)
+      # newBuffer.getChannelData(0).set(buffers[0]);
+      # newSource.buffer = newBuffer
+      # saveSolution is passed the buffer to save it to the DB, other parameters are global so they can be easily accessed.
+      saveSolution(blob)
+      # console.log(newBuffer.size())
+      # newSource.connect(newAudioContext.destination) 
+      # newSource.start(0)
 
     saveSolution = (audioBlob) ->
       dataURL = $whiteboard[0].toDataURL("image/png")
       # convert audioBlob to DataURL for ajax call
+      debugger
       audioBlobReader = new FileReader()
       audioBlobReader.readAsDataURL(audioBlob)
       # run the ajax call after the reader has had a chance to load
