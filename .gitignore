@@ -18,4 +18,6 @@
 /lms.sublime-project
 /lms.sublime-workspace
 
-/public
+/public/questions
+/public/system
+/public/assets
