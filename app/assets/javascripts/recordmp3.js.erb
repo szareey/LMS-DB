@@ -14,7 +14,7 @@
     audioInput.connect(gain);
 
     processorFunction = context.createScriptProcessor;
-    processor = processorFunction.call(context, 16384, 2, 2);
+    processor = processorFunction.call(context, 1024, 2, 2);
 
     var worker = new Worker(WORKER_PATH);
     worker.postMessage({

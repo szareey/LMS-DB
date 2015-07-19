@@ -207,26 +207,6 @@ $(document).ready ->
       setTimeout ( ->
         $('.saveMessage').html('&nbsp;')
       ), 1000
-
-    # Convert dataURL to Blob object
-    dataURLtoBlob = (dataURL) ->
-      # Decode the dataURL    
-      binary = atob(dataURL.split(',')[1])
-      # Create 8-bit unsigned array
-      array = []
-      i = 0
-      while i < binary.length
-        array.push binary.charCodeAt(i)
-        i++
-      # Return our Blob object
-      return new Blob([ new Uint8Array(array) ], type: 'image/png')
-
-    # $('#finish').on 'click', ->
-    #   saveSolution()
-      # .replace(/^data:image\/png;base64,/, '')
-      # file = dataURLtoBlob(dataURL)
-      # fd = new FormData()
-      # fd.append("image", file)
       
     $recorder.on 'click', ->
       if navigator.webkitGetUserMedia
@@ -257,16 +237,18 @@ $(document).ready ->
       audioBlobReader.readAsDataURL(audioBlob)
       # run the ajax call after the reader has had a chance to load
       audioBlobReader.onloadend = ->
-        $.ajax
+        ajaxSave(dataURL, audioBlobReader.result)
+        
+    ajaxSave = (image, audio) ->
+      $.ajax
           type: 'POST'
           url: '/questions/' + $whiteboard.attr("data-id") + '/answers'
-          data: {solution: JSON.stringify(solution), user_id: $('#user_id').val(), final_answer_img: dataURL, audio: audioBlobReader.result}
+          data: {solution: JSON.stringify(solution), user_id: $('#user_id').val(), final_answer_img: image, audio: audio}
           success: saveSuccess
-      
 
     $('#showAnswer').on 'click', ->
       # flag will be set to false if the slider is clicked
-      # continuePlayback = true
+      continuePlayback = true
       # # start the audio playback
       # newAudioContext = new AudioContext
       # answerBuffer = new Float32Array(262143)
@@ -295,41 +277,6 @@ $(document).ready ->
         context.closePath()
         context.stroke()
       draw_question()
-
-    # Animated drawing of student's answer
-    drawStroke = (i, timer = 18) ->
-      draw_question()
-      # Only draw strokes while i < the # of strokes in the solution 
-      if i < solution.length
-        stroke = solution[i]
-        initialize_stroke(stroke)
-        # Draw the points in the stroke
-        drawPoints(stroke, timer, ->
-          # When the points are drawn, draw the next stroke
-          drawStroke(i + 1, timer)
-        )
-    
-    drawPoints = (stroke, timer, callback) ->
-      context.moveTo(stroke.x[0], stroke.y[0])
-
-      # Draw the first point in stroke
-      drawPoint(stroke, timer, callback, 1)
-
-    drawPoint = (stroke, timer, callback, i) ->
-      if i < stroke.x.length
-        # Delay each point by X miliseconds
-        setTimeout ->
-          # Draw
-          context.lineTo(stroke.x[i], stroke.y[i])
-          context.stroke()  
-
-          # Draw the next point in the stroke
-          drawPoint(stroke, timer, callback, i + 1)
-        , timer
-      else
-        # If all points are done, call the callback
-        # which draws the next stroke
-        callback()
 
     # draws the strokes with a time delay reflecting the student's pauses between strokes
     drawDelayStroke = (i)  -> 
