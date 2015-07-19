@@ -232,10 +232,9 @@ $(document).ready ->
       if navigator.webkitGetUserMedia
         navigator.webkitGetUserMedia {
           audio: true
-        }, ((stream) ->
-          # as a parameter object LocalMediaStream is passed to function
-          recordLessonAudio(stream)
-        ), (error) ->
+          # recordLessonAudio() will be passed an Audio Stream
+        }, recordLessonAudio 
+        , (error) ->
           # error object is passing to the function as a parameter
           console.log 'Error:', error
           return
@@ -243,30 +242,12 @@ $(document).ready ->
         console.log 'navigator.webkitGetUserMedia not supported.'
 
     recordLessonAudio = (stream) ->
-      audio_context = new AudioContext  
-      input = audio_context.createMediaStreamSource(stream)
-      # TODO: Need to reference the path of recorderWorker.js properly. I assume this is a bad way of doing it
-      rec = new Recorder(input)
-      rec.record()
-      # TODO: Is this a terrible way of looking for the stop event? Should I have an event function nested in my audio?
-      # $stopRecorder.on 'click', ->
+      # initialize recorder from recordmp3.js
+      rec = new Recorder(stream)
+      rec.record()    
       $('#finish').on 'click', ->
         rec.stop()
-        console.log('stopped')
-        rec.exportWAV(saveSolution) 
-
-    # Uncomment below to play back audio. Currently modified to save array to database.
-    wavCallback = (blob) ->
-      # newAudioContext = new AudioContext
-      # # newSource = newAudioContext.createBufferSource()
-      # newBuffer = newAudioContext.createBuffer(1, buffers[0].length, 44100)
-      # newBuffer.getChannelData(0).set(buffers[0]);
-      # newSource.buffer = newBuffer
-      # saveSolution is passed the buffer to save it to the DB, other parameters are global so they can be easily accessed.
-      saveSolution(blob)
-      # console.log(newBuffer.size())
-      # newSource.connect(newAudioContext.destination) 
-      # newSource.start(0)
+        rec.exportMP3(saveSolution) 
 
     saveSolution = (audioBlob) ->
       dataURL = $whiteboard[0].toDataURL("image/png")
