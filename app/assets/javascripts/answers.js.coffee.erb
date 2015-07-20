@@ -238,7 +238,7 @@ $(document).ready ->
       # run the ajax call after the reader has had a chance to load
       audioBlobReader.onloadend = ->
         ajaxSave(dataURL, audioBlobReader.result)
-        
+        `
     ajaxSave = (image, audio) ->
       $.ajax
           type: 'POST'
