@@ -43,6 +43,9 @@ $(document).ready ->
     $recorder = $('#recorder')
     $stopRecorder = $('#stop-recorder')
 
+    # cache audio if available
+    lessonAudio = $('#theAudio')[0]
+
     highlightPalette = (element, type = 'palette') ->
       if type == 'palette'
         $palette.removeClass('clicked')
@@ -232,13 +235,12 @@ $(document).ready ->
     saveSolution = (audioBlob) ->
       dataURL = $whiteboard[0].toDataURL("image/png")
       # convert audioBlob to DataURL for ajax call
-      debugger
       audioBlobReader = new FileReader()
       audioBlobReader.readAsDataURL(audioBlob)
       # run the ajax call after the reader has had a chance to load
       audioBlobReader.onloadend = ->
         ajaxSave(dataURL, audioBlobReader.result)
-        `
+        
     ajaxSave = (image, audio) ->
       $.ajax
           type: 'POST'
@@ -249,6 +251,9 @@ $(document).ready ->
     $('#showAnswer').on 'click', ->
       # flag will be set to false if the slider is clicked
       continuePlayback = true
+      if lessonAudio != null
+        lessonAudio.currentTime = 0
+        lessonAudio.play()
       # # start the audio playback
       # newAudioContext = new AudioContext
       # answerBuffer = new Float32Array(262143)
