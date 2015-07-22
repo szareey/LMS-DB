@@ -18,12 +18,9 @@
       <% end %>
   </div>
 </div>
-<div class="row">
-  <div class="col s12 l7 offset-l1">
-    <div id="slider"></div>
-  </div>
+
+<%= render 'playback_controls' %>
+
+<div class="col s12 l3">
+  <button class="btn waves-effect waves-light btn-large btn-fullwidth show_answer">Play <%=@answer.student.first_name%>'s answers</button>
 </div>
-<audio id='theAudio'>
-<source src='<%=@answer.audio%>' type='audio/wav'>
-</audio>
-<button id='showAnswer' class="btn waves-effect waves-light btn-large btn-fullwidth">Play <%=@answer.student.first_name%>'s answers</button>

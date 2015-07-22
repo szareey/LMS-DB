@@ -227,7 +227,7 @@ $(document).ready ->
       # initialize recorder from recordmp3.js
       rec = new Recorder(stream)
       rec.record()    
-      $('#finish').on 'click', ->
+      $('#submit_answer').on 'click', ->
         rec.stop()
         rec.exportMP3(saveSolution) 
 
@@ -247,12 +247,12 @@ $(document).ready ->
           data: {solution: JSON.stringify(solution), user_id: $('#user_id').val(), final_answer_img: image, audio: audio}
           success: saveSuccess
 
-    $('#showAnswer').on 'click', ->
+    $('.show_answer').on 'click', ->
       # flag will be set to false if the slider is clicked
       continuePlayback = true
 
       # If accompanied by audio, start playing the audio
-      if lessonAudio != null
+      if lessonAudio != undefined
         lessonAudio.currentTime = 0
         lessonAudio.play()
 
