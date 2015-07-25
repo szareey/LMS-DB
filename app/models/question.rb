@@ -4,6 +4,7 @@ class Question < ActiveRecord::Base
   do_not_validate_attachment_file_type :question
 
   has_many :answers
+  has_and_belongs_to_many :ministrySpecifics
   belongs_to :teacher, class_name: 'Teacher', foreign_key: 'user_id'
 
 end

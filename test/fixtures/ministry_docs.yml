@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  subject: MyString
+  grade9: false
+  grade10: false
+  grade11: false
+  grade12: false
+  province: MyString
+  year: MyString
+  title: MyString
+
+two:
+  subject: MyString
+  grade9: false
+  grade10: false
+  grade11: false
+  grade12: false
+  province: MyString
+  year: MyString
+  title: MyString

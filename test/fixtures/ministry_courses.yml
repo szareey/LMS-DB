@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ministryDocs_id: 
+  grade: MyString
+  title: MyString
+  description: MyString
+  code: MyString
+  preReq: MyString
+  level: MyString
+  creditValue: MyString
+
+two:
+  ministryDocs_id: 
+  grade: MyString
+  title: MyString
+  description: MyString
+  code: MyString
+  preReq: MyString
+  level: MyString
+  creditValue: MyString
