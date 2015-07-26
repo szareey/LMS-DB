@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150726181233) do
+ActiveRecord::Schema.define(version: 20150726192126) do
 
   create_table "answers", force: true do |t|
     t.integer  "user_id"
@@ -140,6 +140,8 @@ ActiveRecord::Schema.define(version: 20150726181233) do
     t.boolean  "thinking",              default: false
     t.boolean  "communication",         default: false
     t.boolean  "application",           default: false
+    t.boolean  "answerRequiresAudio",   default: false
+    t.boolean  "questionRequiresAudio", default: false
   end
 
   add_index "questions", ["ministrySpecifics_id"], name: "index_questions_on_ministrySpecifics_id"

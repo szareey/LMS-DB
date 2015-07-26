@@ -16,6 +16,8 @@ Rails.application.routes.draw do
     resources :answers
   end
 
+  resource :lessons
+
   root 'sessions#new'
 
 end
