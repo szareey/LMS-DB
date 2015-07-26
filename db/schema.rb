@@ -56,6 +56,7 @@ ActiveRecord::Schema.define(version: 20150725054039) do
     t.string   "province"
     t.string   "year"
     t.string   "title"
+    t.string   "URLpdf"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

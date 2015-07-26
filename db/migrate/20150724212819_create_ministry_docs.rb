@@ -9,6 +9,7 @@ class CreateMinistryDocs < ActiveRecord::Migration
       t.string :province
       t.string :year
       t.string :title
+      t.string :URLpdf
 
       t.timestamps
     end
