@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ministrySpecifics_id: MyString
+  user_id: MyString
+  lesson: MyString
+  difficulty: MyString
+  audio: MyString
+  homework: MyString
+
+two:
+  ministrySpecifics_id: MyString
+  user_id: MyString
+  lesson: MyString
+  difficulty: MyString
+  audio: MyString
+  homework: MyString
