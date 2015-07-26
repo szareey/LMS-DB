@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150725054039) do
+ActiveRecord::Schema.define(version: 20150726181233) do
 
   create_table "answers", force: true do |t|
     t.integer  "user_id"
@@ -30,6 +30,17 @@ ActiveRecord::Schema.define(version: 20150725054039) do
     t.string   "audio_content_type"
     t.integer  "audio_file_size"
     t.datetime "audio_updated_at"
+  end
+
+  create_table "lessons", force: true do |t|
+    t.string   "ministrySpecifics_id"
+    t.string   "user_id"
+    t.string   "lesson"
+    t.string   "difficulty"
+    t.string   "audio"
+    t.string   "homework"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "ministry_courses", force: true do |t|
