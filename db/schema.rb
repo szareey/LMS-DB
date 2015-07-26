@@ -33,15 +33,28 @@ ActiveRecord::Schema.define(version: 20150726181233) do
   end
 
   create_table "lessons", force: true do |t|
-    t.string   "ministrySpecifics_id"
-    t.string   "user_id"
+    t.integer  "ministrySpecifics_id"
+    t.integer  "users_id"
     t.string   "lesson"
     t.string   "difficulty"
-    t.string   "audio"
+    t.string   "audio_file_name"
+    t.string   "audio_content_type"
+    t.integer  "audio_file_size"
+    t.datetime "audio_updated_at"
     t.string   "homework"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "lessons_ministry_specifics", force: true do |t|
+    t.integer  "lessons_id"
+    t.integer  "ministry_specifics_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "lessons_ministry_specifics", ["lessons_id"], name: "index_lessons_ministry_specifics_on_lessons_id"
+  add_index "lessons_ministry_specifics", ["ministry_specifics_id"], name: "index_lessons_ministry_specifics_on_ministry_specifics_id"
 
   create_table "ministry_courses", force: true do |t|
     t.integer  "ministryDocs_id"
