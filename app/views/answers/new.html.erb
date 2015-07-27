@@ -9,7 +9,7 @@
     <canvas id='whiteboard' height="500px" width="1000px" data-id="<%= @answer.question.id %>" data-points="<%= @answer.answer %>" data-question="<%=@answer.question.question%>"></canvas>
   </div>
 
-  <%= render 'whiteboard_palette' %>
+  <%= render 'shared/whiteboard_palette' %>
 
   <div class="col s6 m6 l2">
     <p class='question-marks'> This question is worth <%=@answer.question.marks%> marks </p>
@@ -35,14 +35,16 @@
         <button id='submit_answer' class='btn waves-effect waves-light btn-large btn-fullwidth'>Submit</button>
         <input id='user_id'type='hidden' name='user_id' value='<%=@current_user.id %>'>
       </div>
-      <div class="col s12 m6 l1">
-        <button id='recorder'class="btn waves-effect waves-light btn-large btn-fullwidth">Record audio</button>
-      </div>
+      <% if @answer.question.answerRequiresAudio == true %>
+        <div class="col s12 m6 l1">
+          <button id='recorder'class="btn waves-effect waves-light btn-large btn-fullwidth">Record audio</button>
+        </div>
+      <% end %>
       </div>
     </div>
   <% end %>
 
   <% if @answer.created_at %>
-    <%= render 'playback_controls' %>
+    <%= render 'shared\playback_controls' %>
   <%end%>
 </div>
