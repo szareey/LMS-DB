@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20150725054039) do
   end
 
   create_table "ministry_courses", force: true do |t|
-    t.integer  "ministryDocs_id"
+    t.integer  "ministry_docs_id"
     t.string   "grade"
     t.string   "title"
     t.string   "description"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20150725054039) do
     t.datetime "updated_at"
   end
 
-  add_index "ministry_courses", ["ministryDocs_id"], name: "index_ministry_courses_on_ministryDocs_id"
+  add_index "ministry_courses", ["ministry_docs_id"], name: "index_ministry_courses_on_ministry_docs_id"
 
   create_table "ministry_docs", force: true do |t|
     t.string   "subject"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20150725054039) do
   end
 
   create_table "ministry_overalls", force: true do |t|
-    t.integer  "ministryStrands_id"
+    t.integer  "ministry_strands_id"
     t.string   "part"
     t.string   "description"
     t.string   "shorthand"
@@ -70,17 +70,17 @@ ActiveRecord::Schema.define(version: 20150725054039) do
     t.datetime "updated_at"
   end
 
-  add_index "ministry_overalls", ["ministryStrands_id"], name: "index_ministry_overalls_on_ministryStrands_id"
+  add_index "ministry_overalls", ["ministry_strands_id"], name: "index_ministry_overalls_on_ministry_strands_id"
 
   create_table "ministry_specifics", force: true do |t|
-    t.integer  "ministryOveralls_id"
+    t.integer  "ministry_overalls_id"
     t.string   "part"
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "ministry_specifics", ["ministryOveralls_id"], name: "index_ministry_specifics_on_ministryOveralls_id"
+  add_index "ministry_specifics", ["ministry_overalls_id"], name: "index_ministry_specifics_on_ministry_overalls_id"
 
   create_table "ministry_specifics_questions", force: true do |t|
     t.integer  "ministry_specifics_id"
@@ -93,14 +93,14 @@ ActiveRecord::Schema.define(version: 20150725054039) do
   add_index "ministry_specifics_questions", ["questions_id"], name: "index_ministry_specifics_questions_on_questions_id"
 
   create_table "ministry_strands", force: true do |t|
-    t.integer  "ministryCourses_id"
+    t.integer  "ministry_courses_id"
     t.string   "part"
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "ministry_strands", ["ministryCourses_id"], name: "index_ministry_strands_on_ministryCourses_id"
+  add_index "ministry_strands", ["ministry_courses_id"], name: "index_ministry_strands_on_ministry_courses_id"
 
   create_table "questions", force: true do |t|
     t.integer  "user_id"
