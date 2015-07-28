@@ -33,9 +33,10 @@ ActiveRecord::Schema.define(version: 20150726192126) do
   end
 
   create_table "lessons", force: true do |t|
-    t.integer  "ministrySpecifics_id"
+    t.integer  "ministry_specifics_id"
     t.integer  "users_id"
     t.string   "lesson"
+    t.string   "title"
     t.string   "difficulty"
     t.string   "audio_file_name"
     t.string   "audio_content_type"

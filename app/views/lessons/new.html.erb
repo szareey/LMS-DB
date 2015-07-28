@@ -1,18 +1,20 @@
+
 </div>
 <div class="container">
-  <h1 id='testStroke'> Answer the question </h1>
-  <div class='divider'> </div>
-  <div class='saveMessage'> &nbsp; </div>
-</div>
-<div id='corkboard' class='row' class='container'>
-  <div class="col s12 m12 l9">
-    <canvas id='whiteboard' height="500px" width="1000px"></canvas>
+  <%= form_for @lesson, url: lessons_path, :html => { :multipart => true } do |l| %>
+    <h1> <%= @course.code %> - <%= @course.title %> - Lesson: <%= l.text_field :title %> </h1>
+    <div class='divider'> </div>
+    <div class='saveMessage'> &nbsp; </div>
   </div>
-</div>
-  <%= render 'shared/whiteboard_palette' %>
+  <div id='corkboard' class='row' class='container'>
+    <div class="col s12 m12 l9">
+      <canvas id='whiteboard' height="500px" width="1000px"></canvas>
+    </div>
+  </div>
+    <%= render 'shared/whiteboard_palette' %>
 
-<%= form_for @lesson, url: lessons, :html => { :multipart => true } do |f| %>
-  <%= f.file_field :question %>
-  <%= f.text_field :marks %>
-  <%= f.submit "Save", class: 'btn' %> 
+
+  <%= l.text_field :homework %>
+  <%= l.text_field :difficulty %>
+  <%= l.submit "Save", class: 'btn' %> 
 <% end %>
