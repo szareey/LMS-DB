@@ -1,5 +1,5 @@
 class MinistryStrand < ActiveRecord::Base
-  belongs_to :ministryCourse
-  has_many :ministryOveralls, dependent: :destroy
+  belongs_to :ministry_course
+  has_many :ministry_overalls, dependent: :destroy
 
 end

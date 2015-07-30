@@ -1,5 +1,5 @@
 class MinistryDoc < ActiveRecord::Base
 
-  has_many :ministryCourses, dependent: :destroy
+  has_many :ministry_courses, dependent: :destroy
 
 end

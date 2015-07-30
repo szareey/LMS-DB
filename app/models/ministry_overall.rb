@@ -1,5 +1,5 @@
 class MinistryOverall < ActiveRecord::Base
-  belongs_to :ministryCourse
-  has_many :ministrySpecifics
+  belongs_to :ministry_course
+  has_many :ministry_specifics
 
 end
