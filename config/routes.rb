@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     resources :answers
   end
 
-  resources :lessons, only: [:new, :create, :destroy]
+  resources :lessons
 
   root 'sessions#new'
 

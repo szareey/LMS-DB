@@ -8,6 +8,10 @@
 <!-- Initialize audio -->
 <audio id='theAudio'>
   <!-- may to need to eventually change @answers to accomodate @lesson audio -->
-  <source src='<%=@answer.audio%>' type='audio/wav'>
+  <% if @answer %>
+    <source src='<%=@answer.audio%>' type='audio/wav'>
+  <% elsif @lesson %>
+    <source src='<%=@lesson.audio%>' type='audio/wav'>
+  <% end %>
   Must run on chrome
 </audio>

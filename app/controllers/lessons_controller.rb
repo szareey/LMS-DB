@@ -7,6 +7,10 @@ class LessonsController < ApplicationController
     @course = MinistryCourse.first
   end
 
+  def show
+    @lesson = Lesson.find(params[:id])
+  end
+
   def create
    
    # TODO: add other required attributes for Lesson
