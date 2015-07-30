@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150725054039) do
+ActiveRecord::Schema.define(version: 20150730134311) do
 
   create_table "answers", force: true do |t|
     t.integer  "user_id"
@@ -33,7 +33,7 @@ ActiveRecord::Schema.define(version: 20150725054039) do
   end
 
   create_table "ministry_courses", force: true do |t|
-    t.integer  "ministry_docs_id"
+    t.integer  "ministry_doc_id"
     t.string   "grade"
     t.string   "title"
     t.string   "description"
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20150725054039) do
     t.datetime "updated_at"
   end
 
-  add_index "ministry_courses", ["ministry_docs_id"], name: "index_ministry_courses_on_ministry_docs_id"
+  add_index "ministry_courses", ["ministry_doc_id"], name: "index_ministry_courses_on_ministry_doc_id"
 
   create_table "ministry_docs", force: true do |t|
     t.string   "subject"
@@ -62,7 +62,7 @@ ActiveRecord::Schema.define(version: 20150725054039) do
   end
 
   create_table "ministry_overalls", force: true do |t|
-    t.integer  "ministry_strands_id"
+    t.integer  "ministry_strand_id"
     t.string   "part"
     t.string   "description"
     t.string   "shorthand"
@@ -70,17 +70,17 @@ ActiveRecord::Schema.define(version: 20150725054039) do
     t.datetime "updated_at"
   end
 
-  add_index "ministry_overalls", ["ministry_strands_id"], name: "index_ministry_overalls_on_ministry_strands_id"
+  add_index "ministry_overalls", ["ministry_strand_id"], name: "index_ministry_overalls_on_ministry_strand_id"
 
   create_table "ministry_specifics", force: true do |t|
-    t.integer  "ministry_overalls_id"
+    t.integer  "ministry_overall_id"
     t.string   "part"
     t.string   "description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "ministry_specifics", ["ministry_overalls_id"], name: "index_ministry_specifics_on_ministry_overalls_id"
+  add_index "ministry_specifics", ["ministry_overall_id"], name: "index_ministry_specifics_on_ministry_overall_id"
 
   create_table "ministry_specifics_questions", force: true do |t|
     t.integer  "ministry_specifics_id"
@@ -93,14 +93,14 @@ ActiveRecord::Schema.define(version: 20150725054039) do
   add_index "ministry_specifics_questions", ["questions_id"], name: "index_ministry_specifics_questions_on_questions_id"
 
   create_table "ministry_strands", force: true do |t|
-    t.integer  "ministry_courses_id"
+    t.integer  "ministry_course_id"
     t.string   "part"
     t.string   "title"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "ministry_strands", ["ministry_courses_id"], name: "index_ministry_strands_on_ministry_courses_id"
+  add_index "ministry_strands", ["ministry_course_id"], name: "index_ministry_strands_on_ministry_course_id"
 
   create_table "questions", force: true do |t|
     t.integer  "user_id"
