@@ -5,18 +5,9 @@
     <div class="divider"></div>
   </div> 
 </div>
-
+<div class="row">
+  <%= render @lessons%>
+</div>
 <div class="row">
   <%= render @questions, current_user_type: @current_user.type %>
 </div>
-
-<% if @current_user.type == 'Teacher' %>
-  <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
-    <a class="btn-floating btn-large red">
-      <i class="large material-icons">add</i>
-    </a>
-    <ul>
-      <li><a class="btn-floating green" href="<%= new_lesson_path %>"><i class="material-icons">play_circle_filled</i></i></a></li>
-      <li><a class="btn-floating blue" href="<%= new_question_path %>"><i class="material-icons">label_outline</i></a></li>
-  </div>
-<% end %>

@@ -3,7 +3,9 @@ class QuestionsController < ApplicationController
   before_action :permission, only: [:destroy, :create, :new]
 
   def index
+    # TODO: will need to update eventually to only include lessons and questions that are part of a course
     @questions = Question.all
+    @lessons = Lesson.all
     @user_answers = Answer.find_by(user_id: @current_user.id)
   end
 
