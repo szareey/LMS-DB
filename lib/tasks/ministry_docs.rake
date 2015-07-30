@@ -12,13 +12,13 @@ def transform_to_doc(parsed_data)
           part: expect.part,
           description: expect.description,
           shorthand: expect.title,
-          ministrySpecifics: expect.specifics
+          ministry_specifics: expect.specifics
         )
       end
       MinistryStrand.new(
         part: strand.part,
         title: strand.title,
-        ministryOveralls: strand.expectations
+        ministry_overalls: strand.expectations
       )
     end
     MinistryCourse.new(
@@ -26,13 +26,13 @@ def transform_to_doc(parsed_data)
       title: course.title,
       description: course.description,
       code: course.code,
-      preReq: course.pre_req,
+      pre_req: course.pre_req,
       level: course.level,
-      ministryStrands: course.strands
+      ministry_strands: course.strands
     )
   end
   MinistryDoc.new(
-    ministryCourses: parsed_data
+    ministry_courses: parsed_data
   )
 end
 namespace :ministry_docs do
