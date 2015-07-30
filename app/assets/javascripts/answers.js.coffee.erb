@@ -209,6 +209,9 @@ $(document).ready ->
       setTimeout ( ->
         $('.saveMessage').html('&nbsp;')
       ), 1000
+
+    $('#submit_answer').on 'click', ->
+      saveSolution()
       
     $recorder.on 'click', ->
       if navigator.webkitGetUserMedia
@@ -227,29 +230,26 @@ $(document).ready ->
       # initialize recorder from recordmp3.js
       rec = new Recorder(stream)
       rec.record()
-      $('#submit_answer').on 'click', ->
-        rec.stop()
-        rec.exportMP3(saveSolution)  
-
+       
       $('#submit_lesson').on 'click', ->
         rec.stop()
         rec.exportMP3(saveLesson)
 
     saveSolution = (audioBlob) ->
-      dataURL = $whiteboard[0].toDataURL("image/png")
+      imageDataURL = $whiteboard[0].toDataURL("image/png")
       # convert audioBlob to DataURL for ajax call
-      audioBlobReader = new FileReader()
-      audioBlobReader.readAsDataURL(audioBlob)
+      # saveSolution is student's solution. It should for now no longer save audio.
+      # audioBlobReader = new FileReader()
+      # audioBlobReader.readAsDataURL(audioBlob)
       # run the ajax call after the reader has had a chance to load
-      audioBlobReader.onloadend = ->
-        ajaxSaveAnswer(dataURL, audioBlobReader.result)
-        
-    ajaxSaveAnswer = (image, audio) ->
       $.ajax
-          type: 'POST'
-          url: '/questions/' + $whiteboard.attr("data-id") + '/answers'
-          data: {solution: JSON.stringify(solution), user_id: $('#user_id').val(), final_answer_img: image, audio: audio}
-          success: saveSuccess
+        type: 'POST'
+        url: '/questions/' + $whiteboard.attr("data-id") + '/answers'
+        data: {solution: JSON.stringify(solution), user_id: $('#user_id').val(), final_answer_img: imageDataURL}
+        success: saveSuccess
+        
+    ajaxSaveSolution = (image, audio) ->
+     
 
     saveLesson = (audioBlob) ->
       dataURL = $whiteboard[0].toDataURL("image/png")
