@@ -8,13 +8,14 @@ class LessonsController < ApplicationController
   end
 
   def create
-   # Lesson.create(
-   #    user_id: params[:user_id],
-   #    question_id: params[:question_id],
-   #    answer: params[:solution],
-   #    final_answer_img: params[:final_answer_img],
-   #    audio: params[:audio]
-   #    )
+   byebug
+   Lesson.create(
+      # user_id: params[:user_id],
+      lesson: params[:lesson],
+      audio: params[:audio]
+      # homework: params[:homework],
+      # difficulty: params[:difficutly]
+      )
 
     redirect_to :back
   end

@@ -226,10 +226,14 @@ $(document).ready ->
     recordLessonAudio = (stream) ->
       # initialize recorder from recordmp3.js
       rec = new Recorder(stream)
-      rec.record()    
+      rec.record()
       $('#submit_answer').on 'click', ->
         rec.stop()
-        rec.exportMP3(saveSolution) 
+        rec.exportMP3(saveSolution)  
+
+      $('#submit_lesson').on 'click', ->
+        rec.stop()
+        rec.exportMP3(saveLesson)
 
     saveSolution = (audioBlob) ->
       dataURL = $whiteboard[0].toDataURL("image/png")
@@ -238,13 +242,29 @@ $(document).ready ->
       audioBlobReader.readAsDataURL(audioBlob)
       # run the ajax call after the reader has had a chance to load
       audioBlobReader.onloadend = ->
-        ajaxSave(dataURL, audioBlobReader.result)
+        ajaxSaveAnswer(dataURL, audioBlobReader.result)
         
-    ajaxSave = (image, audio) ->
+    ajaxSaveAnswer = (image, audio) ->
       $.ajax
           type: 'POST'
           url: '/questions/' + $whiteboard.attr("data-id") + '/answers'
           data: {solution: JSON.stringify(solution), user_id: $('#user_id').val(), final_answer_img: image, audio: audio}
+          success: saveSuccess
+
+    saveLesson = (audioBlob) ->
+      dataURL = $whiteboard[0].toDataURL("image/png")
+      # convert audioBlob to DataURL for ajax call
+      audioBlobReader = new FileReader()
+      audioBlobReader.readAsDataURL(audioBlob)
+      # run the ajax call after the reader has had a chance to load
+      audioBlobReader.onloadend = ->
+        ajaxSaveLesson(dataURL, audioBlobReader.result)
+
+    ajaxSaveLesson = (image, audio) ->
+      $.ajax
+          type: 'POST'
+          url: '/lessons'
+          data: {lesson: JSON.stringify(solution), audio: audio}
           success: saveSuccess
 
     $('.show_answer').on 'click', ->

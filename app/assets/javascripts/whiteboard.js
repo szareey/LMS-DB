@@ -1,2 +1,2 @@
-//= answers
-//= questions
+//= require answers
+//= require questions

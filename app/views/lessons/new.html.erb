@@ -1,13 +1,12 @@
 
 </div>
 <div class="container">
-  <%= form_for @lesson, url: lessons_path, :html => { :multipart => true } do |l| %>
     <div class="row">
       <div class="col s10 m10 l8">
         <h3> <%= @course.code %> - <%= @course.title %> - Lesson: </h3> 
       </div>
       <div class="col s2 m2 l4">
-        <h3><%= l.text_field :title, placeholder: 'x.x - Lesson title' %> </h3>
+        <h3><input type='text' name='title' placeholder='x.x - Lesson title'> </h3>
       </div>
       
     </div>
@@ -24,10 +23,10 @@
 <div class='container'>
   <div class='row'>
     <div class='col s12 m6 l6'>
-      <%= l.text_field :homework, placeholder: 'Enter homework assignment'%>
+      <input type='text' name='homework' placeholder='Enter homework assignment'>
     </div>
     <div class='col s12 m6 l6'>
-      <%= l.text_field :difficulty, placeholder: 'Additional notes on this lesson' %>
+    <input type='text' name='difficulty' placeholder='Additional notes on this lesson'>
     </div>
   </div>
   <div class="row">
@@ -35,8 +34,7 @@
       <button id='recorder'class="btn waves-effect waves-light btn-large btn-fullwidth">Start Recording Lesson</button>    
     </div>
     <div class="col s12 l3">
-      <%= l.submit "Click to save", class: 'btn' %> 
+      <button class='btn' id='submit_lesson'>Submit</button> 
     </div>
   </div>
 </div>
-<% end %>
