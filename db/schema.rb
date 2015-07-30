@@ -11,10 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-
-ActiveRecord::Schema.define(version: 20150726192126) do
-
-ministry_docs
+ActiveRecord::Schema.define(version: 20150730134311) do
 
   create_table "answers", force: true do |t|
     t.integer  "user_id"
@@ -140,12 +137,12 @@ ministry_docs
     t.datetime "updated_at"
     t.integer  "marks"
     t.integer  "ministry_specific_id"
-    t.boolean  "knowledge",               default: false
-    t.boolean  "thinking",                default: false
-    t.boolean  "communication",           default: false
-    t.boolean  "application",             default: false
-    t.boolean  "answer_requires_audio",   default: false
-    t.boolean  "question_requires_audio", default: false
+    t.boolean  "knowledge",             default: false
+    t.boolean  "thinking",              default: false
+    t.boolean  "communication",         default: false
+    t.boolean  "application",           default: false
+    t.boolean  "answer_has_audio",      default: false
+    t.boolean  "question_has_audio",    default: false
   end
 
   add_index "questions", ["ministry_specific_id"], name: "index_questions_on_ministry_specific_id"
