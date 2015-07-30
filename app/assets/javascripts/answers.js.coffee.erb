@@ -31,11 +31,12 @@ $(document).ready ->
     zoom = 1
 
     # method to draw question on canvas. Get's value from data-question in html view
+    # added hasImage data attribute to canvas to prevent Lessons from getting an error.
     draw_question = ->
       question = new Image 
       question.onload = ->
         context.drawImage(question,0,0)
-      question.src = $whiteboard.data("question")
+      question.src = $whiteboard.data("question") || ""
 
     $palette = $('.palette')
     $weight = $('.pencil-weight')
@@ -237,20 +238,12 @@ $(document).ready ->
 
     saveSolution = (audioBlob) ->
       imageDataURL = $whiteboard[0].toDataURL("image/png")
-      # convert audioBlob to DataURL for ajax call
-      # saveSolution is student's solution. It should for now no longer save audio.
-      # audioBlobReader = new FileReader()
-      # audioBlobReader.readAsDataURL(audioBlob)
-      # run the ajax call after the reader has had a chance to load
       $.ajax
         type: 'POST'
         url: '/questions/' + $whiteboard.attr("data-id") + '/answers'
         data: {solution: JSON.stringify(solution), user_id: $('#user_id').val(), final_answer_img: imageDataURL}
         success: saveSuccess
-        
-    ajaxSaveSolution = (image, audio) ->
-     
-
+      
     saveLesson = (audioBlob) ->
       dataURL = $whiteboard[0].toDataURL("image/png")
       # convert audioBlob to DataURL for ajax call

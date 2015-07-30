@@ -8,7 +8,8 @@ class LessonsController < ApplicationController
   end
 
   def create
-   byebug
+   
+   # TODO: add other required attributes for Lesson
    Lesson.create(
       # user_id: params[:user_id],
       lesson: params[:lesson],
