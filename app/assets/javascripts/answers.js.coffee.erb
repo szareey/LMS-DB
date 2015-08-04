@@ -254,10 +254,13 @@ $(document).ready ->
         ajaxSaveLesson(dataURL, audioBlobReader.result)
 
     ajaxSaveLesson = (image, audio) ->
+      title = $('#lesson-title').val()
+      homework = $('#lesson-homework').val()
+      difficulty = $('#lesson-difficulty').val()
       $.ajax
           type: 'POST'
           url: '/lessons'
-          data: {lesson: JSON.stringify(solution), audio: audio}
+          data: {lesson: JSON.stringify(solution), audio: audio, title: title, homework: homework, difficulty: difficulty}
           success: saveSuccess
 
     $('.show_answer').on 'click', ->

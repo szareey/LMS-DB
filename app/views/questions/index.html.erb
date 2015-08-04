@@ -11,3 +11,16 @@
 <div class="row">
   <%= render @questions, current_user_type: @current_user.type %>
 </div>
+
+<% if @current_user.type == 'Teacher' %>
+  <div class="fixed-action-btn" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red">
+      <i class="large material-icons">add</i>
+    </a>
+     <ul>
+      <li><a class="btn-floating red" href="<%= new_question_path %>"><i class="material-icons">assessment</i></i></a></li>
+      <li><a class="btn-floating yellow darken-1" href="<%= new_lesson_path %>"><i class="material-icons">play_circle_outline</i></a></li>
+    </ul>
+  </div>
+<% end %>
+

@@ -12,14 +12,14 @@ class LessonsController < ApplicationController
   end
 
   def create
-   
    # TODO: add other required attributes for Lesson
    Lesson.create(
-      # user_id: params[:user_id],
+      #user_id: params[:user_id],
       lesson: params[:lesson],
-      audio: params[:audio]
-      # homework: params[:homework],
-      # difficulty: params[:difficutly]
+      audio: params[:audio],
+      homework: params[:homework],
+      difficulty: params[:difficulty],
+      title: params[:title]
       )
 
     redirect_to :back

@@ -1,9 +1,9 @@
 <div class="col s12 m6 l6">
   <div class="card">
     <div class="card-content">
-      <p>THIS IS A LESSON</p>
-      <p> This is lesson teaches you something</p>
-      <p class="question-marks"> This question is worth some marks </p>
+      <p>Lesson: <%= lesson.title %> </p>
+      <p>Notes: <%= lesson.difficulty %> </p>
+      <p>Homework: <%= lesson.homework %> </p>
     </div>
     <div class="card-action">
         <%= link_to "Click to watch lesson", lesson_path(lesson)%>
