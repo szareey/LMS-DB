@@ -13,7 +13,7 @@
     <%= yield %>
   </div>
   <% if @current_user.type == 'Teacher' %>
-    <%= render 'layouts/add_button' %>
+    ’<%= render 'layouts/add_button' %>
   <% end %>
   <%= render 'layouts/footer' %>
 </body>
