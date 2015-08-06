@@ -1,8 +1,8 @@
 GIT
   remote: git@github.com:szareey/ministryDocs.git
-  revision: 350ac6405c0035a0970c70fede89814abdc63704
+  revision: aeab1b3a54df51445d2e4270a7a85ffda20e5621
   specs:
-    ministry_docs (2.0.1)
+    ministry_docs (2.1.3)
       mechanize
 
 GEM

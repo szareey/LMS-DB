@@ -1,7 +1,7 @@
 require 'ministry_docs'
 
 def transform_to_doc(parsed_data)
-  parsed_data.collect! do |course|
+  parsed_data.courses.collect! do |course|
     course.strands.collect! do |strand|
       strand.expectations.collect! do |expect|
         expect.specifics.collect! do |specific|
@@ -31,19 +31,25 @@ def transform_to_doc(parsed_data)
       ministry_strands: course.strands
     )
   end
-  MinistryDoc.new(
-    ministry_courses: parsed_data
-  )
+  grades = [9, 10, 11, 12].collect do |grade|
+    {"grade#{grade}" => parsed_data.grades.include?(grade)}
+  end
+
+  MinistryDoc.new({
+    ministry_courses: parsed_data.courses,
+    title: parsed_data.title,
+    subject: parsed_data.subject,
+    year: parsed_data.year,
+    'URLpdf' => parsed_data.pdf_url,
+    province: parsed_data.province
+  }.merge(grades.reduce Hash.new, :merge))
 end
+
 namespace :ministry_docs do
   desc "It parse from site 2007 math file"
   task parse_math_2007: :environment do
     parser = MinistryDocs::Math2007Parser.new
     doc = transform_to_doc(parser.parse_from_site)
-
-    doc.year = '2007'
-    doc.title = 'The Ontario Curriculum, Grades 11 and 12: Mathematics, 2007'
-
     doc.save!
   end
 
@@ -51,10 +57,6 @@ namespace :ministry_docs do
   task parse_math_2005: :environment do
     parser = MinistryDocs::Math2005Parser.new
     doc = transform_to_doc(parser.parse_from_site)
-
-    doc.year = '2005'
-    doc.title = 'The Ontario Curriculum, Grades 9 and 10: Mathematics, 2005'
-
     doc.save!
   end
 
