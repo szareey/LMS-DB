@@ -12,6 +12,9 @@
   <div class="container">
     <%= yield %>
   </div>
+  <% if @current_user.type == 'Teacher' %>
+    <%= render 'layouts/add_button' %>
+  <% end %>
   <%= render 'layouts/footer' %>
 </body>
 </html>

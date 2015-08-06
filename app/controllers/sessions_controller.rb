@@ -1,3 +1,4 @@
+require 'byebug'
 class SessionsController < ApplicationController
 
   def new
@@ -8,8 +9,13 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-        flash.now[:alert] = "Login successful"
-        redirect_to :questions
+        flash.now[:alert] = "Login successful" 
+        # if user.type = "Student"
+        #   redirect_to :questions
+        # elsif user.type = "Teacher"
+        #   byebug
+          redirect_to :ministry_courses
+        # end
     else
       flash.now[:alert] = "login failed"
       render :new

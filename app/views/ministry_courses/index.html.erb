@@ -1,0 +1,4 @@
+<h1> Courses </h1>
+<% @courses.each do |course| %>
+  <p> <a href="<%= ministry_course_path(course) %>"> <%= course.code %> </p>
+<% end %>
