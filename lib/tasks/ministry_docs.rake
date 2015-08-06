@@ -42,6 +42,7 @@ namespace :ministry_docs do
     doc = transform_to_doc(parser.parse_from_site)
 
     doc.year = '2007'
+    doc.title = 'The Ontario Curriculum, Grades 11 and 12: Mathematics, 2007'
 
     doc.save!
   end
@@ -52,6 +53,7 @@ namespace :ministry_docs do
     doc = transform_to_doc(parser.parse_from_site)
 
     doc.year = '2005'
+    doc.title = 'The Ontario Curriculum, Grades 9 and 10: Mathematics, 2005'
 
     doc.save!
   end
