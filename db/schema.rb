@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150726192126) do
+ActiveRecord::Schema.define(version: 20150806204753) do
 
   create_table "answers", force: true do |t|
     t.integer  "user_id"
@@ -142,6 +142,7 @@ ActiveRecord::Schema.define(version: 20150726192126) do
     t.boolean  "application",           default: false
     t.boolean  "answer_has_audio",      default: false
     t.boolean  "question_has_audio",    default: false
+    t.string   "description"
   end
 
   create_table "users", force: true do |t|

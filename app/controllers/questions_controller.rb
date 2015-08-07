@@ -15,6 +15,7 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
+    @course = MinistryCourses.find_by(code: 'MPM1D')
   end
 
   def create

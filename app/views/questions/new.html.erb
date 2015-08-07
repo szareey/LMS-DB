@@ -1,5 +1,34 @@
-<%= form_for @question, url: questions_path, :html => { :multipart => true } do |f| %>
-  <%= f.file_field :question %>
-  <%= f.text_field :marks %>
-  <%= f.submit "Save", class: 'btn' %> 
-<% end %>
+<div class="row">
+  <%= form_for @question, class: 'col s12', url: questions_path, :html => { :multipart => true } do |f| %>
+    <div class="file-field input-field">
+      <!-- materialize css -->
+      <input class="file-path validate" type="text" placeholder="Click to add file"/>
+      <%= f.file_field :question%>
+    </div>
+    <!-- Once file selected add the source and remove hidden -->
+    <img id="question_preview" src="#" hidden/> </br>
+    <div class="row">
+      <div class="col s12 m6 l6">
+        <%= f.label 'Note' %>
+        <%= f.text_field :description, placeholder: 'Enter a short note or description for the question' %>
+      </div>
+      <div class="col s12 m6 l6">
+        <%= f.label 'Marks Available' %>
+        <%= f.text_field :marks, placeholder: 'Enter the number of marks this question is worth'%>
+      </div>
+    </div>
+    <%= f.label 'Areas of Skill' %>
+    </br>
+    <%= f.check_box :knowledge %>
+    <%= f.label 'knowledge' %>
+    <%= f.check_box :thinking %>
+    <%= f.label 'thinking' %>
+    <%= f.check_box :communication %>
+    <%= f.label 'communication' %>
+    <%= f.check_box :application %>
+    <%= f.label 'application'%> </br>
+    </br>
+    
+    <%= f.submit "Save", class: 'btn' %> 
+  <% end %>
+</div>
