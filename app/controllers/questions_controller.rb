@@ -19,7 +19,20 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = Question.create(question_params)
+    # q_params = question_params
+    
+    # # TODO: I don't know how to mass assign with the HABTM for ministry specifics. There has to be a better way to do this
+    # specs = q_params.extract!(:ministry_specifics)
+    # specs = specs.require(:ministry_specifics)
+    
+    # # TODO: figure out why the last element of my :ministry_specifics param is a blank. For now this removes it.
+    # specs.pop
+    # # reusing the specs variable to store MinstrySpecific objects
+    # specs = MinistrySpecific.find specs
+
+    @question = Question.new(params.require(:question))
+      # teacher: @current_user,
+      # ministry_specifics: specs,
     redirect_to :questions
   end
 
@@ -35,7 +48,17 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:question)
+    params.require(:question).permit(
+      :question, 
+      :knowledge, 
+      :thinking, 
+      :communication, 
+      :application, 
+      :description, 
+      :answer_has_audio, 
+      :question_has_audio, 
+      :marks)
+      # {ministry_specifics: []})
   end
 
 end
