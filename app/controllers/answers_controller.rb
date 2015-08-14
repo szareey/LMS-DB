@@ -8,7 +8,7 @@ class AnswersController < ApplicationController
   end
 
   def new
-    unless @answer = Answer.find_by(question_id: params[:question_id], user_id: @current_user.id)
+    unless @answer = Answer.find_by(question_id: params[:question_id], user_id: current_user.id)
       @answer = Answer.new
       @answer.question = Question.find(params[:question_id])
     end
