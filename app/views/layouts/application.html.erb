@@ -10,6 +10,7 @@
 <body class="<%= controller_name %>">
   <%= render 'layouts/navbar' %>
   <div class="container">
+  <%= render 'layouts/flash' %>
     <%= yield %>
   </div>
   <% if @current_user && @current_user.type == 'Teacher' %>

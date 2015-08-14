@@ -9,7 +9,7 @@ class SessionsController < ApplicationController
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
-        flash.now[:alert] = "Login successful" 
+        flash[:alert] = "Login successful" 
         # if user.type = "Student"
         #   redirect_to :questions
         # elsif user.type = "Teacher"
@@ -17,7 +17,7 @@ class SessionsController < ApplicationController
           redirect_to :ministry_courses
         # end
     else
-      flash.now[:alert] = "login failed"
+      flash[:alert] = "login failed"
       render :new
     end
 
