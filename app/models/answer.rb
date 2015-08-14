@@ -1,4 +1,4 @@
-require 'Base64'
+# require 'Base64' -for what?
 
 class Answer < ActiveRecord::Base
 
