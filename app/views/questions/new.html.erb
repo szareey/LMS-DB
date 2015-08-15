@@ -17,17 +17,24 @@
         <%= q.text_field :marks, placeholder: 'Enter the number of marks this question is worth'%>
       </div>
     </div>
-    <%= q.label 'Areas of Skill' %>
-    <%= q.check_box :knowledge %>
-    <%= q.label 'knowledge' %>
-    <%= q.check_box :thinking %>
-    <%= q.label 'thinking' %>
-    <%= q.check_box :communication %>
-    <%= q.label 'communication' %>
-    <%= q.check_box :application %>
-    <%= q.label 'application'%> </br>
-    <%= q.label 'Course: ' + @course.code %> </br>
-    <%= q.collection_check_boxes :ministry_specifics, @course.ministry_specifics, :id, :part_with_strand%>
-    <%= q.submit "Save", class: 'btn' %> 
+    <div class="row">
+      <%= q.label 'Areas of Skill' %>
+      <%= q.check_box :knowledge %>
+      <%= q.label 'knowledge' %>
+      <%= q.check_box :thinking %>
+      <%= q.label 'thinking' %>
+      <%= q.check_box :communication %>
+      <%= q.label 'communication' %>
+      <%= q.check_box :application %>
+      <%= q.label 'application'%> </br>
+    </div>
+       <%= q.label 'Course: ' + @course.code %> </br>
+    </div>
+    <div class="row">
+      <%= q.collection_check_boxes :ministry_specifics, @course.ministry_specifics, :id, :part_with_strand%>
+    </div>
+    <div>
+      <%= q.submit "Save", class: 'btn' %> 
+    </div>
   <% end %>
 </div>
