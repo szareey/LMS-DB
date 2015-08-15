@@ -19,20 +19,10 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    # q_params = question_params
-    
-    # # TODO: I don't know how to mass assign with the HABTM for ministry specifics. There has to be a better way to do this
-    # specs = q_params.extract!(:ministry_specifics)
-    # specs = specs.require(:ministry_specifics)
-    
-    # # TODO: figure out why the last element of my :ministry_specifics param is a blank. For now this removes it.
-    # specs.pop
-    # # reusing the specs variable to store MinstrySpecific objects
-    # specs = MinistrySpecific.find specs
-
-    @question = Question.new(params.require(:question))
-      # teacher: @current_user,
-      # ministry_specifics: specs,
+    @question = Question.new(question_params)
+    @question.teacher = @current_user
+    @question.ministry_specifics = question_specifics
+    @question.save
     redirect_to :questions
   end
 
@@ -58,7 +48,11 @@ class QuestionsController < ApplicationController
       :answer_has_audio, 
       :question_has_audio, 
       :marks)
-      # {ministry_specifics: []})
+  end
+
+  def question_specifics
+    # TODO: Don't know if there's a way to remove the empty element from array. Seems to be a rails issue.
+    MinistrySpecific.find params.require(:question).require(:ministry_specifics).reject(&:empty?)
   end
 
 end
