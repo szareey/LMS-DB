@@ -21,7 +21,6 @@ class QuestionsController < ApplicationController
   def create
     @question = Question.new(question_params)
     @question.teacher = @current_user
-    @question.ministry_specifics = question_specifics
     @question.save
     redirect_to :questions
   end
@@ -46,13 +45,8 @@ class QuestionsController < ApplicationController
       :application, 
       :description, 
       :answer_has_audio, 
-      :question_has_audio, 
-      :marks)
+      :question_has_audio,
+      :marks,
+      ministry_specific_ids: [])
   end
-
-  def question_specifics
-    # TODO: Don't know if there's a way to remove the empty element from array. Seems to be a rails issue.
-    MinistrySpecific.find params.require(:question).require(:ministry_specifics).reject(&:empty?)
-  end
-
 end

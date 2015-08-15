@@ -1,4 +1,3 @@
-require 'Base64'
 
 class Answer < ActiveRecord::Base
 
