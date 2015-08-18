@@ -5,23 +5,23 @@ def transform_to_doc(parsed_data)
     course.strands.collect! do |strand|
       strand.expectations.collect! do |expect|
         expect.specifics.collect! do |specific|
-          MinistrySpecific.new(specific.marshal_dump)
+          MinistryDoc::Specific.new(specific.marshal_dump)
         end
 
-        MinistryOverall.new(
+        MinistryDoc::Overall.new(
           part: expect.part,
           description: expect.description,
           shorthand: expect.title,
           ministry_specifics: expect.specifics
         )
       end
-      MinistryStrand.new(
+      MinistryDoc::Strand.new(
         part: strand.part,
         title: strand.title,
         ministry_overalls: strand.expectations
       )
     end
-    MinistryCourse.new(
+    MinistryDoc::Course.new(
       grade: course.grade,
       title: course.title,
       description: course.description,

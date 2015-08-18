@@ -1,9 +1,9 @@
 class MinistryCoursesController < ApplicationController
   def index
-    @courses = MinistryCourse.all
+    @courses = MinistryDoc::Course.all
   end
 
   def show
-    @course = MinistryCourse.find_by(code: params[:id])
+    @course = MinistryDoc::Course.find_by(code: params[:id])
   end
 end

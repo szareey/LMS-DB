@@ -3,7 +3,7 @@
 # Table name: questions
 #
 #  id                    :integer          not null, primary key
-#  user_id               :integer
+#  teacher_id            :integer
 #  question_file_name    :string(255)
 #  question_content_type :string(255)
 #  question_file_size    :integer

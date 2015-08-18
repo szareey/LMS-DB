@@ -25,7 +25,7 @@ class AnswersController < ApplicationController
   def create
     #byebug
     Answer.create(
-      user_id: params[:user_id],
+      user_id: current_user,
       question_id: params[:question_id],
       answer: params[:solution],
       final_answer_img: params[:final_answer_img],
