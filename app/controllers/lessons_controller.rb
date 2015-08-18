@@ -4,7 +4,7 @@ class LessonsController < ApplicationController
 
   def new
     @lesson = Lesson.new
-    @course = MinistryCourse.first
+    @course = MinistryDoc::Course.first
   end
 
   def show

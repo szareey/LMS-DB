@@ -2,7 +2,7 @@
   <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Nancy Campbell Academy</a>
     <ul class="right">
       <% if current_user %>
-        Signed in as <%= current_user.type %> :  <%= current_user.first_name %>
+        Signed in as <%= current_user.class.model_name.human.downcase %>:  <%= current_user.first_name %>
       <% end %>
     </ul>
 

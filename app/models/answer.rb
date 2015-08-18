@@ -35,7 +35,7 @@ class Answer < ActiveRecord::Base
   # validates_attachment_content_type :final_answer_img, :content_type => ["image/jpg", "image/jpeg", "image/png", "image/gif"]
   # validates_attachment_file_name :final_answer_img, :matches => [/png\Z/, /jpe?g\Z/, /gif\Z/]
 
-  belongs_to :student, class_name: 'Student', foreign_key: 'user_id'
+  belongs_to :student, class_name: 'User::Student'
   belongs_to :question
 
 

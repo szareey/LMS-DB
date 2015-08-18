@@ -17,6 +17,7 @@
 #  application           :boolean          default(FALSE)
 #  answer_has_audio      :boolean          default(FALSE)
 #  question_has_audio    :boolean          default(FALSE)
+#  description           :string(255)
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
