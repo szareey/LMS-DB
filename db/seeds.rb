@@ -1,4 +1,4 @@
-teacher = Teacher.create(
+ 7gtV(9teacher = Teacher.create(
     first_name: 'Sana',
     last_name: 'Zareey',
     email: 'szareey@nancycampbell.ca',

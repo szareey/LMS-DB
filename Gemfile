@@ -48,3 +48,4 @@ gem 'ministry_docs', git: 'git@github.com:szareey/ministryDocs.git'
 # Use debugger
 # gem 'debugger', group: [:development, :test]
 
+gem 'annotate'

@@ -10,9 +10,11 @@
 <body class="<%= controller_name %>">
   <%= render 'layouts/navbar' %>
   <div class="container">
+  <%= render 'layouts/flash' %>
     <%= yield %>
   </div>
   <% if @current_user.type == 'Teacher' %>
+<!--  <% if current_user && current_user.type == 'Teacher' %> -->
     <%= render 'layouts/add_button' %>
   <% end %>
   <%= render 'layouts/footer' %>
