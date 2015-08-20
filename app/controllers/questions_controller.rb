@@ -15,7 +15,7 @@ class QuestionsController < ApplicationController
 
   def new
     @question = Question.new
-    @course = MinistryCourse.find_by(code: 'MPM1D')
+    @course = MinistryDoc::Course.find_by(code: 'MPM1D')
   end
 
   def create
@@ -37,7 +37,7 @@ class QuestionsController < ApplicationController
   protected
 
   def permission
-    redirect_to :back unless current_user.type == 'Teacher'
+    redirect_to :back unless current_user.teacher?
   end
 
   def question_params

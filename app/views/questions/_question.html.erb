@@ -8,7 +8,7 @@
       <p> This is question tests your problem solving skills </p>
       <p class="question-marks"> This question is worth <%=question.marks%> marks </p>
     </div>
-    <% if current_user.techer? %>
+    <% if current_user.teacher? %>
       <div class="card-action">
         <%= link_to '', class: 'view-answers' do %>
           <i class="material-icons">play_for_work</i> 

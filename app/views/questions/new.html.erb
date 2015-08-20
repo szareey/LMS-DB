@@ -31,7 +31,7 @@
        <%= q.label 'Course: ' + @course.code %> </br>
     </div>
     <div class="row">
-      <%= q.collection_check_boxes :ministry_specific_ids, @course.ministry_specifics, :id, :part_with_strand%>
+      <%= q.collection_check_boxes :ministry_specific_ids, @course.specifics, :id, :part_with_strand%>
     </div>
     <div>
       <%= q.submit "Save", class: 'btn' %> 
