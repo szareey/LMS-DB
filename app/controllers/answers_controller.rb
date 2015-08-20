@@ -8,7 +8,7 @@ class AnswersController < ApplicationController
   end
 
   def new
-    unless @answer = Answer.find_by(question_id: params[:question_id], user_id: current_user.id)
+    unless @answer = Answer.find_by(question_id: params[:question_id], student: current_user)
       @answer = Answer.new
       @answer.question = Question.find(params[:question_id])
     end
@@ -25,7 +25,7 @@ class AnswersController < ApplicationController
   def create
     #byebug
     Answer.create(
-      user_id: current_user,
+      student: current_user,
       question_id: params[:question_id],
       answer: params[:solution],
       final_answer_img: params[:final_answer_img],

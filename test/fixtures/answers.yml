@@ -3,7 +3,7 @@
 # Table name: answers
 #
 #  id                            :integer          not null, primary key
-#  user_id                       :integer
+#  student_id                    :integer
 #  question_id                   :integer
 #  answer                        :string(255)
 #  created_at                    :datetime

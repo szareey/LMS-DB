@@ -3,7 +3,7 @@
 # Table name: answers
 #
 #  id                            :integer          not null, primary key
-#  user_id                       :integer
+#  student_id                    :integer
 #  question_id                   :integer
 #  answer                        :string(255)
 #  created_at                    :datetime
@@ -19,6 +19,7 @@
 #  audio_content_type            :string(255)
 #  audio_file_size               :integer
 #  audio_updated_at              :datetime
+#
 
 class Answer < ActiveRecord::Base
 
