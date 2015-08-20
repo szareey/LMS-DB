@@ -20,7 +20,7 @@
       </div>
     <% end %>
     <div class="card-action">
-      <% ans = Answer.find_by(question_id: question.id, user_id: current_user) %>
+      <% ans = Answer.find_by(question_id: question.id, student: current_user) %>
       <% if ans && ans.score%>
         <%= link_to "My answer", new_question_answer_path(question) %>
         You got <%= ans.score %>/<%=question.marks%>
