@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
     # TODO: will need to update eventually to only include lessons and questions that are part of a course
     @questions = Question.all
     @lessons = Lesson.all
-    @user_answers = Answer.find_by(student: current_user)
+    @user_answers = Answer.find_by(student_id: current_user.id)
   end
 
   def show
