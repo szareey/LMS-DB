@@ -16,4 +16,11 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
+  def teacher?
+    type == 'User::Teacher'
+  end
+
+  def student?
+    type == 'User::Student'
+  end
 end

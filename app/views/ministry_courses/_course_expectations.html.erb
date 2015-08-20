@@ -1,13 +1,13 @@
-<% @course.ministry_strands.each do |strand| %>
+<% @course.strands.each do |strand| %>
   <div class="divider"></div>
     <h4><%= strand.part %>. <%= strand.title %></h4>
-    <% strand.ministry_overalls.each do |overall| %>
+    <% strand.overalls.each do |overall| %>
     <div class="row">
       <div class="col s12 m12 l12">
         <div class="card">
           <div class="card-content black-text">
             <span class="card-title black-text"><%= overall.part %>. <%= overall.shorthand %></span>
-            <% overall.ministry_specifics.each do |specific| %>
+            <% overall.specifics.each do |specific| %>
               <p><%= specific.part %>
               <%= specific.description %></p>
             <% end %>

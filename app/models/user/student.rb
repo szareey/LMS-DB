@@ -12,7 +12,7 @@
 #  updated_at      :datetime
 #
 
-class Student < User
+class User::Student < User
 
   has_many :answers
 

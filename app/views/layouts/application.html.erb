@@ -13,8 +13,7 @@
   <%= render 'layouts/flash' %>
     <%= yield %>
   </div>
-  <% if @current_user.type == 'Teacher' %>
-<!--  <% if current_user && current_user.type == 'Teacher' %> -->
+  <% if current_user.try(:teacher?)%>
     <%= render 'layouts/add_button' %>
   <% end %>
   <%= render 'layouts/footer' %>

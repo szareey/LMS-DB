@@ -4,7 +4,7 @@
 #
 #  id                   :integer          not null, primary key
 #  ministry_specific_id :integer
-#  user_id              :integer
+#  teacher_id           :integer
 #  lesson               :string(255)
 #  title                :string(255)
 #  difficulty           :string(255)

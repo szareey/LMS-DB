@@ -3,7 +3,7 @@
 # Table name: questions
 #
 #  id                    :integer          not null, primary key
-#  user_id               :integer
+#  teacher_id            :integer
 #  question_file_name    :string(255)
 #  question_content_type :string(255)
 #  question_file_size    :integer
@@ -17,16 +17,20 @@
 #  application           :boolean          default(FALSE)
 #  answer_has_audio      :boolean          default(FALSE)
 #  question_has_audio    :boolean          default(FALSE)
+#  description           :string(255)
 #
 
 class Question < ActiveRecord::Base
-
-  has_attached_file :question, :styles => { :medium => "300x300>", :thumb => "100x100>" }, :default_url => "/images/:style/missing.png"
+  has_attached_file :question, styles: { 
+                                 medium: "300x300>", 
+                                 thumb: "100x100>"
+                               }, 
+                               default_url: "/images/:style/missing.png"
   do_not_validate_attachment_file_type :question
 
+  belongs_to :teacher, class_name: 'User::Teacher'
   has_many :answers
-  has_and_belongs_to_many :ministry_specifics
-  belongs_to :teacher, class_name: 'Teacher', foreign_key: 'user_id'
-
+  has_and_belongs_to_many :ministry_specifics,
+                          class_name: 'MinistryDoc::Specific'
 end
 
