@@ -21,3 +21,6 @@
 /public/questions
 /public/system
 /public/assets
+
+/.tags
+/.gemtags

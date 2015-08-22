@@ -155,12 +155,10 @@ $(document).ready ->
       if stroke.x.length > 1
         pointTime = Date.now() - prevPointTime
         stroke.pointDelay.push pointTime
-        console.log('time between points: ', pointTime)
       # save the time that the point was recorded 
       prevPointTime = Date.now()
 
-      console.log("delay between points", stroke.pointDelay[stroke.pointDelay.length - 1])
-
+      
       # draw the points on the canvas
       # move the to the previously recorded point
       newPointIndex = stroke.x.length - 1
@@ -213,31 +211,27 @@ $(document).ready ->
 
     $('#submit_answer').on 'click', ->
       saveSolution()
-      
-    $recorder.on 'click', ->
-      if navigator.webkitGetUserMedia
-        navigator.webkitGetUserMedia {
-          audio: true
-          # recordLessonAudio() will be passed an Audio Stream
-        }, recordLessonAudio 
-        , (error) ->
-          # error object is passing to the function as a parameter
-          console.log 'Error:', error
-          return
-      else
+    (->
+      recorder = new Recorder(
+        encoderPath: '/assets/recorder_js/oggopusEncoder.js'
+      )
+      recorder.initStream()
+      unless Recorder.isRecordingSupported()
         console.log 'navigator.webkitGetUserMedia not supported.'
+      
+      recorder.addEventListener "dataAvailable", (e)->
+        saveLesson(e.detail)
 
-    recordLessonAudio = (stream) ->
-      # initialize recorder from recordmp3.js
-      rec = new Recorder(stream)
-      rec.record()
-       
+      $recorder.on 'click', ->
+        recorder.start()
+
       $('#submit_lesson').on 'click', ->
-        rec.stop()
-        rec.exportMP3(saveLesson)
+        recorder.stop()
+    )(@)
 
     saveSolution = (audioBlob) ->
       imageDataURL = $whiteboard[0].toDataURL("image/png")
+      console.log 'lesson is sending to the server'
       $.ajax
         type: 'POST'
         url: '/questions/' + $whiteboard.attr("data-id") + '/answers'
@@ -245,6 +239,7 @@ $(document).ready ->
         success: saveSuccess
       
     saveLesson = (audioBlob) ->
+      
       dataURL = $whiteboard[0].toDataURL("image/png")
       # convert audioBlob to DataURL for ajax call
       audioBlobReader = new FileReader()
