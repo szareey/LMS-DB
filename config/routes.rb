@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
-  resources :sessions, only: [:new, :create, :destroy]
+  delete :sessions, to: 'sessions#destroy'
+  resources :sessions, only: [:new, :create]
 
   resources :ministry_courses
 
