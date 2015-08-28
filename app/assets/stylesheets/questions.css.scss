@@ -15,17 +15,21 @@ p.question-marks {
   color: red;
 }
 
-div.teacher_marked_checkbox {
-  border: 1px solid #ccc;
-  width: 25px;
-  height: 25px;
+.answer {
+  .mark {
+    input {
+      max-width: 100%
+    }
+    .progress {
+      margin-top: 0px;
+      display: none;
+    }
+  }
+  .image {
+    max-width: 100%
+  }
 }
 
-p.teacher_mark {
-  font-size: 15px;
-  margin-top: 0px;
-  margin-left: 3px;
-}
 
 .card .card-image img.question_img {
   width: initial;

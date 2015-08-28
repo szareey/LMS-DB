@@ -1,15 +1,16 @@
-<% if answer.student != nil %>
-  <div class="row">
-    <div class="col s3">
+<% if answer.student.present? %>
+  <div class="row answer" data-id="<%= answer.id%>">
+    <div class="name col s3">
     <%= link_to answer.student.first_name, question_answer_path(answer.question, answer) %> 
     </div>
-    <div class="teacher_marked_checkbox col s1">
-      <% if answer.score %>
-        <p class="teacher_mark"> <%= answer.score %> </p>
-      <% end %>
+    <div class="mark col s2">
+      <input value='<%= answer.score %>' name='mark'/>
+      <div class="progress">
+        <div class="indeterminate"></div>
+      </div>
     </div>
-    <div class="col s7">
-      <img src="<%= answer.final_answer_img(:medium)%>" style="width:100%">
+    <div class="image col s7">
+      <img src="<%= answer.final_answer_img(:medium)%>">
     </div>
   </div>
 <% end %>

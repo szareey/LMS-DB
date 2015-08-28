@@ -2,6 +2,39 @@
 # All this logic will automatically be available in application.js.
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
+markSaver = ->
+  doneTypingInterval = 1000
+  typingTimer = null
+
+  saveMark = (val, id, $progress)->
+    return unless val && $.isNumeric(val)
+    
+    $progress.show()
+    $.ajax(
+      type: 'PUT'
+      url:  "/answers/#{id}",
+      data: {
+        answer: {
+          score: val
+        }
+      }
+      success: ->
+        $progress.hide()
+    )
+
+  $('.answer .mark input').on 'keyup', ->
+    $current_input = $(this)
+
+    val = $current_input.val()
+    id = $current_input.closest('.answer')
+                       .attr('data-id')
+
+    clearTimeout(typingTimer)
+    
+    typingTimer = setTimeout (->
+      saveMark(val, id, $current_input.parent().find('.progress'))
+    ), doneTypingInterval if val
+  
 
 $ ->
   $('.view-answers').on 'click', (e) ->
@@ -23,3 +56,5 @@ $ ->
     readURL this
     $('#question_preview').removeAttr('hidden')
     return
+
+  markSaver()
