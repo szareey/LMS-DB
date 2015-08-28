@@ -3,12 +3,12 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 markSaver = ->
-  doneTypingInterval = 1000
+  doneTypingInterval = 500
   typingTimer = null
 
   saveMark = (val, id, $progress)->
     return unless val && $.isNumeric(val)
-    
+
     $progress.show()
     $.ajax(
       type: 'PUT'
@@ -19,7 +19,9 @@ markSaver = ->
         }
       }
       success: ->
-        $progress.hide()
+        setTimeout(->
+          $progress.hide()
+        , 500)
     )
 
   $('.answer .mark input').on 'keyup', ->
