@@ -30,9 +30,26 @@
     </div>
        <%= q.label 'Course: ' + @course.code %> </br>
     </div>
-    <div class="row">
-      <%= q.collection_check_boxes :ministry_specific_ids, @course.specifics, :id, :part_with_strand%>
+    <div class="row specific-checkboxes">
+      <!-- see http://ux.stackexchange.com/questions/76332/material-design-solution-for-popovers -->
+      <%= q.collection_check_boxes :ministry_specific_ids, @course.specifics, :id, :part_with_strand do |b| %>
+        <%= b.check_box %>
+        <%= b.label(
+          'data-activates' => "data-specific-#{b.object.id}",
+          'data-beloworigin' => 'true',
+          'data-hover' => 'true', 
+          'data-constrainwidth' => false,
+          'class' => 'dropdown-button'
+        ) %>
+      <% end %>
     </div>
+    
+    <% @course.specifics.each do |specific| %>
+      <div class='dropdown-content' id='data-specific-<%= specific.id %>'>
+        <%= specific.description %>
+      </div>
+    <% end %>
+    
     <div>
       <%= q.submit "Save", class: 'btn' %> 
     </div>

@@ -30,6 +30,13 @@ p.question-marks {
   }
 }
 
+.specific-checkboxes {
+  .dropdown-content {
+    max-width: 500px;
+    height: auto;
+    padding: 5px 7px;
+  }
+}
 
 .card .card-image img.question_img {
   width: initial;
