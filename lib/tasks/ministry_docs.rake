@@ -45,37 +45,24 @@ def transform_to_doc(parsed_data)
   }.merge(grades.reduce Hash.new, :merge))
 end
 
-# I know that it is a bad idea. 
-# When I will have time - I will realize it in gem
-class MinistryDocs::MathParser
-  def parse_from_file(file)
-    page = agent.get URL + 'math.html'
-    courses = parse(
-      File.read("./public/docs/#{file}.txt")
-          .encode('UTF-8', 'Windows-1251')
-    )
-
-    doc = {
-            courses: courses,
-            subject: 'math',
-            province: 'Ontario'
-          }.merge(addable_info(page))
-    OpenStruct.new(doc)
-  end
-end
-
 namespace :ministry_docs do
   desc "It parse from site 2007 math file"
   task parse_math_2007: :environment do
-    parser = MinistryDocs::Math2007Parser.new
-    doc = transform_to_doc(parser.parse_from_file('math1112currb'))
+    parser = MinistryDocs::FileParser.new(
+      MinistryDocs::Math2007Doc::DocParser.new,
+      "#{Rails.root}/public/docs/math1112currb.txt"
+    )
+    doc = transform_to_doc(parser.parse)
     doc.save!
   end
 
   desc "It parse from site 2005 math file"
   task parse_math_2005: :environment do
-    parser = MinistryDocs::Math2005Parser.new
-    doc = transform_to_doc(parser.parse_from_file('math910curr'))
+    parser = MinistryDocs::FileParser.new(
+      MinistryDocs::Math2005Doc::DocParser.new,
+      "#{Rails.root}/public/docs/math910curr.txt"
+    )
+    doc = transform_to_doc(parser.parse)
     doc.save!
   end
 
