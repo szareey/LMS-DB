@@ -38,6 +38,28 @@ p.question-marks {
   }
 }
 
+.img-select {
+  display: table;
+  width: 100%;
+  padding: 0 12px;
+  
+  .file-field {
+    display:table-cell;
+    height: 46px;
+    width: 100%;
+    
+    vertical-align: middle;
+    input {
+      margin-bottom: 0px;
+    }
+  }
+  .add-button {
+    display:table-cell;
+    vertical-align: middle;
+    padding-left: 20px;
+  }
+}
+
 .card .card-image img.question_img {
   width: initial;
   max-width: 100%;

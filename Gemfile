@@ -8,7 +8,7 @@ gem 'railties'
 
 #gem 'bootstrap-sass', '~> 3.3.5'
 gem 'sprockets-rails', :require => 'sprockets/railtie'
-gem 'materialize-sass'
+gem 'materialize-sass', github: 'mkhairi/materialize-sass'
 gem 'sass'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.4'

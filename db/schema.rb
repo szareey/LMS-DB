@@ -136,7 +136,6 @@ ActiveRecord::Schema.define(version: 20150820191702) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "marks"
-    t.integer  "ministry_specific_id"
     t.boolean  "knowledge",             default: false
     t.boolean  "thinking",              default: false
     t.boolean  "communication",         default: false
@@ -145,8 +144,6 @@ ActiveRecord::Schema.define(version: 20150820191702) do
     t.boolean  "question_has_audio",    default: false
     t.string   "description"
   end
-
-  add_index "questions", ["ministry_specific_id"], name: "index_questions_on_ministry_specific_id"
 
   create_table "users", force: true do |t|
     t.string   "first_name"

@@ -27,8 +27,7 @@ class Question < ActiveRecord::Base
                                }, 
                                default_url: "/images/:style/missing.png"
   do_not_validate_attachment_file_type :question
-
-  belongs_to :teacher, class_name: 'User::Teacher'
+  
   has_many :answers
   has_and_belongs_to_many :ministry_specifics,
                           class_name: 'MinistryDoc::Specific'
