@@ -36,41 +36,49 @@ markSaver = ->
     typingTimer = setTimeout (->
       saveMark(val, id, $current_input.parent().find('.progress'))
     ), doneTypingInterval if val
-  
+
 file_img_input = ->
-  $without_button = $('.img-select').first().clone()
-  $without_button.find('.add-button').remove()
+  $first_select = $('.img-select').first().clone()
   $add_button = $('.img-select').first().find('.add-button .btn-floating')
   $container = $('.img-select').parent()
+  $with_delete = (->
+    $temp = $container.find('.img-select').first().clone()
+    $temp.find('.add-button').toggleClass('add-button delete-button')
+    $temp.find('.delete-button .material-icons').text('delete')
+    $temp)()
 
-  $add_button.click ->
-    $container.append($without_button.clone())
+  deleteInput = ->
+    $(this).closest('.img-select').remove()
+  addInpit = ->
+    $container.append($with_delete.clone())
+  loadPreview = (input, $image)->
+    reader = new FileReader
+
+    reader.onload = (e) ->
+      $image.attr 'src', e.target.result
+      $image.show()
+      addInpit()
+
+    reader.readAsDataURL input.files[0]
+
+  $add_button.click addInpit
+  $container.on 'click', '.delete-button', deleteInput
+
+  $container.on 'change', 'input[type="file"]', ->
+    $image = $(this).closest('.img-select').find('img')
+    loadPreview(this, $image) if this.files and this.files[0]
+
+
+  dragDropFile = ->
+    $container.find('input')[0].ondrop = ->
+      console.log 'tezt'
+
+  dragDropFile()
 
 $ ->
   file_img_input()
   markSaver()
 
-'''
-  $file_input_html = $('.file-field.input-field')
   $('.view-answers').on 'click', (e) ->
     e.preventDefault()
     $(this).closest('.card-action').find('.answers').slideToggle(300)
-
-  readURL = (input) ->
-    if input.files and input.files[0]
-      reader = new FileReader
-
-      reader.onload = (e) ->
-        $('#question_preview').attr 'src', e.target.result
-        return
-
-      reader.readAsDataURL input.files[0]
-    return
-
-  $('.file-field.input-field input[type="file"]').change ->
-    readURL this
-    $('#question_preview').removeAttr('hidden')
-    $file_input_html.append($file_input_html.html())
-    return
-'''
-  

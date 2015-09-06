@@ -1,7 +1,6 @@
 class QuestionsController < ApplicationController
 
   before_action :permission, only: [:destroy, :create, :new]
-
   def index
     # TODO: will need to update eventually to only include lessons and questions that are part of a course
     @questions = Question.all
@@ -14,15 +13,17 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @question = Question.new
+    @questions = [Question.new]
     @course = MinistryDoc::Course.find_by(code: 'MPM1D')
   end
 
   def create
-    @question = Question.new(question_params)
-    @question.teacher = current_user
+    @form = Question::BatchForm.new(
+      question_params.merge(teacher: current_user)
+    )
+    @questions = @form.to_models
 
-    if @question.save
+    if @form.save
       redirect_to :questions
     else
       render :new
@@ -42,7 +43,6 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(
-      :question, 
       :knowledge, 
       :thinking, 
       :communication, 
@@ -51,6 +51,7 @@ class QuestionsController < ApplicationController
       :answer_has_audio, 
       :question_has_audio,
       :marks,
+      questions: [], 
       ministry_specific_ids: [])
   end
 end
