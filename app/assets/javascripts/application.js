@@ -13,5 +13,5 @@
 //= require jquery
 //= require jquery_ujs
 //= require materialize-sprockets
-//= require dropzone
+//= require recorder_js
 //= require_tree .
