@@ -19,16 +19,20 @@ class Question::BatchForm
   end
 
   private
-
-  # It doesn't work if params[:questions] is not specified.
-  # TODO: Needed to be fixed.
+  
   def transform(params)
-    params[:questions].collect do |question|
-      Question.new(
-        params
-          .except(:questions)
-          .merge({question: question})
-      )
+    if params[:questions].blank?
+      [Question.new(
+        params.except(:questions)
+      )]
+    else
+      params[:questions].collect do |question|
+        Question.new(
+          params
+            .except(:questions)
+            .merge({question: question})
+        )
+      end
     end
   end
 end

@@ -21,8 +21,9 @@ class QuestionsController < ApplicationController
     @form = Question::BatchForm.new(
       question_params.merge(teacher: current_user)
     )
+    
     @questions = @form.to_models
-
+    @course = MinistryDoc::Course.find_by(code: 'MPM1D')
     if @form.save
       redirect_to :questions
     else

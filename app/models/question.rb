@@ -32,5 +32,9 @@ class Question < ActiveRecord::Base
   has_and_belongs_to_many :ministry_specifics,
                           class_name: 'MinistryDoc::Specific'
   belongs_to :teacher, class_name: 'User::Teacher'
+
+  validates :question,
+            :ministry_specifics,
+            presence: true
 end
 
