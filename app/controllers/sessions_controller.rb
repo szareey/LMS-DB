@@ -5,7 +5,8 @@ class SessionsController < ApplicationController
   end
 
   def create
-      
+    pp request.env["omniauth.auth"]
+=begin
     user = User.find_by(email: params[:email])
     if user && user.authenticate(params[:password])
       session[:user_id] = user.id
@@ -20,7 +21,7 @@ class SessionsController < ApplicationController
       flash[:alert] = "login failed"
       render :new
     end
-
+=end
   end
 
   def destroy

@@ -6,9 +6,6 @@
 
 # Ignore bundler config.
 /.bundle
-/.tags
-/.gemtags
-
 # Ignore the default SQLite database.
 /db/*.sqlite3
 /db/*.sqlite3-journal

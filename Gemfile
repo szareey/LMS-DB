@@ -38,6 +38,10 @@ gem 'spring',        group: :development
 # Use ActiveModel has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
+gem 'omniauth-google-oauth2'
+
+gem 'dotenv-rails', groups: [:development, :test]
+
 gem 'ministry_docs', git: 'git@github.com:szareey/ministryDocs.git'
 # Use unicorn as the app server
 # gem 'unicorn'
