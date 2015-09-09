@@ -10,6 +10,8 @@
 #  type            :string(255)
 #  created_at      :datetime
 #  updated_at      :datetime
+#  image           :string(255)
+#  gid             :string(255)
 #
 
 class User::Student < User

@@ -53,4 +53,5 @@ group :development, :test do
   gem 'annotate'
   gem 'rspec-rails', '~> 3.0'
   gem 'dotenv-rails'
+  gem 'factory_girl_rails'
 end

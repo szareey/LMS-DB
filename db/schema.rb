@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150820191702) do
+ActiveRecord::Schema.define(version: 20150909130354) do
 
   create_table "answers", force: true do |t|
     t.integer  "student_id"
@@ -145,6 +145,15 @@ ActiveRecord::Schema.define(version: 20150820191702) do
     t.string   "description"
   end
 
+  create_table "user_tokens", force: true do |t|
+    t.string   "token"
+    t.string   "refresh_token"
+    t.datetime "expires_at"
+    t.integer  "user_id"
+  end
+
+  add_index "user_tokens", ["user_id"], name: "index_user_tokens_on_user_id"
+
   create_table "users", force: true do |t|
     t.string   "first_name"
     t.string   "last_name"
@@ -153,6 +162,9 @@ ActiveRecord::Schema.define(version: 20150820191702) do
     t.string   "type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "image_url"
+    t.string   "gid"
+    t.boolean  "is_approved"
   end
 
 end

@@ -10,11 +10,12 @@
 #  type            :string(255)
 #  created_at      :datetime
 #  updated_at      :datetime
+#  image           :string(255)
+#  gid             :string(255)
 #
 
 class User < ActiveRecord::Base
-
-  has_secure_password
+  has_one :token, class_name: 'User::Token'
 
   def teacher?
     type == 'User::Teacher'

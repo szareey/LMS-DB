@@ -1,27 +1,12 @@
 require 'byebug'
 class SessionsController < ApplicationController
-
-  def new
-  end
-
+  skip_before_filter :is_approved
+  
   def create
-    pp request.env["omniauth.auth"]
-=begin
-    user = User.find_by(email: params[:email])
-    if user && user.authenticate(params[:password])
-      session[:user_id] = user.id
-        flash[:alert] = "Login successful" 
-        # if user.type = "Student"
-        #   redirect_to :questions
-        # elsif user.type = "Teacher"
-        #   byebug
-          redirect_to :ministry_courses
-        # end
-    else
-      flash[:alert] = "login failed"
-      render :new
-    end
-=end
+    user = User::Auth.auth_or_create(request.env["omniauth.auth"])
+    session[:user_id] = user.id
+
+    redirect_to :root
   end
 
   def destroy
