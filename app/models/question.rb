@@ -33,8 +33,6 @@ class Question < ActiveRecord::Base
                           class_name: 'MinistryDoc::Specific'
   belongs_to :teacher, class_name: 'User::Teacher'
 
-  validates :question,
-            :ministry_specifics,
-            presence: true
+  attr_accessor :image_ids
 end
 

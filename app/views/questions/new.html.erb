@@ -1,28 +1,9 @@
 <div class="row">
-  <%= form_for @questions.first, class: 'col s12', url: questions_path, :html => { :multipart => true } do |q| %>
-    <div class="row">
-      <div class='img-select'>
-        <div class='img-input'>
-          <div class="file-field input-field">
+  <%= form_tag questions_upload_path, class: 'dropzone' do %>
 
-            <!-- materialize css -->
-            <input class="file-path validate" type="text" placeholder="Click to add file"/>
-            <input name="question[questions][]" type="file" value=''>
-
-            
-          </div>
-          <div class='add-button'>
-            <div class='btn-floating'>
-              <i class=" material-icons">add</i>
-            </div>
-          </div>
-        </div>
-        
-        <img src="#" style='display: none'/>
-      </div>
-    </div>
-    
-    </br>
+  <% end %>
+  <%= form_for @questions, class: 'col s12', url: questions_path, :html => { multipart: true} do |q| %>
+    <%= hidden_field_tag 'question[image_ids]'%>
     <div class="row">
       <div class="col s12 m6 l6">
         <%= q.label 'Note' %>

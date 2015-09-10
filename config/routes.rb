@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :questions do
     resources :answers
   end
+  post 'questions/upload', to: 'questions#upload'
   resources :answers
   resources :lessons
 

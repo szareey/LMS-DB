@@ -37,7 +37,11 @@ p.question-marks {
     padding: 5px 7px;
   }
 }
-
+#new_question {
+  .dropzone {
+    height: 400px;
+  }
+}
 .img-select {
   padding: 0 12px;
   .img-input {

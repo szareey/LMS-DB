@@ -1,4 +1,3 @@
-require 'byebug'
 class SessionsController < ApplicationController
   skip_before_filter :is_approved
   
@@ -10,9 +9,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-      session[:user_id] = nil
-      redirect_to '/', notice: "Adios!"
+    session[:user_id] = nil
+    redirect_to '/', notice: "Adios!"
   end
-
-
 end

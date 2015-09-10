@@ -1,6 +1,6 @@
 class QuestionsController < ApplicationController
-
   before_action :permission, only: [:destroy, :create, :new]
+  
   def index
     # TODO: will need to update eventually to only include lessons and questions that are part of a course
     @questions = Question.all
@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @questions = [Question.new]
+    @questions = Question.new
     @course = MinistryDoc::Course.find_by(code: 'MPM1D')
   end
 
@@ -34,6 +34,13 @@ class QuestionsController < ApplicationController
   def destroy
     Question.find(params[:id]).destroy
     redirect_to :questions
+  end
+
+  def upload
+    img = Question::TempImage.new(image: params['image'])
+    if img.save
+      render json: { message: "success", id: img.id }, status: 200
+    end
   end
 
   protected
