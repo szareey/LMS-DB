@@ -6,8 +6,11 @@ Rails.application.routes.draw do
   resources :ministry_courses
   resources :questions do
     resources :answers
+    collection do
+      resources :image_uploads, controller: 'questions/image_uploads', only: [:create]
+    end
   end
-  post 'questions/upload', to: 'questions#upload'
+
   resources :answers
   resources :lessons
 

@@ -13,7 +13,7 @@ class QuestionsController < ApplicationController
   end
 
   def new
-    @questions = Question.new
+    @question = Question.new
     @course = MinistryDoc::Course.find_by(code: 'MPM1D')
   end
 
@@ -21,9 +21,9 @@ class QuestionsController < ApplicationController
     @form = Question::BatchForm.new(
       question_params.merge(teacher: current_user)
     )
-    
-    @questions = @form.to_models
     @course = MinistryDoc::Course.find_by(code: 'MPM1D')
+    
+    @question = @form.to_models.first
     if @form.save
       redirect_to :questions
     else
@@ -34,13 +34,6 @@ class QuestionsController < ApplicationController
   def destroy
     Question.find(params[:id]).destroy
     redirect_to :questions
-  end
-
-  def upload
-    img = Question::TempImage.new(image: params['image'])
-    if img.save
-      render json: { message: "success", id: img.id }, status: 200
-    end
   end
 
   protected
@@ -59,7 +52,7 @@ class QuestionsController < ApplicationController
       :answer_has_audio, 
       :question_has_audio,
       :marks,
-      questions: [], 
+      :image_ids, 
       ministry_specific_ids: [])
   end
 end

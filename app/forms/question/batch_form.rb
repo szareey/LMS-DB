@@ -2,15 +2,20 @@
 # For each image of the query it create a new Question model.
 class Question::BatchForm
   def initialize(params)
-    @questions = transform(params)
+    @image_ids = params[:image_ids].try(:split, ',')
+    @questions = transform(params) 
   end
 
   def save
+    p @image_ids.blank?
+    return false if @image_ids.blank?
+
     is_saved = false
     Question.transaction do
       is_saved = @questions.all? {|q| q.save }
       raise ActiveRecord::Rollback unless is_saved
     end
+    Question.delete @image_ids
     is_saved
   end
 
@@ -21,16 +26,16 @@ class Question::BatchForm
   private
   
   def transform(params)
-    if params[:questions].blank?
+    if @image_ids.blank?
       [Question.new(
-        params.except(:questions)
+        params.except(:image_ids)
       )]
     else
-      params[:questions].collect do |question|
+      @image_ids.collect do |image_id|
         Question.new(
           params
-            .except(:questions)
-            .merge({question: question})
+            .except(:image_ids)
+            .merge(question: Question::TempImage.find(image_id).image)
         )
       end
     end
