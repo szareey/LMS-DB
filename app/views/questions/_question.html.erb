@@ -1,7 +1,7 @@
 <div class="col s12 m6 l6">
   <div class="card">
     <div class="card-image">
-      <img class="question_img" src='<%= question.question %>'>
+      <a href='<%= new_question_answer_path(question) %>'><img class="question_img" src='<%= question.question %>'></a>
     </div> 
     <div class="card-content">
       <p>Question created by Mr. <%=question.teacher.last_name %></p>
