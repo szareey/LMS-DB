@@ -31,7 +31,7 @@ This project helps student with education
    Than set is_admin and is_approved to true
 
          u.is_admin = true
-         u.is_approve = true
+         u.is_approved = true
          u.save
 
 6. Now you can access to the admin page /admin
