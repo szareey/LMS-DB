@@ -8,16 +8,19 @@ This project helps student with education
 
          git clone git@github.com:szareey/LSM.git
 
-2. Then execute following commands:
+2. Don't forget to create `config/database.yml`, you can
+   see example from `config/database.yml.example`
+
+3. Then execute following commands:
 
          bin/rake db:create db:migrate db:seed
 
-3. Start server with command:
+4. Start server with command:
      
          bin/rails s
 
-   And than auth your account through google+, just click 'Log in' buttom on main page.
-4. Enter to the Rails console:
+   And than auth your account through google+, just click 'Log in' button on main page.
+5. Enter to the Rails console:
 
          bin/rails c
 
@@ -31,7 +34,7 @@ This project helps student with education
          u.is_approve = true
          u.save
 
-5. Now you can access to the admin page /admin
+6. Now you can access to the admin page /admin
 
 ## Note
 
