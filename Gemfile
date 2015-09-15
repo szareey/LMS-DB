@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem "paperclip", "~> 4.2"
+gem "paperclip", "~> 4.3"
 gem 'tux'
 gem 'byebug'
 gem 'railties'
@@ -11,7 +11,7 @@ gem 'sprockets-rails', :require => 'sprockets/railtie'
 gem 'materialize-sass', github: 'mkhairi/materialize-sass'
 gem 'sass'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.1.4'
+gem 'rails', '4.2.4'
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3'
 # Use SCSS for stylesheets
@@ -54,4 +54,5 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'dotenv-rails'
   gem 'factory_girl_rails'
+  gem 'quiet_assets'
 end
