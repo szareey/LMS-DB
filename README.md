@@ -14,22 +14,22 @@ This project helps student with education
 
 3. Start server with command:
      
-     bin/rails s
+         bin/rails s
 
    And than auth your account through google+, just click 'Log in' buttom on main page.
 4. Enter to the Rails console:
 
-     bin/rails c
+         bin/rails c
 
    And find your account:
 
-     u = User.last
+         u = User.last
 
    Than set is_admin and is_approved to true
 
-     u.is_admin = true
-     u.is_approve = true
-     u.save
+         u.is_admin = true
+         u.is_approve = true
+         u.save
 
 5. Now you can access to the admin page /admin
 
