@@ -3,15 +3,15 @@
 # Table name: ministry_docs
 #
 #  id         :integer          not null, primary key
-#  subject    :string(255)
+#  subject    :string
 #  grade9     :boolean
 #  grade10    :boolean
 #  grade11    :boolean
 #  grade12    :boolean
-#  province   :string(255)
-#  year       :string(255)
-#  title      :string(255)
-#  URLpdf     :string(255)
+#  province   :string
+#  year       :string
+#  title      :string
+#  URLpdf     :string
 #  created_at :datetime
 #  updated_at :datetime
 #

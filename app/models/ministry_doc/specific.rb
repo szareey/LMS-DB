@@ -4,8 +4,8 @@
 #
 #  id          :integer          not null, primary key
 #  overall_id  :integer
-#  part        :string(255)
-#  description :string(255)
+#  part        :string
+#  description :string
 #  created_at  :datetime
 #  updated_at  :datetime
 #

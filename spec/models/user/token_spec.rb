@@ -2,10 +2,11 @@
 #
 # Table name: user_tokens
 #
-#  id         :integer          not null, primary key
-#  token      :string(255)
-#  expires_at :datetime
-#  user_id    :integer
+#  id            :integer          not null, primary key
+#  token         :string
+#  refresh_token :string
+#  expires_at    :datetime
+#  user_id       :integer
 #
 
 require 'rails_helper'

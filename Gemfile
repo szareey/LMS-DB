@@ -46,6 +46,9 @@ gem 'ministry_docs', git: 'git@github.com:szareey/ministryDocs.git'
 
 # Use debugger
 # gem 'debugger', group: [:development, :test]
+
+gem 'rails_admin'
+
 group :development, :test do
   gem 'annotate'
   gem 'rspec-rails', '~> 3.0'
