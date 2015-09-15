@@ -4,8 +4,8 @@
 #
 #  id                    :integer          not null, primary key
 #  teacher_id            :integer
-#  question_file_name    :string(255)
-#  question_content_type :string(255)
+#  question_file_name    :string
+#  question_content_type :string
 #  question_file_size    :integer
 #  question_updated_at   :datetime
 #  created_at            :datetime
@@ -17,7 +17,7 @@
 #  application           :boolean          default(FALSE)
 #  answer_has_audio      :boolean          default(FALSE)
 #  question_has_audio    :boolean          default(FALSE)
-#  description           :string(255)
+#  description           :string
 #
 
 class Question < ActiveRecord::Base

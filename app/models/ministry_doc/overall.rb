@@ -4,9 +4,9 @@
 #
 #  id          :integer          not null, primary key
 #  strand_id   :integer
-#  part        :string(255)
-#  description :string(255)
-#  shorthand   :string(255)
+#  part        :string
+#  description :string
+#  shorthand   :string
 #  created_at  :datetime
 #  updated_at  :datetime
 #

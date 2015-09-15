@@ -5,14 +5,14 @@
 #  id                   :integer          not null, primary key
 #  ministry_specific_id :integer
 #  teacher_id           :integer
-#  lesson               :string(255)
-#  title                :string(255)
-#  difficulty           :string(255)
-#  audio_file_name      :string(255)
-#  audio_content_type   :string(255)
+#  lesson               :string
+#  title                :string
+#  difficulty           :string
+#  audio_file_name      :string
+#  audio_content_type   :string
 #  audio_file_size      :integer
 #  audio_updated_at     :datetime
-#  homework             :string(255)
+#  homework             :string
 #  created_at           :datetime
 #  updated_at           :datetime
 #

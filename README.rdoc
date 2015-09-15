@@ -1,9 +1,0 @@
-Two seed data accounts for signing in:
-
-Teacher
-szareey@nancycampbell.ca
-test123
-
-Student
-logan@gmail.com
-test123

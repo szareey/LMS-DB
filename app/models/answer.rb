@@ -5,18 +5,18 @@
 #  id                            :integer          not null, primary key
 #  student_id                    :integer
 #  question_id                   :integer
-#  answer                        :string(255)
+#  answer                        :string
 #  created_at                    :datetime
 #  updated_at                    :datetime
-#  teacher_comment               :string(255)
+#  teacher_comment               :string
 #  score                         :integer
 #  request_meeting               :boolean          default(FALSE)
-#  final_answer_img_file_name    :string(255)
-#  final_answer_img_content_type :string(255)
+#  final_answer_img_file_name    :string
+#  final_answer_img_content_type :string
 #  final_answer_img_file_size    :integer
 #  final_answer_img_updated_at   :datetime
-#  audio_file_name               :string(255)
-#  audio_content_type            :string(255)
+#  audio_file_name               :string
+#  audio_content_type            :string
 #  audio_file_size               :integer
 #  audio_updated_at              :datetime
 #

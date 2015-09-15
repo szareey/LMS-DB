@@ -4,13 +4,13 @@
 #
 #  id              :integer          not null, primary key
 #  ministry_doc_id :integer
-#  grade           :string(255)
-#  title           :string(255)
-#  description     :string(255)
-#  code            :string(255)
-#  pre_req         :string(255)
-#  level           :string(255)
-#  credit_value    :string(255)
+#  grade           :string
+#  title           :string
+#  description     :string
+#  code            :string
+#  pre_req         :string
+#  level           :string
+#  credit_value    :string
 #  created_at      :datetime
 #  updated_at      :datetime
 #
@@ -21,11 +21,6 @@ class MinistryDoc::Course < ActiveRecord::Base
 
   has_many :overalls, through: :strands
   has_many :specifics, through: :overalls
-
-
-  has_many :ministry_overalls, through: :ministry_strands
-  has_many :ministry_specifics, through: :ministry_overalls
-
 
   def to_param
     code

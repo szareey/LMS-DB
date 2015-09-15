@@ -15,7 +15,7 @@ class Question::BatchForm
       is_saved = @questions.all? {|q| q.save }
       raise ActiveRecord::Rollback unless is_saved
     end
-    Question.delete @image_ids
+    Question::TempImage.delete @image_ids
     is_saved
   end
 
