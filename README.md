@@ -6,11 +6,11 @@ This project helps student with education
 
 1. First of all you must clone our repository:
 
-     git clone git@github.com:szareey/LSM.git
+         git clone git@github.com:szareey/LSM.git
 
 2. Then execute following commands:
 
-     bin/rake db:create db:migrate db:seed
+         bin/rake db:create db:migrate db:seed
 
 3. Start server with command:
      
