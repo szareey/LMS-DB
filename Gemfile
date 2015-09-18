@@ -49,6 +49,8 @@ gem 'ministry_docs', git: 'git@github.com:szareey/ministryDocs.git'
 
 gem 'rails_admin'
 
+gem 'foreman'
+
 group :development, :test do
   gem 'annotate'
   gem 'rspec-rails', '~> 3.0'
@@ -56,4 +58,15 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'quiet_assets'
   gem 'spring'
+end
+
+group :development do
+  gem 'capistrano'
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rbenv'
+end
+
+group :production do
+  gem 'unicorn'
 end
