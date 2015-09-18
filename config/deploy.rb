@@ -77,6 +77,7 @@ namespace :deploy do
   desc 'Create symlink'
   task :symlink do
     on roles(:all) do
+      sudo "rm -f #{release_path}/Procfile"
       execute "ln -s #{shared_path}/Procfile #{release_path}/Procfile"
       execute "ln -s #{shared_path}/system #{release_path}/public/system"
 
@@ -102,11 +103,11 @@ namespace :deploy do
   end
 
   after :finishing, 'deploy:cleanup'
-  after :finishing, 'foreman:restart'
+  #after :finishing, 'foreman:restart'
   after :updating, 'deploy:symlink'
   after :setup, 'deploy:foreman_init'
 
-  after :foreman_init, 'foreman:restart'
+  #after :foreman_init, 'foreman:restart'
   before :setup, 'deploy:starting'
   before :setup, 'deploy:updating'
   before :setup, 'bundler:install'
