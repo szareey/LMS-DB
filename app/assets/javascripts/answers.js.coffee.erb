@@ -213,7 +213,7 @@ $(document).ready ->
       saveSolution()
     (->
       recorder = new Recorder(
-        encoderPath: '/assets/recorder_js/oggopusEncoder.js'
+        encoderPath: '<%= javascript_path "oggopusEncoder.js" %>'
       )
       recorder.initStream()
       unless Recorder.isRecordingSupported()
