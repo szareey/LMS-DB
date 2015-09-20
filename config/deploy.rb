@@ -91,7 +91,7 @@ namespace :deploy do
       foreman_temp = "/var/www/tmp/foreman"
       execute  "mkdir -p #{foreman_temp}"
 
-      execute "ln -s #{release_path} #{current_path}"
+      #execute "ln -s #{release_path} #{current_path}"
       
       within current_path do
         execute "cd #{current_path}"
