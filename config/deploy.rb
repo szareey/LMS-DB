@@ -18,21 +18,21 @@ namespace :foreman do
   desc 'Start server'
   task :start do
     on roles(:all) do
-      sudo "service start #{application}"
+      sudo "systemctl start #{application}.target"
     end
   end
 
   desc 'Stop server'
   task :stop do
     on roles(:all) do
-      sudo "systemctl stop #{application}"
+      sudo "systemctl stop #{application}.target"
     end
   end
 
   desc 'Restart server'
   task :restart do
     on roles(:all) do
-      sudo "systemctl restart #{application}"
+      sudo "systemctl restart #{application}.target"
     end
   end
 
@@ -103,11 +103,11 @@ namespace :deploy do
   end
 
   after :finishing, 'deploy:cleanup'
-  #after :finishing, 'foreman:restart'
+  after :finishing, 'foreman:restart'
   after :updating, 'deploy:symlink'
   after :setup, 'deploy:foreman_init'
 
-  #after :foreman_init, 'foreman:restart'
+  after :foreman_init, 'foreman:restart'
   before :setup, 'deploy:starting'
   before :setup, 'deploy:updating'
   before :setup, 'bundler:install'
