@@ -10,11 +10,17 @@ h2 {
   font: 2em "stationery", roboto;
 }
 */
+#question_dropzone {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: none;
+  background-color: #eee;
+}
+
 p.question-marks {
   font-weight: bold;
   color: red;
 }
-
 .answer {
   .mark {
     input {
@@ -36,44 +42,6 @@ p.question-marks {
     height: auto;
     max-width: 500px;
     padding: 5px 7px;
-  }
-}
-#new_question {
-  .dropzone {
-    height: 400px;
-  }
-}
-.img-select {
-  padding: 0 12px;
-  .img-input {
-    display: table;
-    width: 100%;
-    
-    .file-field {
-      display:table-cell;
-      height: 46px;
-      width: 100%;
-      
-      vertical-align: middle;
-      input {
-        margin-bottom: 0px;
-      }
-    }
-  }
-  
-  .add-button, .delete-button {
-    display:table-cell;
-    vertical-align: middle;
-    padding-left: 20px;
-  }
-  .delete-button {
-    .btn-floating {
-      background-color: rgb(244, 67, 54);
-    }
-  }
-  img {
-    display: block;
-    height: 200px;
   }
 }
 
