@@ -3,14 +3,16 @@
   <h1 id="testStroke"> Lesson and Learn! get it?</h1>
   
 </div>
-<div id='corkboard' class='row'>
-  <div class="col s12 l9">
-    <canvas id='whiteboard' height="500px" width="1000" data-points="<%= @lesson.lesson %>"> </canvas>  
+<div class="container">
+  <div id='corkboard' class='row'>
+    <div class="col s12 l9">
+      <canvas id='whiteboard' height="500px" width="1000" data-points="<%= @lesson.lesson %>"> </canvas>  
+    </div>
   </div>
-</div>
 
-<%= render 'shared/playback_controls' %>
+  <%= render 'shared/playback_controls' %>
 
-<div class="col s12 l3">
-  <button class="btn waves-effect waves-light btn-large btn-fullwidth show_answer">Play Lesson</button>
+  <div class="col s12 l3">
+    <button class="btn waves-effect waves-light btn-large btn-fullwidth show_answer">Play Lesson</button>
+  </div>
 </div>

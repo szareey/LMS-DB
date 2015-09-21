@@ -1,33 +1,35 @@
 </div>
+
 <div class="container">
   <h1 id='testStroke'> Answer the question </h1>
   <div class='divider'> </div>
   <div class='saveMessage'> &nbsp; </div>
 </div>
-<div id='corkboard' class='row' class='container'>
-  <div class="col s12 m12 l9">
-    <canvas id='whiteboard' height="500px" width="1000px" data-id="<%= @answer.question.id %>" data-points="<%= @answer.answer %>" data-question="<%=@answer.question.question%>"></canvas>
-  </div>
+<div class="container">
+  <div id='corkboard' class='row' class='container'>
+    <div class="col s12 m12 l9">
+      <canvas id='whiteboard' height="500px" width="1000px" data-id="<%= @answer.question.id %>" data-points="<%= @answer.answer %>" data-question="<%=@answer.question.question%>"></canvas>
+    </div>
 
-  <%= render 'shared/whiteboard_palette' %>
+    <%= render 'shared/whiteboard_palette' %>
 
-  <div class="col s6 m6 l2">
-    <p class='question-marks'> This question is worth <%=@answer.question.marks%> marks </p>
-    <% if @answer.score %>
-      <p> This question has been marked </p>
-      <p> You got <%= @answer.score %> out of <%= @answer.question.marks %> </p>
-      <p> Mr. <%=@answer.question.teacher.last_name%>'s Comment: <%= @answer.teacher_comment %> </p>
-    <% elsif @answer.answer %>
-      <p> You have submitted an answer, but it hasn't been marked yet! </p>
-    <% else %>
-      <p> You have not yet answered this question </p>
-    <% end %>
-    <% if @answer.created_at %>
-      <button class='btn waves-effect waves-light btn-large btn-fullwidth show_answer'>My Answer</button>
-    <%end%>
+    <div class="col s6 m6 l2">
+      <p class='question-marks'> This question is worth <%=@answer.question.marks%> marks </p>
+      <% if @answer.score %>
+        <p> This question has been marked </p>
+        <p> You got <%= @answer.score %> out of <%= @answer.question.marks %> </p>
+        <p> Mr. <%=@answer.question.teacher.last_name%>'s Comment: <%= @answer.teacher_comment %> </p>
+      <% elsif @answer.answer %>
+        <p> You have submitted an answer, but it hasn't been marked yet! </p>
+      <% else %>
+        <p> You have not yet answered this question </p>
+      <% end %>
+      <% if @answer.created_at %>
+        <button class='btn waves-effect waves-light btn-large btn-fullwidth show_answer'>My Answer</button>
+      <%end%>
+    </div>
   </div>
 </div>
-
 <div class='container'>
   <% unless @answer.answer %>
     <div class="row">
