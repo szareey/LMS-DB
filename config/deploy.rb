@@ -38,7 +38,9 @@ namespace :foreman do
   desc 'Restart server'
   task :restart do
     on roles(:all) do
-      sudo "systemctl restart #{application}.target"
+      #I don't know why, but restart is not working
+      sudo "systemctl stop #{application}.target"
+      sudo "systemctl start #{application}.target"
     end
   end
 
@@ -102,7 +104,7 @@ namespace :deploy do
         execute "cd #{current_path}"
         execute "~/.rbenv/bin/rbenv exec foreman export systemd #{foreman_temp} -a #{application} -u deployer -l /var/www/apps/#{application}/log -d #{current_path}"
       end
-      
+
       sudo "mv #{foreman_temp}/* /etc/systemd/system"
       sudo "rm -r #{foreman_temp}"
     end
