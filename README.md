@@ -1,6 +1,6 @@
 ## Welcome to LMS project
 
-This project helps student with education
+This project helps student with education.
 
 ## Getting Started
 
@@ -9,7 +9,7 @@ This project helps student with education
          git clone git@github.com:szareey/LSM.git
 
 2. Don't forget to create `config/database.yml`, you can
-   see example from `config/database.yml.example`
+   see example from `config/database.yml.example`.
 
 3. Then execute following commands:
 
@@ -34,12 +34,12 @@ This project helps student with education
          u.is_approved = true
          u.save
 
-6. Now you can access to the admin page /admin
+6. Now you can access to the admin page /admin.
 
 ## Note
 
 All accounts that authed through OAuth have `User::Student` type. If you want
-to be a teacher, you must set field `type` in /admin or from console to `User::Teacher`
+to be a teacher, you must set field `type` in /admin or from console to `User::Teacher`.
 
 ## Deploying
 
@@ -55,4 +55,4 @@ To deploy app to the server you must:
 
          cap production deploy
 
-NOTE: if you want to change configuration, you must request from the maintainer `shared` folder
+NOTE: if you want to change configuration, you must request from the maintainer `shared` folder.
