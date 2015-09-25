@@ -28,7 +28,7 @@ This project helps student with education
 
          u = User.last
 
-   Than set is_admin and is_approved to true
+   Than set `is_admin` and `is_approved` to true
 
          u.is_admin = true
          u.is_approve = true
@@ -40,3 +40,19 @@ This project helps student with education
 
 All accounts that authed through OAuth have `User::Student` type. If you want
 to be a teacher, you must set field `type` in /admin or from console to `User::Teacher`
+
+## Deploying
+
+To deploy app to the server you must:
+
+1. Copy ssh key
+
+         ssh-copy-id deployer@latentgems.com
+
+   Password for the server you must request from the maintainer.
+2. Make some project changes, then commit and push their to the master branch.
+3. Deploy the app using command
+
+         cap production deploy
+
+NOTE: if you want to change configuration, you must request from the maintainer `shared` folder
