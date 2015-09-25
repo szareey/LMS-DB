@@ -59,4 +59,4 @@
 #     auth_methods: %w(publickey password)
 #     # password: 'please use keys'
 #   }
-server '45.55.250.120', user: 'deployer', roles: %w{web app db}
+server 'latentgems.com', user: 'deployer', roles: %w{web app db}
