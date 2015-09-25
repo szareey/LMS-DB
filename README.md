@@ -19,7 +19,7 @@ This project helps student with education.
      
          bin/rails s
 
-   And than auth your account through google+, just click 'Log in' button on main page.
+   And than auth your account through google+, just click `Log in` button on main page.
 5. Enter to the Rails console:
 
          bin/rails c
@@ -34,7 +34,7 @@ This project helps student with education.
          u.is_approved = true
          u.save
 
-6. Now you can access to the admin page /admin.
+6. Now you can access to the admin page `/admin`.
 
 ## Note
 
@@ -55,4 +55,4 @@ To deploy app to the server you must:
 
          cap production deploy
 
-NOTE: if you want to change configuration, you must request from the maintainer `shared` folder.
+NOTE: If you want to change configuration, you must request from the maintainer `shared` folder.
