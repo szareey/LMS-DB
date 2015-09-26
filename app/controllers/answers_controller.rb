@@ -19,7 +19,11 @@ class AnswersController < ApplicationController
       score: params[:answer][:score],
       teacher_comment: params[:answer][:teacher_comment]
       )
-    redirect_to :back
+    if request.xhr?
+      render nothing: true
+    else
+      redirect_to :back
+    end
   end
 
   def create

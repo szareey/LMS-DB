@@ -15,7 +15,7 @@
           Submissions
         <% end %>
         <div class="answers" style="display:none">
-          <%= render partial: "/answers/answer", collection: question.answers %>
+          <%= render question.answers %>
         </div>
       </div>
     <% end %>

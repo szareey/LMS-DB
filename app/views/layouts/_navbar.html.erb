@@ -1,14 +1,25 @@
+<% if current_user.present? %>
+  <ul id="nav-profile-dropdown" class="dropdown-content">
+    <li><%= link_to "Logout", sessions_path, method: :delete%></li>
+  </ul>
+<% end %>
 <nav class="purple lighten-1" role="navigation">
   <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">Nancy Campbell Academy</a>
     <ul class="right">
-      <% if current_user %>
-        Signed in as <%= current_user.class.model_name.human.downcase %>:  <%= current_user.first_name %>
+      <% if current_user.present? %>
+        <li>
+          <a href="#!" class="dropdown-button" data-activates="nav-profile-dropdown">
+            Signed in as <%= current_user.class.model_name.human.downcase %>:  
+          <%= current_user.first_name %> 
+            <i class="material-icons right">arrow_drop_down</i>
+          </a>
+          
+        </li>
       <% end %>
     </ul>
 
     <ul id="nav-mobile" class="side-nav" style="left: -250px;">
       <li><a href="#">NCA</a></li>
     </ul>
-    <a href="/" data-activates="nav-mobile" class="button-collapse"><i class="material-icons">Logout</i></a>
   </div>
 </nav>

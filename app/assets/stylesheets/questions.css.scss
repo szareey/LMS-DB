@@ -10,21 +10,39 @@ h2 {
   font: 2em "stationery", roboto;
 }
 */
+#question_dropzone {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: none;
+  background-color: #eee;
+}
+
 p.question-marks {
   font-weight: bold;
   color: red;
 }
-
-div.teacher_marked_checkbox {
-  border: 1px solid #ccc;
-  width: 25px;
-  height: 25px;
+.answer {
+  .mark {
+    input {
+      max-width: 100%
+    }
+    .progress {
+      margin-top: 0px;
+      display: none;
+    }
+  }
+  .image {
+    max-width: 100%
+  }
 }
 
-p.teacher_mark {
-  font-size: 15px;
-  margin-top: 0px;
-  margin-left: 3px;
+.specific-checkboxes {
+  .dropdown-content {
+    white-space: normal !important;
+    height: auto;
+    max-width: 500px;
+    padding: 5px 7px;
+  }
 }
 
 .card .card-image img.question_img {

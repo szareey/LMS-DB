@@ -1,12 +1,9 @@
 <div class="row">
-  <%= form_for @question, class: 'col s12', url: questions_path, :html => { :multipart => true } do |q| %>
-    <div class="file-field input-field">
-      <!-- materialize css -->
-      <input class="file-path validate" type="text" placeholder="Click to add file"/>
-      <%= q.file_field :question%>
-    </div>
-    <!-- Once file selected add the source and remove hidden -->
-    <img id="question_preview" src="#" hidden/> </br>
+  <%= form_tag image_uploads_path, class: 'dropzone', id: 'question_dropzone' do %>
+
+  <% end %>
+  <%= form_for @question, class: 'col s12', url: questions_path, :html => { multipart: true} do |q| %>
+    <%= hidden_field_tag 'question[image_ids]'%>
     <div class="row">
       <div class="col s12 m6 l6">
         <%= q.label 'Note' %>
@@ -28,11 +25,29 @@
       <%= q.check_box :application %>
       <%= q.label 'application'%> </br>
     </div>
+    <div class="row">
        <%= q.label 'Course: ' + @course.code %> </br>
     </div>
-    <div class="row">
-      <%= q.collection_check_boxes :ministry_specific_ids, @course.specifics, :id, :part_with_strand%>
+    <div class="row specific-checkboxes">
+      <!-- see http://ux.stackexchange.com/questions/76332/material-design-solution-for-popovers -->
+      <%= q.collection_check_boxes :ministry_specific_ids, @course.specifics, :id, :part_with_strand do |b| %>
+        <%= b.check_box %>
+        <%= b.label(
+          'data-activates' => "data-specific-#{b.object.id}",
+          'data-beloworigin' => 'true',
+          'data-hover' => 'true', 
+          'data-constrainwidth' => false,
+          'class' => 'dropdown-button'
+        ) %>
+      <% end %>
     </div>
+
+    <% @course.specifics.each do |specific| %>
+      <div class='dropdown-content' id='data-specific-<%= specific.id %>'>
+        <%= specific.description %>
+      </div>
+    <% end %>
+    
     <div>
       <%= q.submit "Save", class: 'btn' %> 
     </div>

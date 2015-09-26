@@ -4,8 +4,8 @@
 #
 #  id         :integer          not null, primary key
 #  course_id  :integer
-#  part       :string(255)
-#  title      :string(255)
+#  part       :string
+#  title      :string
 #  created_at :datetime
 #  updated_at :datetime
 #
