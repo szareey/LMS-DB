@@ -57,6 +57,7 @@ namespace :deploy do
     on roles(:all) do
       mkdirs(
         "#{shared_path}/config/",
+        "#{shared_path}/system",
         "/var/www/log", 
         "/var/www/apps/#{application}/run/",
         "/var/www/apps/#{application}/log/",
