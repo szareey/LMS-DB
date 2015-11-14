@@ -18,6 +18,18 @@
 
 class MinistryDoc < ActiveRecord::Base
   has_many :courses, 
-           class_name: 'MinistryDoc::Course',
-           dependent: :destroy
+          class_name: 'MinistryDoc::Course',
+          dependent: :destroy
+
+  has_many :assessment_stradegies,
+          class_name: 'CourseOutline::AssessmentStradegy',
+          dependent: :destroy
+
+  has_many :considerations,
+          class_name: 'CourseOutline::Consideration',
+          dependent: :destroy
+
+  has_many :teaching_stradegies,
+          class_name: 'CourseOutline::TeachingStradegy',
+          dependent: :destroy
 end

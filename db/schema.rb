@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150915205048) do
+ActiveRecord::Schema.define(version: 20151114020932) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,50 @@ ActiveRecord::Schema.define(version: 20150915205048) do
     t.string   "audio_content_type"
     t.integer  "audio_file_size"
     t.datetime "audio_updated_at"
+  end
+
+  create_table "assessments", force: :cascade do |t|
+    t.integer "ministry_doc_id"
+    t.string  "type"
+    t.string  "description"
+  end
+
+  create_table "considerations", force: :cascade do |t|
+    t.integer "ministry_doc_id"
+    t.string  "title"
+    t.string  "description"
+  end
+
+  create_table "course_contents", force: :cascade do |t|
+    t.integer  "course_outline_id"
+    t.integer  "unit"
+    t.string   "unit_title"
+    t.integer  "hours"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "course_outlines", force: :cascade do |t|
+    t.integer  "ministry_doc_course_id"
+    t.date     "year"
+    t.integer  "semester"
+    t.date     "development_date"
+    t.date     "revision_date"
+    t.string   "developer"
+    t.string   "teacher"
+    t.string   "reviser"
+    t.string   "school"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "evaluations", force: :cascade do |t|
+    t.integer  "course_content_id"
+    t.string   "type"
+    t.string   "description"
+    t.integer  "weight"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "lessons", force: :cascade do |t|
@@ -155,6 +199,28 @@ ActiveRecord::Schema.define(version: 20150915205048) do
     t.boolean  "answer_has_audio",      default: false
     t.boolean  "question_has_audio",    default: false
     t.string   "description"
+  end
+
+  create_table "resources", force: :cascade do |t|
+    t.integer "ministry_doc_course_id"
+    t.string  "description"
+  end
+
+  create_table "standard_infos", force: :cascade do |t|
+    t.string   "vision_statement_title"
+    t.string   "vision_statement_description"
+    t.string   "learning_skills_title"
+    t.string   "learning_skills_description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "teaching_stradegies", force: :cascade do |t|
+    t.integer  "ministry_doc_id"
+    t.string   "title"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "user_tokens", force: :cascade do |t|
