@@ -22,14 +22,14 @@ class MinistryDoc < ActiveRecord::Base
           dependent: :destroy
 
   has_many :assessment_stradegies,
-          class_name: 'CourseOutline::AssessmentStradegy',
+          class_name: 'MinistryDoc::AssessmentStradegy',
           dependent: :destroy
 
   has_many :considerations,
-          class_name: 'CourseOutline::Consideration',
+          class_name: 'MinistryDoc::Consideration',
           dependent: :destroy
 
   has_many :teaching_stradegies,
-          class_name: 'CourseOutline::TeachingStradegy',
+          class_name: 'MinistryDoc::TeachingStradegy',
           dependent: :destroy
 end

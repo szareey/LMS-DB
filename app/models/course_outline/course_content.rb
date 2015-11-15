@@ -11,4 +11,5 @@ class CourseOutline::CourseContent < ActiveRecord::Base
   belongs_to :course_outline
   has_many :evaluations
 
+  
 end

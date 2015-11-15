@@ -11,9 +11,7 @@
 #
 
 class MinistryDoc::Strand < ActiveRecord::Base
-  
   belongs_to :course
   has_many :overalls, dependent: :destroy
   has_many :specifics, through: :overalls
-
 end

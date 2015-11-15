@@ -1,4 +1,4 @@
 #considerations for program planning
-class CourseOutline::Considerations < ActiveRecord::Base
+class MinistryDoc::Consideration < ActiveRecord::Base
   belongs_to :ministry_doc
 end

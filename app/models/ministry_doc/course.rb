@@ -18,6 +18,7 @@
 class MinistryDoc::Course < ActiveRecord::Base
   belongs_to :ministry_doc
   has_many :strands, dependent: :destroy
+  has_many :resources
 
   has_many :overalls, through: :strands
   has_many :specifics, through: :overalls

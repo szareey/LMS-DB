@@ -12,8 +12,6 @@
 #
 
 class MinistryDoc::Overall < ActiveRecord::Base
-  
   belongs_to :strand
   has_many :specifics
-
 end

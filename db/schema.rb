@@ -35,29 +35,8 @@ ActiveRecord::Schema.define(version: 20151114020932) do
     t.datetime "audio_updated_at"
   end
 
-  create_table "assessments", force: :cascade do |t|
-    t.integer "ministry_doc_id"
-    t.string  "type"
-    t.string  "description"
-  end
-
-  create_table "considerations", force: :cascade do |t|
-    t.integer "ministry_doc_id"
-    t.string  "title"
-    t.string  "description"
-  end
-
-  create_table "course_contents", force: :cascade do |t|
-    t.integer  "course_outline_id"
-    t.integer  "unit"
-    t.string   "unit_title"
-    t.integer  "hours"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "course_outlines", force: :cascade do |t|
-    t.integer  "ministry_doc_course_id"
+    t.integer  "course_id"
     t.date     "year"
     t.integer  "semester"
     t.date     "development_date"
@@ -70,7 +49,20 @@ ActiveRecord::Schema.define(version: 20151114020932) do
     t.datetime "updated_at"
   end
 
-  create_table "evaluations", force: :cascade do |t|
+  add_index "course_outlines", ["course_id"], name: "index_course_outlines_on_course_id", using: :btree
+
+  create_table "course_outlines_course_contents", force: :cascade do |t|
+    t.integer  "course_outline_id"
+    t.integer  "unit"
+    t.string   "unit_title"
+    t.integer  "hours"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "course_outlines_course_contents", ["course_outline_id"], name: "index_course_outlines_course_contents_on_course_outline_id", using: :btree
+
+  create_table "course_outlines_evaluations", force: :cascade do |t|
     t.integer  "course_content_id"
     t.string   "type"
     t.string   "description"
@@ -78,6 +70,8 @@ ActiveRecord::Schema.define(version: 20151114020932) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "course_outlines_evaluations", ["course_content_id"], name: "index_course_outlines_evaluations_on_course_content_id", using: :btree
 
   create_table "lessons", force: :cascade do |t|
     t.integer  "ministry_specific_id"
@@ -104,6 +98,22 @@ ActiveRecord::Schema.define(version: 20151114020932) do
   add_index "lessons_ministry_doc_specifics", ["lesson_id"], name: "index_lessons_ministry_doc_specifics_on_lesson_id", using: :btree
   add_index "lessons_ministry_doc_specifics", ["specific_id"], name: "index_lessons_ministry_doc_specifics_on_specific_id", using: :btree
 
+  create_table "ministry_doc_assessments", force: :cascade do |t|
+    t.integer "ministry_doc_id"
+    t.string  "type"
+    t.string  "description"
+  end
+
+  add_index "ministry_doc_assessments", ["ministry_doc_id"], name: "index_ministry_doc_assessments_on_ministry_doc_id", using: :btree
+
+  create_table "ministry_doc_considerations", force: :cascade do |t|
+    t.integer "ministry_doc_id"
+    t.string  "title"
+    t.string  "description"
+  end
+
+  add_index "ministry_doc_considerations", ["ministry_doc_id"], name: "index_ministry_doc_considerations_on_ministry_doc_id", using: :btree
+
   create_table "ministry_doc_courses", force: :cascade do |t|
     t.integer  "ministry_doc_id"
     t.string   "grade"
@@ -129,6 +139,13 @@ ActiveRecord::Schema.define(version: 20151114020932) do
   end
 
   add_index "ministry_doc_overalls", ["strand_id"], name: "index_ministry_doc_overalls_on_strand_id", using: :btree
+
+  create_table "ministry_doc_resources", force: :cascade do |t|
+    t.integer "course_id"
+    t.string  "description"
+  end
+
+  add_index "ministry_doc_resources", ["course_id"], name: "index_ministry_doc_resources_on_course_id", using: :btree
 
   create_table "ministry_doc_specifics", force: :cascade do |t|
     t.integer  "overall_id"
@@ -159,6 +176,16 @@ ActiveRecord::Schema.define(version: 20151114020932) do
   end
 
   add_index "ministry_doc_strands", ["course_id"], name: "index_ministry_doc_strands_on_course_id", using: :btree
+
+  create_table "ministry_doc_teaching_stradegies", force: :cascade do |t|
+    t.integer  "ministry_doc_id"
+    t.string   "title"
+    t.string   "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ministry_doc_teaching_stradegies", ["ministry_doc_id"], name: "index_ministry_doc_teaching_stradegies_on_ministry_doc_id", using: :btree
 
   create_table "ministry_docs", force: :cascade do |t|
     t.string   "subject"
@@ -199,28 +226,6 @@ ActiveRecord::Schema.define(version: 20151114020932) do
     t.boolean  "answer_has_audio",      default: false
     t.boolean  "question_has_audio",    default: false
     t.string   "description"
-  end
-
-  create_table "resources", force: :cascade do |t|
-    t.integer "ministry_doc_course_id"
-    t.string  "description"
-  end
-
-  create_table "standard_infos", force: :cascade do |t|
-    t.string   "vision_statement_title"
-    t.string   "vision_statement_description"
-    t.string   "learning_skills_title"
-    t.string   "learning_skills_description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "teaching_stradegies", force: :cascade do |t|
-    t.integer  "ministry_doc_id"
-    t.string   "title"
-    t.string   "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "user_tokens", force: :cascade do |t|

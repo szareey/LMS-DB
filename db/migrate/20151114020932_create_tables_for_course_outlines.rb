@@ -1,7 +1,7 @@
 class CreateTablesForCourseOutlines < ActiveRecord::Migration
   def change
     create_table :course_outlines do |t|
-      t.references :ministry_doc_course
+      t.references :course, index: true
       t.date :year 
       t.integer :semester
       t.date :development_date
@@ -13,51 +13,43 @@ class CreateTablesForCourseOutlines < ActiveRecord::Migration
       t.timestamps
     end
 
-    create_table :standard_infos do |t|
-      t.string :vision_statement_title
-      t.string :vision_statement_description
-      t.string :learning_skills_title
-      t.string :learning_skills_description
-      t.timestamps
-    end
-
-    create_table :course_contents do |t|
-      t.references :course_outline
+    create_table :course_outlines_course_contents do |t|
+      t.references :course_outline, index: true
       t.integer :unit
       t.string :unit_title
       t.integer :hours
       t.timestamps
     end
 
-    create_table :evaluations do |t|
-      t.references :course_content
+    create_table :course_outlines_evaluations do |t|
+      t.references :course_content, index: true
       t.string :type
       t.string :description
       t.integer :weight
       t.timestamps
     end
 
-    create_table :teaching_stradegies do |t|
-      t.references :ministry_doc
+    create_table :ministry_doc_teaching_stradegies do |t|
+      t.references :ministry_doc, index: true
       t.string :title
       t.string :description
       t.timestamps
     end
 
-    create_table :assessments do |t|
-      t.references :ministry_doc
+    create_table :ministry_doc_assessments do |t|
+      t.references :ministry_doc, index: true
       t.string :type
       t.string :description
     end
 
-    create_table :considerations do |t|
-      t.references :ministry_doc
+    create_table :ministry_doc_considerations do |t|
+      t.references :ministry_doc, index: true
       t.string :title
       t.string :description
     end
 
-    create_table :resources do |t|
-      t.references :ministry_doc_course
+    create_table :ministry_doc_resources do |t|
+      t.references :course, index: true
       t.string :description
     end
 
