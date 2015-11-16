@@ -1,0 +1,39 @@
+<h1> New Outlines of Courses of Study </h1>
+
+<div class="row">
+  <div class="card">
+    <div class="col s12 m6">
+      <%= form_for @outline do |f| %>
+        <%= f.label :course_id %>
+        <%= f.text_field :course_id %>
+
+        <%= f.label :year %>
+        <%= f.date_field :year %>
+
+        <%= f.label :semester %>
+        <%= f.number_field :semester %>
+
+        <%= f.label :development_date %>
+        <%= f.date_field :development_date %>
+
+        <%= f.label :revision_date %>
+        <%= f.date_field :revision_date %>
+    </div>
+    <div class="col s12 m6">
+      <%= f.label :developer %>
+      <%= f.text_field :developer %>
+
+      <%= f.label :teacher %>
+      <%= f.text_field :teacher %>
+
+      <%= f.label :reviser %>
+      <%= f.text_field :reviser %>
+
+      <%= f.label :school %>
+      <%= f.text_field :school %>
+    </div>
+    <%= f.submit "Save", class: 'btn' %>
+  </div>  
+      <% end %>
+</div>
+

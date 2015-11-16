@@ -22,5 +22,6 @@ class CourseOutline < ActiveRecord::Base
 
   delegate :ministry_doc, to: :course
   delegate :considerations, to: :ministry_doc
+  delegate :teaching_stradegies, to: :ministry_doc
 
 end

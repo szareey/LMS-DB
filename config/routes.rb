@@ -12,6 +12,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :course_outlines
+
   resources :answers
   resources :lessons
 
