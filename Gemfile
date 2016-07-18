@@ -51,6 +51,8 @@ gem 'rails_admin'
 
 gem 'foreman'
 
+gem 'pdf-forms'
+
 group :development, :test do
   gem 'annotate'
   gem 'rspec-rails', '~> 3.0'

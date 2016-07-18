@@ -3,34 +3,8 @@
 <div class="row">
   <div class="card">
     <div class="col s12 m6">
-      <%= form_for @outline do |f| %>
-        <%= f.label :course_id %>
-        <%= f.text_field :course_id %>
-
-        <%= f.label :year %>
-        <%= f.select :year, (@outline.year)..(@outline.year + 1), :value => @outline.year %>
-
-        <%= f.label :semester %>
-        <%= f.select :semester, (1)..(2), :value => @outline.semester %>
-
-        <%= f.label :development_date %>
-        <%= f.date_field :development_date, :value => @outline.development_date %>
-
-        <%= f.label :revision_date %>
-        <%= f.date_field :revision_date, :value => @outline.revision_date %>
-
-        <%= f.label :developer %>
-        <%= f.text_field :developer, :value => @outline.developer %>
-
-        <%= f.label :teacher %>
-        <%= f.text_field :teacher, :value => @outline.teacher%>
-
-        <%= f.label :reviser %>
-        <%= f.text_field :reviser, :value => @outline.reviser %>
-
-        <%= f.label :school %>
-        <%= f.text_field :school, :value => @outline.school %>
-      <% end %>
+      <label for="course_code_id" class="active">Course Code</label>
+      <input type="text" name="course_code" id="course_code_id" placeholder="eg. MPM1D">
       <button id='outline_next'class="btn waves-effect waves-light btn-large btn-fullwidth rc-button">Next</button>
     </div>
   </div>  

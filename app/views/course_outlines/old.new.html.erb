@@ -8,32 +8,31 @@
         <%= f.text_field :course_id %>
 
         <%= f.label :year %>
-        <%= f.date_field :year %>
+        <%= f.select :year, (@outline.year)..(@outline.year + 1), :value => @outline.year %>
 
         <%= f.label :semester %>
-        <%= f.number_field :semester %>
+        <%= f.select :semester, (1)..(2), :value => @outline.semester %>
 
         <%= f.label :development_date %>
-        <%= f.date_field :development_date %>
+        <%= f.date_field :development_date, :value => @outline.development_date %>
 
         <%= f.label :revision_date %>
-        <%= f.date_field :revision_date %>
-    </div>
-    <div class="col s12 m6">
-      <%= f.label :developer %>
-      <%= f.text_field :developer %>
+        <%= f.date_field :revision_date, :value => @outline.revision_date %>
 
-      <%= f.label :teacher %>
-      <%= f.text_field :teacher %>
+        <%= f.label :developer %>
+        <%= f.text_field :developer, :value => @outline.developer %>
 
-      <%= f.label :reviser %>
-      <%= f.text_field :reviser %>
+        <%= f.label :teacher %>
+        <%= f.text_field :teacher, :value => @outline.teacher%>
 
-      <%= f.label :school %>
-      <%= f.text_field :school %>
-    </div>
-    <%= f.submit "Save", class: 'btn' %>
-  </div>  
+        <%= f.label :reviser %>
+        <%= f.text_field :reviser, :value => @outline.reviser %>
+
+        <%= f.label :school %>
+        <%= f.text_field :school, :value => @outline.school %>
       <% end %>
-</div>
-
+      <button id='outline_next'class="btn waves-effect waves-light btn-large btn-fullwidth rc-button">Next</button>
+    </div>
+  </div>  
+</div>  
+      
