@@ -21,5 +21,5 @@ Rails.application.routes.draw do
 
   get 'auth/google_oauth2/callback', to: 'sessions#create'
 
-  get '/mypdf', to: 'users#show'
+  get '/mypdf', to: 'school_pdf#make'
 end
