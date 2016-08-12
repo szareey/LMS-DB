@@ -13,13 +13,11 @@
 #  gid         :string
 #  is_approved :boolean
 #  is_admin    :boolean
-#
+# 
 
-class User::Student < User
-  has_many :answers
-
-  has_many :guardians, 
-    class_name: 'User::Guardian', 
+class User::Guardian < User
+   has_many :students, 
+    class_name: 'User::Student',
     through: :user_relationships,
-    source: :guardian
+    source: :student
 end

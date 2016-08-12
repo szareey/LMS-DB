@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160729033013) do
+ActiveRecord::Schema.define(version: 20160730052615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -235,6 +235,14 @@ ActiveRecord::Schema.define(version: 20160729033013) do
     t.boolean  "answer_has_audio",      default: false
     t.boolean  "question_has_audio",    default: false
     t.string   "description"
+  end
+
+  create_table "user_relationships", force: :cascade do |t|
+    t.integer  "user1_id",     null: false
+    t.integer  "user2_id",     null: false
+    t.string   "relationship"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "user_tokens", force: :cascade do |t|

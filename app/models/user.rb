@@ -18,6 +18,8 @@
 class User < ActiveRecord::Base
   has_one :token, class_name: 'User::Token'
   has_one :address
+  has_many :user_relationships
+  
 
   def teacher?
     type == 'User::Teacher'
@@ -25,5 +27,9 @@ class User < ActiveRecord::Base
 
   def student?
     type == 'User::Student'
+  end
+
+  def parent?
+    type == 'User::Parent'
   end
 end
