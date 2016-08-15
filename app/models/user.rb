@@ -18,7 +18,6 @@
 class User < ActiveRecord::Base
   has_one :token, class_name: 'User::Token'
   has_one :address
-  has_many :user_relationships
   
 
   def teacher?

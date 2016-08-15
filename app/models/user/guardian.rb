@@ -16,8 +16,10 @@
 # 
 
 class User::Guardian < User
-   has_many :students, 
+  has_many :user_relationships,
+    foreign_key: :user2_id
+
+  has_many :students, 
     class_name: 'User::Student',
-    through: :user_relationships,
-    source: :student
+    through: :user_relationships
 end

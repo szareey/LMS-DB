@@ -14,5 +14,9 @@ class UserRelationship < ActiveRecord::Base
   belongs_to :guardian, 
     class_name: 'User::Guardian', 
     foreign_key: :user2_id
+
+  belongs_to :sibling,
+    class_name: 'User::Student',
+    foreign_key: :user2_id
 end
  
